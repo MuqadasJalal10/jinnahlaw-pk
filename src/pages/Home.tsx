@@ -16,25 +16,50 @@ const FeaturesGrid = styled.div`
 `;
 
 const FeatureCard = styled(Card)`
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
-  
+  background: white;
+  border: 1px solid #e5e7eb; /* light gray border */
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: fadeSlideUp 0.6s ease forwards;
+
   .feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
   }
-  
+
   h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
     color: var(--gray-900);
   }
-  
+
   p {
+    font-size: 0.95rem;
     color: var(--gray-600);
-    line-height: 1.6;
+    line-height: 1.5;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: #1d4ed8; /* Tailwind blue-700 */
+    box-shadow: 0 10px 24px rgba(29, 78, 216, 0.15); /* soft blue shadow */
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 `;
+
+
 
 const CoursesPreviewSection = styled(Section)`
   background: var(--white);
@@ -52,7 +77,16 @@ const CoursesGrid = styled.div`
 
 const CourseCard = styled(Card)`
   overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+
+  &:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--primary-blue);
+}
 `;
+
 
 const CourseHeader = styled.div`
   background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
@@ -183,20 +217,23 @@ const CtaButtons = styled.div`
 
 const Home: React.FC = () => {
   useEffect(() => {
-    const fadeElements = document.querySelectorAll('.fade-in');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
+  const fadeElements = document.querySelectorAll('.fade-in');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
           entry.target.classList.add('visible');
-        }
-      });
+        }, index * 150); // Delay each element by 150ms
+      }
     });
+  });
 
-    fadeElements.forEach(el => observer.observe(el));
+  fadeElements.forEach(el => observer.observe(el));
 
-    return () => observer.disconnect();
-  }, []);
+  return () => observer.disconnect();
+}, []);
+
 
   return (
     <Layout 
@@ -215,7 +252,7 @@ const Home: React.FC = () => {
       <main>
         <FeaturesSection>
           <Container>
-            <SectionTitle>Why Choose Jinnah Law Academy?</SectionTitle>
+            <SectionTitle>Why Choose Jinnah Law Academy By Wasif Mateen?</SectionTitle>
             <FeaturesGrid>
               <FeatureCard className="fade-in">
                 <div className="feature-icon">🎓</div>

@@ -44,6 +44,7 @@ const LogoImage = styled.img`
 const LogoText = styled.div`
   display: flex;
   flex-direction: column;
+  line-height: 1.2;
 
   @media (max-width: 768px) {
     display: none;
@@ -52,21 +53,35 @@ const LogoText = styled.div`
 
 const AcademyName = styled.span`
   font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 1.25rem;
-  color: var(--gray-900);
-  line-height: 1.2;
+  font-weight: 800;
+  font-size: 1.4rem;
+  background: linear-gradient(90deg, #0d47a1, #1976d2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   @media (max-width: 768px) {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 `;
 
 const ByText = styled.span`
-  font-size: 0.875rem;
-  color: var(--gray-600);
+  font-size: 0.9rem;
+  color: var(--primary-blue);
   font-weight: 500;
+  letter-spacing: 0.3px;
+  opacity: 0.9;
+
+  &:hover {
+    color: var(--secondary-blue);
+  }
 `;
+
 
 const NavMenu = styled.div<{ isOpen: boolean }>`
   display: flex;

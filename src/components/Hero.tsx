@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { ArrowRight } from 'lucide-react'; // ✅ Import the arrow icon
 
 const HeroContainer = styled.section<{ backgroundImage?: string }>`
   background-image: ${props =>
@@ -15,14 +16,11 @@ const HeroContainer = styled.section<{ backgroundImage?: string }>`
   position: relative;
   overflow: hidden;
   margin-top: 80px;
-  
 
   @media (max-width: 768px) {
     padding: 6rem 0 3rem;
   }
 `;
-
-// ❌ Removed HeroOverlay
 
 const HeroContent = styled.div`
   position: relative;
@@ -74,12 +72,25 @@ const HeroCta = styled(Link)`
   transition: all 0.3s ease;
   box-shadow: var(--shadow-xl);
   text-decoration: none;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2px solid var(--primary-blue);
+
+  span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
 
   &:hover {
+    background: var(--primary-blue);
+    color: var(--white);
     transform: translateY(-3px);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    color: var(--primary-blue);
+
+    span {
+      transform: translateX(6px); // Arrow glides right
+    }
   }
 
   @media (max-width: 768px) {
@@ -126,6 +137,7 @@ const Hero: React.FC<HeroProps> = ({
         {ctaText && ctaLink && (
           <HeroCta to={ctaLink} className="fade-in">
             {ctaText}
+            <span><ArrowRight size={18} /></span>
           </HeroCta>
         )}
       </HeroContent>

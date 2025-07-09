@@ -601,10 +601,10 @@ const [subCourse, setSubCourse] = useState<string>("");
                     onChange={handleInputChange}
                     required
                   >
-                    <option value="">Select learning mode</option>
+                    
                     <option value="physical">Physical Classes</option>
                     <option value="online">Online Classes</option>
-                    <option value="hybrid">Both (Hybrid)</option>
+                    
                   </select>
                 </FormGroup>
 
@@ -656,7 +656,7 @@ const [subCourse, setSubCourse] = useState<string>("");
           <SuccessContent>
             <div className="success-icon">✅</div>
             <h2>Application Submitted!</h2>
-            <p>Thank you for applying to Jinnah Law Academy. We'll be in touch shortly to discuss your application and provide detailed information about your selected program.</p>
+            <p>Thank you for applying to Jinnah Law Academy By Wasif Mateen. We'll be in touch shortly to discuss your application and provide detailed information about your selected program.</p>
             <Button onClick={closeSuccessMessage} variant="primary">Close</Button>
           </SuccessContent>
         </SuccessMessage>

@@ -148,14 +148,24 @@ const CourseActions = styled.div`
 `;
 
 const CourseImage = styled.div`
+  overflow: hidden;
+  border-radius: 1rem;
+
   img {
     width: 100%;
     height: 400px;
     object-fit: cover;
     border-radius: 1rem;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
     box-shadow: var(--shadow-lg);
   }
 `;
+
 
 const WhyChooseSection = styled(Section)`
   background: var(--gray-50);
@@ -170,21 +180,45 @@ const BenefitsGrid = styled.div`
 const BenefitCard = styled(Card)`
   padding: 2rem;
   text-align: center;
-  
+  background: white;
+  border: 1px solid #e5e7eb; /* light gray border */
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: fadeSlideUp 0.6s ease forwards;
+
   .benefit-icon {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
+    color: #2563eb; /* Tailwind blue-600 */
   }
-  
+
   h3 {
     font-size: 1.25rem;
     margin-bottom: 1rem;
     color: var(--gray-900);
   }
-  
+
   p {
     color: var(--gray-600);
     line-height: 1.6;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: #1d4ed8; /* Tailwind blue-700 */
+    box-shadow: 0 8px 16px rgba(29, 78, 216, 0.2);
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 `;
 

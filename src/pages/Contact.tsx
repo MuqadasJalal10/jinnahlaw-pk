@@ -1,151 +1,76 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
-import { Section, SectionTitle, Container, Button, Card } from '../styles/GlobalStyles';
+import { Section, SectionTitle, Container, Button } from '../styles/GlobalStyles';
 
-const ContactInfoSection = styled(Section)`
-  background: var(--gray-50);
-`;
-
-const ContactGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-`;
-
-const ContactCard = styled(Card)`
-  padding: 2rem;
-  text-align: center;
-  
-  .contact-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-  
-  h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    color: var(--gray-900);
-  }
-  
-  p {
-    color: var(--gray-600);
-    line-height: 1.6;
-    margin-bottom: 1rem;
-  }
-  
-  a {
-    color: var(--primary-blue);
-    text-decoration: none;
-    
-    &:hover {
-      color: var(--secondary-blue);
-    }
-  }
-`;
-
-const ContactFormSection = styled(Section)`
+const ContactWrapper = styled(Section)`
   background: var(--white);
-`;
-
-const FormContent = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
   align-items: start;
-  
+  padding: 4rem 0;
+
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: 2rem;
   }
 `;
 
-const FormInfo = styled.div`
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--gray-900);
-    
-    @media (max-width: 768px) {
-      font-size: 2rem;
-    }
-  }
-  
-  p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--gray-600);
-    margin-bottom: 2rem;
-  }
-`;
-
-const QuickContact = styled.div`
-  background: var(--gray-50);
-  padding: 2rem;
-  border-radius: 1rem;
-  
-  h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
-    color: var(--gray-900);
-  }
-`;
-
-const QuickContactItems = styled.div`
+const ContactDetails = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  
-  @media (max-width: 768px) {
-    gap: 1.5rem;
-  }
-`;
+  gap: 2rem;
 
-const QuickContactItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  
-  .icon {
-    font-size: 1.5rem;
-    flex-shrink: 0;
+  h2 {
+    font-size: 2.5rem;
+    color: var(--Black);
+    margin-bottom: 1rem;
   }
-  
+
+  p, a {
+    color: var(--gray-700);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
   strong {
-    color: var(--gray-900);
-    display: block;
-    margin-bottom: 0.25rem;
+    color: var(--secondary-blue);
   }
-  
-  p {
-    color: var(--gray-600);
-    margin: 0;
-  }
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: center;
+
+  a {
+    text-decoration: none;
+    color: var(--primary-blue);
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 `;
 
-const ContactFormFields = styled.form`
+const ContactForm = styled.form`
   background: var(--gray-50);
   padding: 2rem;
   border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+
+  h3 {
+    font-size: 1.8rem;
+    color: var(--Black);
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const FormGroup = styled.div`
   margin-bottom: 1.5rem;
-  
+
   label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: var(--gray-900);
+    color: var(--primary-blue);
   }
-  
+
   input, select, textarea {
     width: 100%;
     padding: 0.875rem;
@@ -153,103 +78,55 @@ const FormGroup = styled.div`
     border-radius: 0.5rem;
     font-size: 1rem;
     transition: border-color 0.2s ease;
-    
+
     &:focus {
       outline: none;
       border-color: var(--primary-blue);
     }
   }
-  
+
   textarea {
     resize: vertical;
     min-height: 120px;
   }
 `;
 
-const MapSection = styled(Section)`
-  background: var(--gray-50);
-`;
-
-const MapContainer = styled.div`
-  border-radius: 1rem;
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-`;
-
-const MapPlaceholder = styled.div`
-  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-  height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  text-align: center;
-  
-  @media (max-width: 768px) {
-    height: 300px;
-  }
-`;
-
-const MapContent = styled.div`
-  max-width: 300px;
-  
-  .map-icon {
-    font-size: 4rem;
-    margin-bottom: 1rem;
-    
-    @media (max-width: 768px) {
-      font-size: 3rem;
-    }
-  }
-  
-  h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--white);
-  }
-  
-  p {
-    color: var(--light-blue);
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const MapButton = styled(Button)`
-  background: var(--white);
-  color: var(--primary-blue);
-  
-  &:hover {
-    background: var(--gray-100);
-    color: var(--primary-blue);
+const MapEmbed = styled.div`
+  iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: 1rem;
+    border: none;
   }
 `;
 
 const FaqSection = styled(Section)`
   background: var(--white);
-`;
-
-const FaqGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+  padding: 4rem 0;
 `;
 
 const FaqItem = styled.div`
-  background: var(--gray-50);
-  padding: 2rem;
-  border-radius: 1rem;
-  border-left: 4px solid var(--primary-blue);
-  
+  border-bottom: 1px solid var(--gray-200);
+  padding: 1rem 0;
+
   h3 {
     font-size: 1.2rem;
-    margin-bottom: 1rem;
-    color: var(--gray-900);
+    color: var(--primary-blue);
+    cursor: pointer;
+    position: relative;
   }
-  
-  p {
-    color: var(--gray-600);
+
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    color: var(--gray-700);
     line-height: 1.6;
+  }
+
+  &.open .faq-answer {
+    max-height: 500px;
+    margin-top: 1rem;
   }
 `;
 
@@ -262,244 +139,121 @@ const Contact: React.FC = () => {
     message: ''
   });
 
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenIndex(prev => (prev === index ? null : index));
+  };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Simulate form submission
-    const submitButton = e.currentTarget.querySelector('button[type="submit"]') as HTMLButtonElement;
-    const originalText = submitButton.textContent;
-    
-    submitButton.textContent = 'Sending...';
-    submitButton.disabled = true;
-    
-    setTimeout(() => {
-      alert('Thank you for your message! We will get back to you soon.');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: ''
-      });
-      submitButton.textContent = originalText;
-      submitButton.disabled = false;
-    }, 1000);
+    alert('Thank you for your message! We will get back to you soon.');
+    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
   };
 
-  useEffect(() => {
-    const fadeElements = document.querySelectorAll('.fade-in');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-
-    fadeElements.forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <Layout 
-      title="Contact Us - Jinnah Law Academy By Wasif Mateen" 
-      description="Get in touch with Jinnah Law Academy. Find our location, contact details, and reach out for any inquiries about our law programs."
-    >
-      <Hero 
-        title="Contact Us" 
-        subtitle="Get in touch with us for any inquiries about our programs, admissions, or general information."
-        
-      />
-      
-      <main>
-        <ContactInfoSection>
-          <Container>
-            <ContactGrid>
-              <ContactCard className="fade-in">
-                <div className="contact-icon">📍</div>
-                <h3>Visit Our Campus</h3>
-                <p>Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Nowshera Virkan, Pakistan</p>
-                <Button as="a" href="https://maps.google.com" target="_blank" variant="secondary">Get Directions</Button>
-              </ContactCard>
+    <Layout title="Contact Us - Jinnah Law Academy By Wasif Mateen" description="Get in touch with Jinnah Law Academy.">
+      <Hero title="Contact Us" subtitle="Get in touch with us for any inquiries about our programs, admissions, or general information." />
 
-              <ContactCard className="fade-in">
-                <div className="contact-icon">📞</div>
-                <h3>Call Us</h3>
-                <p>Phone: <a href="tel:0300-1186473">0300-1186473</a></p>
-                <p>WhatsApp: <a href="https://wa.me/923014686473">0301-4686473</a></p>
-                <Button as="a" href="tel:0300-1186473" variant="secondary">Call Now</Button>
-              </ContactCard>
+      <Container>
+        <ContactWrapper>
+          <ContactDetails>
+            <h2>📞 Get In Touch</h2>
+            <p><strong>Call Us:</strong> <a href="tel:03001186473">0300-1186473</a></p>
+            <p><strong>Email:</strong> <a href="mailto:jinnahlawacademybywasifmateen@gmail.com">jinnahlawacademybywasifmateen@gmail.com</a></p>
+            <p><strong>Office Hours:</strong><br/>Monday to Friday: 9:00 AM - 6:00 PM<br/>Saturday: 9:00 AM - 2:00 PM<br/>Sunday: Closed</p>
+            <p><strong>Visit Our Campus:</strong><br/>Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Nowshera Virkan</p>
+            <MapEmbed>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27235.93401901972!2d74.19101014272807!3d31.571904276907337!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39188a4f372f92a3%3A0x15fc6aa83263c4b4!2sNowshera%20Virkan!5e0!3m2!1sen!2s!4v1717764437069!5m2!1sen!2s"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </MapEmbed>
+          </ContactDetails>
 
-              <ContactCard className="fade-in">
-                <div className="contact-icon">✉️</div>
-                <h3>Email Us</h3>
-                <p>jinnahlawacademybywasifmateen@gmail.com</p>
-                <Button as="a" href="mailto:jinnahlawacademybywasifmateen@gmail.com" variant="secondary">Send Email</Button>
-              </ContactCard>
+          <ContactForm onSubmit={handleSubmit}>
+            <h3>Send Us a Message</h3>
+            <FormGroup>
+              <label htmlFor="name">Full Name *</label>
+              <input type="text" id="name" name="name" value={formData.name} onChange={handleInputChange} required />
+            </FormGroup>
 
-              <ContactCard className="fade-in">
-                <div className="contact-icon">🕒</div>
-                <h3>Office Hours</h3>
-                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                <p>Saturday: 9:00 AM - 2:00 PM</p>
-                <p>Sunday: Closed</p>
-              </ContactCard>
-            </ContactGrid>
-          </Container>
-        </ContactInfoSection>
+            <FormGroup>
+              <label htmlFor="email">Email *</label>
+              <input type="email" id="email" name="email" value={formData.email} onChange={handleInputChange} required />
+            </FormGroup>
 
-        <ContactFormSection>
-          <Container>
-            <FormContent>
-              <FormInfo>
-                <h2 className="fade-in">Send Us a Message</h2>
-                <p className="fade-in">Have a question about our programs or need more information? Fill out the form below and we'll get back to you as soon as possible.</p>
-                
-                <QuickContact className="fade-in">
-                  <h3>Quick Contact</h3>
-                  <QuickContactItems>
-                    <QuickContactItem>
-                      <span className="icon">📱</span>
-                      <div>
-                        <strong>WhatsApp</strong>
-                        <p><a href="https://wa.me/923014686473">0301-4686473</a></p>
-                      </div>
-                    </QuickContactItem>
-                    <QuickContactItem>
-                      <span className="icon">💬</span>
-                      <div>
-                        <strong>Facebook</strong>
-                        <p><a href="#">Facebook Profile</a></p>
-                      </div>
-                    </QuickContactItem>
-                  </QuickContactItems>
-                </QuickContact>
-              </FormInfo>
+            <FormGroup>
+              <label htmlFor="phone">Phone *</label>
+              <input type="tel" id="phone" name="phone" value={formData.phone} onChange={handleInputChange} required />
+            </FormGroup>
 
-              <ContactFormFields className="fade-in" onSubmit={handleSubmit}>
-                <FormGroup>
-                  <label htmlFor="name">Full Name *</label>
-                  <input 
-                    type="text" 
-                    id="name" 
-                    name="name" 
-                    value={formData.name}
-                    onChange={handleInputChange}
-                    required 
-                  />
-                </FormGroup>
+            <FormGroup>
+              <label htmlFor="subject">Subject *</label>
+              <select id="subject" name="subject" value={formData.subject} onChange={handleInputChange} required>
+                <option value="">Select a subject</option>
+                <option value="admission">Admission Inquiry</option>
+                <option value="courses">Course Information</option>
+                <option value="fees">Fee Structure</option>
+                <option value="schedule">Class Schedule</option>
+                <option value="general">General Inquiry</option>
+                <option value="other">Other</option>
+              </select>
+            </FormGroup>
 
-                <FormGroup>
-                  <label htmlFor="email">Email *</label>
-                  <input 
-                    type="email" 
-                    id="email" 
-                    name="email" 
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required 
-                  />
-                </FormGroup>
+            <FormGroup>
+              <label htmlFor="message">Message *</label>
+              <textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required></textarea>
+            </FormGroup>
 
-                <FormGroup>
-                  <label htmlFor="phone">Phone *</label>
-                  <input 
-                    type="tel" 
-                    id="phone" 
-                    name="phone" 
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required 
-                  />
-                </FormGroup>
+            <Button type="submit" variant="primary">Send Message</Button>
+          </ContactForm>
+        </ContactWrapper>
+      </Container>
 
-                <FormGroup>
-                  <label htmlFor="subject">Subject *</label>
-                  <select 
-                    id="subject" 
-                    name="subject" 
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    required
-                  >
-                    <option value="">Select a subject</option>
-                    <option value="admission">Admission Inquiry</option>
-                    <option value="courses">Course Information</option>
-                    <option value="fees">Fee Structure</option>
-                    <option value="schedule">Class Schedule</option>
-                    <option value="general">General Inquiry</option>
-                    <option value="other">Other</option>
-                  </select>
-                </FormGroup>
+      <FaqSection>
+        <Container>
+          <SectionTitle>Frequently Asked Questions</SectionTitle>
 
-                <FormGroup>
-                  <label htmlFor="message">Message *</label>
-                  <textarea 
-                    id="message" 
-                    name="message" 
-                    rows={5} 
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                  />
-                </FormGroup>
-
-                <Button type="submit" variant="primary">Send Message</Button>
-              </ContactFormFields>
-            </FormContent>
-          </Container>
-        </ContactFormSection>
-
-        <MapSection>
-          <Container>
-            <SectionTitle>Find Us</SectionTitle>
-            <MapContainer className="fade-in">
-              <MapPlaceholder>
-                <MapContent>
-                  <div className="map-icon">📍</div>
-                  <h3>Jinnah Law Academy</h3>
-                  <p>Near Bank Islami, Opp. Sports Hall<br />Mattu Bhaike Rd, Nowshera Virkan</p>
-                  <MapButton as="a" href="https://maps.google.com" target="_blank">View on Google Maps</MapButton>
-                </MapContent>
-              </MapPlaceholder>
-            </MapContainer>
-          </Container>
-        </MapSection>
-
-        <FaqSection>
-          <Container>
-            <SectionTitle>Frequently Asked Questions</SectionTitle>
-            <FaqGrid>
-              <FaqItem className="fade-in">
-                <h3>What are the admission requirements?</h3>
-                <p>Admission requirements vary by program. For LAT preparation, you need intermediate or A-Level completion. For LL.B programs, you need LAT qualification plus relevant educational background.</p>
-              </FaqItem>
-              <FaqItem className="fade-in">
-                <h3>Do you offer online classes?</h3>
-                <p>Yes, we offer both online and on-campus classes to provide flexibility for our students. You can choose the mode that best fits your schedule and preferences.</p>
-              </FaqItem>
-              <FaqItem className="fade-in">
-                <h3>What is the fee structure?</h3>
-                <p>Our fee structure varies by program. Please contact us directly or visit our campus for detailed information about fees and payment options.</p>
-              </FaqItem>
-              <FaqItem className="fade-in">
-                <h3>When do new batches start?</h3>
-                <p>We start new batches regularly throughout the year. Contact us to learn about upcoming batch schedules and registration deadlines.</p>
-              </FaqItem>
-            </FaqGrid>
-          </Container>
-        </FaqSection>
-      </main>
+          {[{
+            q: 'What are the admission requirements?',
+            a: 'For LAT preparation, students must have completed their intermediate (FA/FSc) or A-Levels. For LL.B programs, LAT qualification is mandatory in addition to prior academic credentials like intermediate or equivalent.'
+          }, {
+            q: 'Do you offer online classes?',
+            a: 'Yes, we offer both online and on-campus classes. Our online classes are conducted via Zoom or Google Meet and are equally interactive, allowing students from remote areas to benefit.'
+          }, {
+            q: 'What is the fee structure?',
+            a: 'The fee structure varies by program and duration. We offer monthly as well as lump-sum payment options. Discounts may be available for early registrations or group admissions.'
+          }, {
+            q: 'When do new batches start?',
+            a: 'We initiate new batches every two months. The exact dates are announced on our Facebook page and website. You can also call us for the latest schedule.'
+          }, {
+            q: 'Do you offer trial classes?',
+            a: 'Yes, prospective students can attend one or two trial classes free of cost to experience our teaching environment before committing.'
+          }, {
+            q: 'Can I get one-on-one support?',
+            a: 'Absolutely! We provide extra support and doubt-clearing sessions for students who need additional help, especially before exams or assessments.'
+          }, {
+            q: 'Are your instructors qualified?',
+            a: 'Our faculty includes experienced law professionals and LAT/LL.B subject experts with years of teaching experience. They are committed to delivering high-quality education.'
+          }, {
+            q: 'Is there any hostel or accommodation facility?',
+            a: 'Currently, we do not offer in-house hostel facilities. However, we can help students find nearby hostels or accommodations on request.'
+          }].map((item, idx) => (
+            <FaqItem key={idx} className={openIndex === idx ? 'open' : ''}>
+              <h3 onClick={() => toggleFaq(idx)}>{item.q}</h3>
+              <div className="faq-answer">{item.a}</div>
+            </FaqItem>
+          ))}
+        </Container>
+      </FaqSection>
     </Layout>
   );
 };

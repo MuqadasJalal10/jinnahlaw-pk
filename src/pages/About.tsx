@@ -36,10 +36,6 @@ const AboutText = styled.div`
     line-height: 1.8;
     color: var(--gray-600);
     margin-bottom: 1.5rem;
-
-    @media (max-width: 768px) {
-      font-size: 1rem;
-    }
   }
 `;
 
@@ -53,13 +49,14 @@ const AboutImage = styled.div`
     object-fit: cover;
     border-radius: 1rem;
     box-shadow: var(--shadow-lg);
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, border 0.3s ease;
 
-    border: 2px solid transparent;
+    border: 2px solid transparent; // default: no border
   }
 
   &:hover img {
     transform: scale(1.03);
+    
   }
 
   @media (max-width: 768px) {
@@ -75,6 +72,7 @@ const AboutImage = styled.div`
   }
 `;
 
+
 const QuickFactsSection = styled(Section)`
   background: var(--gray-50);
 `;
@@ -89,21 +87,22 @@ const FactCard = styled(Card)`
   padding: 2rem;
   text-align: center;
   background: white;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e5e7eb; /* default gray border */
   border-radius: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: fadeSlideUp 0.6s ease forwards;
 
   &:hover {
     transform: translateY(-8px) scale(1.02);
-    border-color: #1d4ed8;
-    box-shadow: 0 8px 16px rgba(29, 78, 216, 0.2);
+    border-color: #1d4ed8; /* Tailwind blue-700 */
+    box-shadow: 0 8px 16px rgba(29, 78, 216, 0.2); /* blue glow */
   }
 
   .fact-icon {
     font-size: 1.75rem;
     margin-bottom: 1rem;
-    color: #2563eb;
+    color: #2563eb; /* Tailwind blue-600 */
   }
 
   h3 {
@@ -116,7 +115,19 @@ const FactCard = styled(Card)`
     color: var(--gray-600);
     font-weight: 500;
   }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 `;
+
 
 const VisionMissionSection = styled(Section)`
   background: var(--white);
@@ -124,8 +135,12 @@ const VisionMissionSection = styled(Section)`
 
 const VmGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const VmCard = styled.div`
@@ -227,7 +242,7 @@ const FounderSignature = styled.div`
 `;
 
 const FounderImage = styled.div`
-  margin-top: -100px;
+  margin-top: -100px; /* Increased from -20px */
   overflow: hidden;
   border-radius: 1rem;
 
@@ -237,26 +252,16 @@ const FounderImage = styled.div`
     object-fit: cover;
     border-radius: 1rem;
     box-shadow: var(--shadow-lg);
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 
     &:hover {
       transform: scale(1.05);
-    }
-  }
-
-  @media (max-width: 768px) {
-    margin-top: 0;
-    img {
-      height: 250px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    img {
-      height: 200px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     }
   }
 `;
+
+
 
 const ValuesSection = styled(Section)`
   background: var(--white);
@@ -264,7 +269,7 @@ const ValuesSection = styled(Section)`
 
 const ValuesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
 `;
 
@@ -274,15 +279,28 @@ const ValueCard = styled.div`
   border-radius: 1rem;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #e5e7eb;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e5e7eb; /* default gray border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: fadeSlideUp 0.6s ease forwards;
 
   &:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 8px 16px rgba(29, 78, 216, 0.2);
-    border-color: #1d4ed8;
+    box-shadow: 0 8px 16px rgba(29, 78, 216, 0.2); /* soft blue shadow */
+    border-color: #1d4ed8; /* blue border on hover */
+  }
+
+  @keyframes fadeSlideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 `;
+
 
 const AchievementsSection = styled(Section)`
   background: var(--gray-50);
@@ -304,30 +322,20 @@ const AchievementImage = styled.div`
   border-radius: 1rem;
 
   img {
-    width: 100%;
-    height: 400px;
+    width: 80%;
+    height: 100%;
     object-fit: cover;
     border-radius: 1rem;
     box-shadow: var(--shadow-lg);
-    transition: transform 0.4s ease;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
 
     &:hover {
       transform: scale(1.05);
-    }
-  }
-
-  @media (max-width: 768px) {
-    img {
-      height: 250px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    img {
-      height: 180px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     }
   }
 `;
+
 
 const AchievementText = styled.div`
   h2 {
@@ -340,25 +348,23 @@ const AchievementText = styled.div`
     font-size: 1.1rem;
     color: var(--gray-600);
     line-height: 1.7;
-
-    @media (max-width: 768px) {
-      font-size: 1rem;
-    }
   }
 `;
 
 const About: React.FC = () => {
   useEffect(() => {
     const fadeElements = document.querySelectorAll('.fade-in');
+
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
     });
 
-    fadeElements.forEach((el) => observer.observe(el));
+    fadeElements.forEach(el => observer.observe(el));
+
     return () => observer.disconnect();
   }, []);
 
@@ -370,6 +376,8 @@ const About: React.FC = () => {
       <Hero
         title="Where Law Meets Purpose"
         subtitle="Discover our mission, values, and the visionary behind Jinnah Law Academy By Wasif Mateen."
+       
+
       />
 
       <main>
@@ -439,12 +447,27 @@ const About: React.FC = () => {
               <FounderText>
                 <h2 className="fade-in">Founder's Message</h2>
                 <blockquote className="fade-in">
-                  <p><strong>Law is more than a profession</strong> — it's the foundation of justice, dignity, and social change.</p>
-                  <p>With this vision, I founded <strong>Jinnah Law Academy By Wasif Mateen</strong>.</p>
-                  <p>We go beyond textbooks to shape <em>critical thinkers</em> and <em>ethical leaders</em>.</p>
-                  <p>Legal education is a powerful journey requiring clarity, courage, and integrity.</p>
-                  <p>I invite you to join this mission — lead with purpose, and create lasting impact.</p>
+             <p>
+               <strong>Law is more than a profession</strong> — it's the foundation of justice, dignity, and social change. It empowers individuals, protects freedoms, and reflects a nation's moral compass.
+             </p>
+
+             <p>
+              With this vision, I founded <strong>Jinnah Law Academy By Wasif Mateen</strong> — a space where aspiring legal minds grow with discipline, confidence, and purpose.
+             </p>
+
+             <p>
+              We go beyond textbooks to shape <em>critical thinkers</em> and <em>ethical leaders</em> — prepared not just to study law, but to <strong>live it</strong> and <strong>lead through it</strong>.
+               </p>
+
+               <p>
+              Legal education is a powerful journey requiring clarity, courage, and integrity. At our academy, we instill these values to develop true agents of change.
+              </p>
+
+               <p>
+                I invite you to join this mission — to rise above mediocrity, lead with purpose, and create lasting impact.
+                 </p>
                 </blockquote>
+
                 <FounderSignature className="fade-in">
                   <p className="signature-text">Warmly,</p>
                   <p className="founder-name">Mian Wasif Mateen</p>
@@ -467,7 +490,7 @@ const About: React.FC = () => {
               </AchievementImage>
               <AchievementText className="fade-in">
                 <h2>Our Achievements</h2>
-                <p>With consistent top results, growing online reach, and impactful legal publications, our journey is just beginning — and it’s powered by the trust of our students.</p>
+                <p>At Jinnah Law Academy, we take pride in shaping successful legal minds. With consistent top results, growing online reach, and impactful legal publications, our journey is just beginning — and it’s powered by the trust of our students.</p>
               </AchievementText>
             </AchievementsContent>
           </Container>

@@ -1,5 +1,3 @@
-// Home.tsx — Fully responsive version with course cards included
-
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -13,7 +11,7 @@ const FeaturesSection = styled(Section)`
 
 const FeaturesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
 `;
 
@@ -89,7 +87,6 @@ const CourseHeader = styled.div`
   padding: 1.5rem;
 
   h3 {
-    color: var(--white);
     margin-bottom: 0.5rem;
   }
 `;
@@ -115,7 +112,6 @@ const CourseContent = styled.div`
 const CourseFeatures = styled.ul`
   list-style: none;
   margin-bottom: 1.5rem;
-  padding: 0;
 
   li {
     padding: 0.25rem 0;
@@ -126,15 +122,17 @@ const CourseFeatures = styled.ul`
 
 const CourseFooter = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
   padding: 1.5rem;
   border-top: 1px solid var(--gray-200);
   background: var(--gray-50);
 
-  @media (max-width: 480px) {
-    flex-direction: column;
-    gap: 0.75rem;
+  @media (min-width: 480px) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 `;
 
@@ -151,7 +149,7 @@ const StatsSection = styled(Section)`
 
 const StatsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 2rem;
 `;
 
@@ -160,15 +158,14 @@ const StatItem = styled.div`
 `;
 
 const StatNumber = styled.div`
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  color: var(--white);
   margin-bottom: 0.5rem;
   font-family: 'Playfair Display', serif;
 `;
 
 const StatLabel = styled.div`
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: var(--light-blue);
   font-weight: 500;
 `;
@@ -181,21 +178,20 @@ const CtaSection = styled(Section)`
 const CtaContent = styled.div`
   max-width: 600px;
   margin: 0 auto;
-  padding: 1rem;
 `;
 
 const CtaTitle = styled.h2`
-  font-size: 2.25rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
   color: var(--gray-900);
 
   @media (max-width: 768px) {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 `;
 
 const CtaSubtitle = styled.p`
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   margin-bottom: 2rem;
   color: var(--gray-600);
 `;
@@ -206,16 +202,16 @@ const CtaButtons = styled.div`
   gap: 1rem;
   flex-wrap: wrap;
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
   }
 `;
 
 const Home: React.FC = () => {
   useEffect(() => {
     const fadeElements = document.querySelectorAll('.fade-in');
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
@@ -231,15 +227,16 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <Layout title="Jinnah Law Academy By Wasif Mateen - Learn Law, Lead Justice"
-      description="Welcome to Jinnah Law Academy by Wasif Mateen — the first and only law-focused institute in Nowshera Virkan. Get expert guidance in LAT, LL.B and LAW-GAT.">
-
+    <Layout
+      title="Jinnah Law Academy By Wasif Mateen - Learn Law, Lead Justice"
+      description="Welcome to Jinnah Law Academy by Wasif Mateen — the first and only law-focused institute in Nowshera Virkan. Get expert guidance in LAT, LL.B and LAW-GAT."
+    >
       <Hero
         title="Learn Law, Lead Justice"
         subtitle="Welcome to Jinnah Law Academy by Wasif Mateen — the first and only law-focused institute in Nowshera Virkan. Get expert guidance in LAT, LL.B and LAW-GAT — available both online and on-campus."
         ctaText="Explore Courses"
         ctaLink="/courses"
-        backgroundImage='/law_justice.jpeg'
+        backgroundImage="/law_justice.jpeg"
       />
 
       <main>

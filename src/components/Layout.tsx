@@ -4,6 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import { GlobalStyle } from '../styles/GlobalStyles';
 
+
 interface LayoutProps {
   children: React.ReactNode;
   title?: string;

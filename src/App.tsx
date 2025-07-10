@@ -1,4 +1,3 @@
-
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -7,6 +6,7 @@ import Contact from './pages/Contact';
 import AdmissionInquiry from './pages/AdmissionInquiry';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
+import WhatsAppButton from './components/WhatsAppButton'; // ✅ Import this
 
 function App() {
   return (
@@ -20,6 +20,9 @@ function App() {
         <Route path="/admission-inquiry" element={<AdmissionInquiry />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+
+      {/* ✅ Floating WhatsApp Icon */}
+      <WhatsAppButton />
     </>
   );
 }

@@ -165,6 +165,7 @@ const Contact: React.FC = () => {
           <ContactDetails>
             <h2>📞 Get In Touch</h2>
             <p><strong>Call Us:</strong> <a href="tel:03001186473">0300-1186473</a></p>
+            <p><strong>WhatsApp:</strong> <a href="https://wa.me/923001186473" target="_blank" rel="noopener noreferrer">03001186473</a></p>
             <p><strong>Email:</strong> <a href="mailto:jinnahlawacademybywasifmateen@gmail.com">jinnahlawacademybywasifmateen@gmail.com</a></p>
             <p><strong>Office Hours:</strong><br/>Monday to Friday: 9:00 AM - 6:00 PM<br/>Saturday: 9:00 AM - 2:00 PM<br/>Sunday: Closed</p>
             <p><strong>Visit Our Campus:</strong><br/>Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Nowshera Virkan</p>

@@ -1,3 +1,5 @@
+// Home.tsx — Fully responsive version with course cards included
+
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -5,25 +7,14 @@ import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import { Section, SectionTitle, Container, Button, Card } from '../styles/GlobalStyles';
 
-// Responsive breakpoints
-const breakpoints = {
-  sm: '480px',
-  md: '768px',
-  lg: '1024px',
-};
-
 const FeaturesSection = styled(Section)`
   background: var(--gray-50);
 `;
 
 const FeaturesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
-
-  @media (max-width: ${breakpoints.md}) {
-    gap: 1.25rem;
-  }
 `;
 
 const FeatureCard = styled(Card)`
@@ -32,7 +23,7 @@ const FeatureCard = styled(Card)`
   background: white;
   border: 1px solid #e5e7eb;
   border-radius: 1rem;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   animation: fadeSlideUp 0.6s ease forwards;
 
   .feature-icon {
@@ -76,18 +67,13 @@ const CoursesPreviewSection = styled(Section)`
 
 const CoursesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-
-  @media (max-width: ${breakpoints.md}) {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-  }
 `;
 
 const CourseCard = styled(Card)`
   overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 
   &:hover {
@@ -101,7 +87,6 @@ const CourseHeader = styled.div`
   background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
   color: var(--white);
   padding: 1.5rem;
-  position: relative;
 
   h3 {
     color: var(--white);
@@ -147,10 +132,9 @@ const CourseFooter = styled.div`
   border-top: 1px solid var(--gray-200);
   background: var(--gray-50);
 
-  @media (max-width: ${breakpoints.sm}) {
+  @media (max-width: 480px) {
     flex-direction: column;
     gap: 0.75rem;
-    padding: 1rem;
   }
 `;
 
@@ -167,18 +151,8 @@ const StatsSection = styled(Section)`
 
 const StatsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 2rem;
-
-  @media (max-width: ${breakpoints.md}) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem;
-  }
-
-  @media (max-width: ${breakpoints.sm}) {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
 `;
 
 const StatItem = styled.div`
@@ -186,7 +160,7 @@ const StatItem = styled.div`
 `;
 
 const StatNumber = styled.div`
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
   color: var(--white);
   margin-bottom: 0.5rem;
@@ -194,7 +168,7 @@ const StatNumber = styled.div`
 `;
 
 const StatLabel = styled.div`
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--light-blue);
   font-weight: 500;
 `;
@@ -207,29 +181,23 @@ const CtaSection = styled(Section)`
 const CtaContent = styled.div`
   max-width: 600px;
   margin: 0 auto;
+  padding: 1rem;
 `;
 
 const CtaTitle = styled.h2`
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   margin-bottom: 1rem;
   color: var(--gray-900);
 
-  @media (max-width: ${breakpoints.md}) {
-    font-size: 2rem;
-  }
-  @media (max-width: ${breakpoints.sm}) {
-    font-size: 1.5rem;
+  @media (max-width: 768px) {
+    font-size: 1.75rem;
   }
 `;
 
 const CtaSubtitle = styled.p`
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   margin-bottom: 2rem;
   color: var(--gray-600);
-
-  @media (max-width: ${breakpoints.sm}) {
-    font-size: 1rem;
-  }
 `;
 
 const CtaButtons = styled.div`
@@ -238,7 +206,7 @@ const CtaButtons = styled.div`
   gap: 1rem;
   flex-wrap: wrap;
 
-  @media (max-width: ${breakpoints.md}) {
+  @media (max-width: 480px) {
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
@@ -248,8 +216,7 @@ const CtaButtons = styled.div`
 const Home: React.FC = () => {
   useEffect(() => {
     const fadeElements = document.querySelectorAll('.fade-in');
-
-    const observer = new window.IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
           setTimeout(() => {
@@ -260,57 +227,45 @@ const Home: React.FC = () => {
     });
 
     fadeElements.forEach(el => observer.observe(el));
-
     return () => observer.disconnect();
   }, []);
 
   return (
-    <Layout
-      title="Jinnah Law Academy By Wasif Mateen - Learn Law, Lead Justice"
-      description="Welcome to Jinnah Law Academy by Wasif Mateen — the first and only law-focused institute in Nowshera Virkan. Get expert guidance in LAT, LL.B and LAW-GAT."
-    >
+    <Layout title="Jinnah Law Academy By Wasif Mateen - Learn Law, Lead Justice"
+      description="Welcome to Jinnah Law Academy by Wasif Mateen — the first and only law-focused institute in Nowshera Virkan. Get expert guidance in LAT, LL.B and LAW-GAT.">
+
       <Hero
         title="Learn Law, Lead Justice"
         subtitle="Welcome to Jinnah Law Academy by Wasif Mateen — the first and only law-focused institute in Nowshera Virkan. Get expert guidance in LAT, LL.B and LAW-GAT — available both online and on-campus."
         ctaText="Explore Courses"
         ctaLink="/courses"
-        backgroundImage="/law_justice.jpeg"
+        backgroundImage='/law_justice.jpeg'
       />
 
       <main>
         <FeaturesSection>
           <Container>
-            <SectionTitle>
-              Why Choose Jinnah Law Academy By Wasif Mateen?
-            </SectionTitle>
+            <SectionTitle>Why Choose Jinnah Law Academy By Wasif Mateen?</SectionTitle>
             <FeaturesGrid>
               <FeatureCard className="fade-in">
-                <div className="feature-icon" aria-label="Graduation Cap">🎓</div>
+                <div className="feature-icon">🎓</div>
                 <h3>Only Law Academy in Nowshera Virkan</h3>
-                <p>
-                  The first and only specialized law academy in the region, providing focused legal education.
-                </p>
+                <p>The first and only specialized law academy in the region, providing focused legal education.</p>
               </FeatureCard>
               <FeatureCard className="fade-in">
-                <div className="feature-icon" aria-label="Books">📚</div>
+                <div className="feature-icon">📚</div>
                 <h3>Online + Physical Classes</h3>
-                <p>
-                  Flexible learning options with both online and on-campus classes to suit your schedule.
-                </p>
+                <p>Flexible learning options with both online and on-campus classes to suit your schedule.</p>
               </FeatureCard>
               <FeatureCard className="fade-in">
-                <div className="feature-icon" aria-label="Instructor">👨‍🏫</div>
+                <div className="feature-icon">👨‍🏫</div>
                 <h3>Qualified Legal Instructors</h3>
-                <p>
-                  Learn from experienced legal professionals and qualified instructors with proven expertise.
-                </p>
+                <p>Learn from experienced legal professionals and qualified instructors with proven expertise.</p>
               </FeatureCard>
               <FeatureCard className="fade-in">
-                <div className="feature-icon" aria-label="University">🏛️</div>
+                <div className="feature-icon">🏛️</div>
                 <h3>University-Affiliated Exam Prep</h3>
-                <p>
-                  Comprehensive preparation for LAT, LL.B, and LAW-GAT exams with university-standard curriculum.
-                </p>
+                <p>Comprehensive preparation for LAT, LL.B, and LAW-GAT exams with university-standard curriculum.</p>
               </FeatureCard>
             </FeaturesGrid>
           </Container>
@@ -326,9 +281,7 @@ const Home: React.FC = () => {
                   <CourseBadge>Entrance Exam</CourseBadge>
                 </CourseHeader>
                 <CourseContent>
-                  <p>
-                    Comprehensive preparation for Law Admission Test covering Essay Writing, Legal Reasoning, and General Knowledge.
-                  </p>
+                  <p>Comprehensive preparation for Law Admission Test covering Essay Writing, Legal Reasoning, and General Knowledge.</p>
                   <CourseFeatures>
                     <li>✓ Free LAT Test Preparation</li>
                     <li>✓ Comprehensive Study Material</li>
@@ -337,9 +290,7 @@ const Home: React.FC = () => {
                 </CourseContent>
                 <CourseFooter>
                   <CourseDuration>Short-Term Intensive</CourseDuration>
-                  <Button as={Link} to="/courses#lat" variant="secondary">
-                    Learn More
-                  </Button>
+                  <Button as={Link} to="/courses#lat" variant="secondary">Learn More</Button>
                 </CourseFooter>
               </CourseCard>
 
@@ -349,9 +300,7 @@ const Home: React.FC = () => {
                   <CourseBadge>Degree Program</CourseBadge>
                 </CourseHeader>
                 <CourseContent>
-                  <p>
-                    Complete law degree programs with both 4-year and 5-year options available for different educational backgrounds.
-                  </p>
+                  <p>Complete law degree programs with both 4-year and 5-year options available for different educational backgrounds.</p>
                   <CourseFeatures>
                     <li>✓ University Syllabus</li>
                     <li>✓ Expert Faculty</li>
@@ -360,9 +309,7 @@ const Home: React.FC = () => {
                 </CourseContent>
                 <CourseFooter>
                   <CourseDuration>4-5 Years</CourseDuration>
-                  <Button as={Link} to="/courses#llb" variant="secondary">
-                    Learn More
-                  </Button>
+                  <Button as={Link} to="/courses#llb" variant="secondary">Learn More</Button>
                 </CourseFooter>
               </CourseCard>
 
@@ -372,9 +319,7 @@ const Home: React.FC = () => {
                   <CourseBadge>Graduate Test</CourseBadge>
                 </CourseHeader>
                 <CourseContent>
-                  <p>
-                    Advanced preparation for Law Graduate Assessment Test covering Jurisprudence, Constitutional, Civil, and Criminal Law.
-                  </p>
+                  <p>Advanced preparation for Law Graduate Assessment Test covering Jurisprudence, Constitutional, Civil, and Criminal Law.</p>
                   <CourseFeatures>
                     <li>✓ Practice Tests</li>
                     <li>✓ Expert Guidance</li>
@@ -383,9 +328,7 @@ const Home: React.FC = () => {
                 </CourseContent>
                 <CourseFooter>
                   <CourseDuration>Intensive Course</CourseDuration>
-                  <Button as={Link} to="/courses#law-gat" variant="secondary">
-                    Learn More
-                  </Button>
+                  <Button as={Link} to="/courses#law-gat" variant="secondary">Learn More</Button>
                 </CourseFooter>
               </CourseCard>
             </CoursesGrid>
@@ -419,16 +362,10 @@ const Home: React.FC = () => {
           <Container>
             <CtaContent>
               <CtaTitle>Ready to Start Your Legal Journey?</CtaTitle>
-              <CtaSubtitle>
-                Join Pakistan's next generation of legal professionals. Apply now for our comprehensive law programs.
-              </CtaSubtitle>
+              <CtaSubtitle>Join Pakistan's next generation of legal professionals. Apply now for our comprehensive law programs.</CtaSubtitle>
               <CtaButtons>
-                <Button as={Link} to="/admission-inquiry" variant="primary">
-                  Apply Now
-                </Button>
-                <Button as={Link} to="/contact" variant="secondary">
-                  Contact Us
-                </Button>
+                <Button as={Link} to="/admission-inquiry" variant="primary">Apply Now</Button>
+                <Button as={Link} to="/contact" variant="secondary">Contact Us</Button>
               </CtaButtons>
             </CtaContent>
           </Container>

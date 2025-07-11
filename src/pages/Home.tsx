@@ -11,8 +11,13 @@ const FeaturesSection = styled(Section)`
 
 const FeaturesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+
+  @media (max-width: 480px) {
+    gap: 1.25rem;
+    padding: 0 1rem;
+  }
 `;
 
 const FeatureCard = styled(Card)`
@@ -67,6 +72,11 @@ const CoursesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
+
+  @media (max-width: 480px) {
+    gap: 1.25rem;
+    padding: 0 1rem;
+  }
 `;
 
 const CourseCard = styled(Card)`
@@ -88,6 +98,11 @@ const CourseHeader = styled.div`
 
   h3 {
     margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+
+    @media (max-width: 480px) {
+      font-size: 1.1rem;
+    }
   }
 `;
 
@@ -106,6 +121,11 @@ const CourseContent = styled.div`
   p {
     margin-bottom: 1rem;
     color: var(--gray-600);
+    font-size: 0.95rem;
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
   }
 `;
 
@@ -117,6 +137,10 @@ const CourseFeatures = styled.ul`
     padding: 0.25rem 0;
     color: var(--gray-700);
     font-size: 0.9rem;
+
+    @media (max-width: 480px) {
+      font-size: 0.85rem;
+    }
   }
 `;
 
@@ -134,12 +158,21 @@ const CourseFooter = styled.div`
     justify-content: space-between;
     align-items: center;
   }
+
+  @media (max-width: 480px) {
+    padding: 1rem;
+    gap: 0.75rem;
+  }
 `;
 
 const CourseDuration = styled.span`
   color: var(--gray-600);
   font-weight: 500;
   font-size: 0.9rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.85rem;
+  }
 `;
 
 const StatsSection = styled(Section)`
@@ -151,6 +184,11 @@ const StatsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 2rem;
+
+  @media (max-width: 480px) {
+    text-align: center;
+    gap: 1.25rem;
+  }
 `;
 
 const StatItem = styled.div`
@@ -162,12 +200,20 @@ const StatNumber = styled.div`
   font-weight: 700;
   margin-bottom: 0.5rem;
   font-family: 'Playfair Display', serif;
+
+  @media (max-width: 480px) {
+    font-size: 2.2rem;
+  }
 `;
 
 const StatLabel = styled.div`
   font-size: 1.1rem;
   color: var(--light-blue);
   font-weight: 500;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const CtaSection = styled(Section)`
@@ -178,6 +224,7 @@ const CtaSection = styled(Section)`
 const CtaContent = styled.div`
   max-width: 600px;
   margin: 0 auto;
+  padding: 0 1rem;
 `;
 
 const CtaTitle = styled.h2`
@@ -188,12 +235,20 @@ const CtaTitle = styled.h2`
   @media (max-width: 768px) {
     font-size: 2rem;
   }
+
+  @media (max-width: 480px) {
+    font-size: 1.75rem;
+  }
 `;
 
 const CtaSubtitle = styled.p`
   font-size: 1.1rem;
   margin-bottom: 2rem;
   color: var(--gray-600);
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const CtaButtons = styled.div`
@@ -205,8 +260,10 @@ const CtaButtons = styled.div`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
+    gap: 0.75rem;
   }
 `;
+
 
 const Home: React.FC = () => {
   useEffect(() => {

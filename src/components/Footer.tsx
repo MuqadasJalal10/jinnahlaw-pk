@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
 
+
+
 const FooterContainer = styled.footer`
   background: var(--gray-900);
   color: var(--white);
@@ -25,6 +27,10 @@ const FooterSection = styled.div`
     color: var(--white);
     margin-bottom: 1rem;
     font-size: 1.1rem;
+  }
+    
+  &:last-child h4 {
+    margin-left: -20px; /* adjust value as needed */
   }
 `;
 
@@ -58,7 +64,6 @@ const LogoIcon = styled.div`
     height: 50px;
   }
 `;
-
 
 const LogoText = styled.div``;
 
@@ -106,6 +111,7 @@ const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+   margin-left: -35px;
 `;
 
 const ContactItem = styled.p`
@@ -146,9 +152,9 @@ const Footer: React.FC = () => {
       <FooterContent>
         <FooterSection>
           <FooterLogo>
-           <LogoIcon>
-  <img src="/logo.jpeg" alt="Jinnah Law Academy Logo" />
-</LogoIcon>
+            <LogoIcon>
+              <img src="/logo.jpeg" alt="Jinnah Law Academy Logo" />
+            </LogoIcon>
 
             <LogoText>
               <AcademyName>Jinnah Law Academy</AcademyName>
@@ -165,6 +171,8 @@ const Footer: React.FC = () => {
             <li><Link to="/about">About</Link></li>
             <li><Link to="/courses">Courses</Link></li>
             <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/terms">Terms & Conditions</Link></li>
+            <li><Link to="/privacy">Privacy Policy</Link></li>
           </FooterLinks>
         </FooterSection>
 
@@ -187,7 +195,7 @@ const Footer: React.FC = () => {
             </ContactItem>
             <ContactItem>
               <span className="icon">📞</span>
-              <a href="tel:0300-1186473">0300-1186473</a>
+              <a href="tel:03001186473">0300-1186473</a>
             </ContactItem>
             <ContactItem>
               <span className="icon">💬</span>
@@ -195,29 +203,26 @@ const Footer: React.FC = () => {
             </ContactItem>
             <ContactItem>
               <span className="icon">✉️</span>
-              <a href="mailto:jinnahlawacademybywasifmateen@gmail.com">
-                jinnahlawacademybywasifmateen@gmail.com
-              </a>
+              <Link to="/contact">jinnahlawacademybywasifmateen@gmail.com</Link>
             </ContactItem>
             <ContactItem>
-  <span className="icon">
-    <FontAwesomeIcon icon={faFacebook} />
-  </span>
-  <a
-    href="https://www.facebook.com/profile.php?id=61567960027157"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    Facebook
-  </a>
-</ContactItem>
-
+              <span className="icon">
+                <FontAwesomeIcon icon={faFacebook} />
+              </span>
+              <a
+                href="https://www.facebook.com/profile.php?id=61567960027157"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Facebook
+              </a>
+            </ContactItem>
           </ContactInfo>
         </FooterSection>
       </FooterContent>
 
       <FooterBottom>
-        <p>&copy; 2024 Jinnah Law Academy by Wasif Mateen. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Jinnah Law Academy by Wasif Mateen. All rights reserved.</p>
       </FooterBottom>
     </FooterContainer>
   );

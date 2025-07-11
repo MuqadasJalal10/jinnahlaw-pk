@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
-import { Section, SectionTitle, Container, Button, Card } from '../styles/GlobalStyles';
+import { Section, Container, Button, } from '../styles/GlobalStyles';
 
 const AdmissionFormSection = styled(Section)`
   background: var(--white);
@@ -235,85 +235,15 @@ const SuccessContent = styled.div`
   }
 `;
 
-const CourseInfoSection = styled(Section)`
-  background: var(--gray-50);
-`;
 
-const ProgramsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-`;
 
-const ProgramCard = styled(Card)`
-  padding: 2rem;
-  text-align: center;
-  
-  .program-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-  
-  h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: var(--gray-900);
-  }
-  
-  p {
-    color: var(--gray-600);
-    margin-bottom: 1rem;
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-    
-    li {
-      padding: 0.25rem 0;
-      color: var(--gray-700);
-      font-size: 0.9rem;
-      
-      &:before {
-        content: "✓ ";
-        color: var(--primary-blue);
-        font-weight: bold;
-      }
-    }
-  }
-`;
 
-const WhyChooseSection = styled(Section)`
-  background: var(--white);
-`;
 
-const BenefitsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-`;
 
-const BenefitItem = styled.div`
-  text-align: center;
-  padding: 1.5rem;
-  
-  .benefit-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-  
-  h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-    color: var(--gray-900);
-  }
-  
-  p {
-    color: var(--gray-600);
-    font-size: 0.9rem;
-  }
-`;
+
+
+
+
 
 interface FormData {
   fullName: string;
@@ -608,29 +538,9 @@ const [subCourse, setSubCourse] = useState<string>("");
                   </select>
                 </FormGroup>
 
-                <FormGroup>
-                  <label htmlFor="previousExperience">Previous Legal Education/Experience</label>
-                  <textarea 
-                    id="previousExperience" 
-                    name="previousExperience" 
-                    rows={3} 
-                    placeholder="Any previous legal education or experience (optional)"
-                    value={formData.previousExperience}
-                    onChange={handleInputChange}
-                  />
-                </FormGroup>
+                
 
-                <FormGroup>
-                  <label htmlFor="additionalInfo">Additional Information</label>
-                  <textarea 
-                    id="additionalInfo" 
-                    name="additionalInfo" 
-                    rows={3} 
-                    placeholder="Any specific questions or requirements (optional)"
-                    value={formData.additionalInfo}
-                    onChange={handleInputChange}
-                  />
-                </FormGroup>
+                
 
                 <FormGroup>
                   <CheckboxGroup>
@@ -661,71 +571,9 @@ const [subCourse, setSubCourse] = useState<string>("");
           </SuccessContent>
         </SuccessMessage>
 
-        <CourseInfoSection>
-          <Container>
-            <SectionTitle>Our Programs</SectionTitle>
-            <ProgramsGrid>
-              <ProgramCard className="fade-in">
-                <div className="program-icon">🎯</div>
-                <h3>LAT Preparation</h3>
-                <p>Comprehensive preparation for Law Admission Test</p>
-                <ul>
-                  <li>Free study material</li>
-                  <li>Mock tests</li>
-                  <li>Expert guidance</li>
-                </ul>
-              </ProgramCard>
-              <ProgramCard className="fade-in">
-                <div className="program-icon">🎓</div>
-                <h3>LL.B Programs</h3>
-                <p>Complete law degree programs (4 & 5 years)</p>
-                <ul>
-                  <li>HEC recognized</li>
-                  <li>University syllabus</li>
-                  <li>Practical training</li>
-                </ul>
-              </ProgramCard>
-              <ProgramCard className="fade-in">
-                <div className="program-icon">📚</div>
-                <h3>LAW-GAT</h3>
-                <p>Graduate assessment test preparation</p>
-                <ul>
-                  <li>Advanced curriculum</li>
-                  <li>Practice tests</li>
-                  <li>Career counseling</li>
-                </ul>
-              </ProgramCard>
-            </ProgramsGrid>
-          </Container>
-        </CourseInfoSection>
+        
 
-        <WhyChooseSection>
-          <Container>
-            <SectionTitle>Why Choose Jinnah Law Academy?</SectionTitle>
-            <BenefitsGrid>
-              <BenefitItem className="fade-in">
-                <div className="benefit-icon">🏆</div>
-                <h3>First in Region</h3>
-                <p>The only specialized law academy in Nowshera Virkan</p>
-              </BenefitItem>
-              <BenefitItem className="fade-in">
-                <div className="benefit-icon">👨‍🏫</div>
-                <h3>Expert Faculty</h3>
-                <p>Qualified legal professionals with proven expertise</p>
-              </BenefitItem>
-              <BenefitItem className="fade-in">
-                <div className="benefit-icon">📱</div>
-                <h3>Flexible Learning</h3>
-                <p>Online and physical classes to suit your schedule</p>
-              </BenefitItem>
-              <BenefitItem className="fade-in">
-                <div className="benefit-icon">🎯</div>
-                <h3>Focused Approach</h3>
-                <p>Specialized curriculum designed for success</p>
-              </BenefitItem>
-            </BenefitsGrid>
-          </Container>
-        </WhyChooseSection>
+        
       </main>
     </Layout>
   );

@@ -7,19 +7,27 @@ import AdmissionInquiry from './pages/AdmissionInquiry';
 import NotFound from './pages/NotFound';
 import ScrollToTop from './components/ScrollToTop';
 import WhatsAppButton from './components/WhatsAppButton'; // ✅ Import this
+import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 
 function App() {
   return (
     <>
       <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/courses" element={<Courses />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/admission-inquiry" element={<AdmissionInquiry />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+
+      {/* ✅ This adds spacing below fixed header */}
+      <main style={{ paddingTop: '80px' }}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/admission-inquiry" element={<AdmissionInquiry />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+        </Routes>
+      </main>
 
       {/* ✅ Floating WhatsApp Icon */}
       <WhatsAppButton />

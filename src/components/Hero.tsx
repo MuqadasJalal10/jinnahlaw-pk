@@ -15,7 +15,8 @@ const HeroContainer = styled.section<{ backgroundImage?: string }>`
   text-align: center;
   position: relative;
   overflow: hidden;
-  margin-top: 80px;
+  padding-top: 80px;
+
 
   @media (max-width: 768px) {
     padding: 6rem 0 3rem;

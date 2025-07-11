@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-
 const HeaderContainer = styled.header`
   background: var(--white);
   box-shadow: var(--shadow-md);
@@ -24,6 +23,7 @@ const NavContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 `;
 
 const LogoLink = styled(Link)`
@@ -82,14 +82,13 @@ const ByText = styled.span`
   }
 `;
 
-
 const NavMenu = styled.div<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
   gap: 2rem;
 
   @media (max-width: 768px) {
-    position: fixed;
+    position: absolute;
     top: 100%;
     left: 0;
     right: 0;
@@ -97,9 +96,10 @@ const NavMenu = styled.div<{ isOpen: boolean }>`
     flex-direction: column;
     padding: 2rem 1rem;
     box-shadow: var(--shadow-lg);
-    transform: translateY(${props => props.isOpen ? '0' : '-100%'});
+    transform: translateY(${props => props.isOpen ? '0' : '-200%'});
     transition: transform 0.3s ease;
     gap: 1rem;
+    z-index: 999;
   }
 `;
 

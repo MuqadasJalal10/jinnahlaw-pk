@@ -4,6 +4,9 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import { Section, SectionTitle, Container, Button, Card } from '../styles/GlobalStyles';
+import { Target, GraduationCap, Smartphone, BarChart } from 'lucide-react';
+
+
 
 const CoursesOverviewSection = styled(Section)`
   background: var(--white);
@@ -180,7 +183,7 @@ const BenefitsGrid = styled.div`
 const BenefitCard = styled(Card)`
   padding: 2rem;
   text-align: center;
-  background: white;
+  background: #f0f9ff;
   border: 1px solid #e5e7eb; /* light gray border */
   border-radius: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
@@ -202,6 +205,7 @@ const BenefitCard = styled(Card)`
   p {
     color: var(--gray-600);
     line-height: 1.6;
+     
   }
 
   &:hover {
@@ -403,7 +407,7 @@ const Courses: React.FC = () => {
                 </CourseFeatures>
 
                 <CourseActions className="fade-in">
-                  <Button as={Link} to="/admission-inquiry" variant="primary">Apply Now</Button>
+                  <Button as={Link} to="/admission-inquiry" variant="primary">Enroll Now</Button>
                   <Button as={Link} to="/contact" variant="secondary">Learn More</Button>
                 </CourseActions>
               </CourseInfo>
@@ -447,7 +451,7 @@ const Courses: React.FC = () => {
                 </CourseFeatures>
 
                 <CourseActions className="fade-in">
-                  <Button as={Link} to="/admission-inquiry" variant="primary">Apply Now</Button>
+                  <Button as={Link} to="/admission-inquiry" variant="primary">Enroll Now</Button>
                   <Button as={Link} to="/contact" variant="secondary">Get Details</Button>
                 </CourseActions>
               </CourseInfo>
@@ -497,7 +501,7 @@ const Courses: React.FC = () => {
                 </CourseFeatures>
 
                 <CourseActions className="fade-in">
-                  <Button as={Link} to="/admission-inquiry" variant="primary">Register Now</Button>
+                  <Button as={Link} to="/admission-inquiry" variant="primary">Enroll Now</Button>
                   <Button as={Link} to="/contact" variant="secondary">Contact Us</Button>
                 </CourseActions>
               </CourseInfo>
@@ -508,28 +512,43 @@ const Courses: React.FC = () => {
         <WhyChooseSection>
           <Container>
             <SectionTitle>Why Choose Our Courses?</SectionTitle>
-            <BenefitsGrid>
-              <BenefitCard className="fade-in">
-                <div className="benefit-icon">🎯</div>
-                <h3>Focused Curriculum</h3>
-                <p>Our courses are specifically designed to meet the requirements of each exam and degree program.</p>
-              </BenefitCard>
-              <BenefitCard className="fade-in">
-                <div className="benefit-icon">👨‍🏫</div>
-                <h3>Expert Faculty</h3>
-                <p>Learn from qualified legal professionals with extensive academic and practical experience.</p>
-              </BenefitCard>
-              <BenefitCard className="fade-in">
-                <div className="benefit-icon">📱</div>
-                <h3>Flexible Learning</h3>
-                <p>Choose between online and on-campus classes to fit your schedule and learning preferences.</p>
-              </BenefitCard>
-              <BenefitCard className="fade-in">
-                <div className="benefit-icon">📊</div>
-                <h3>Progress Tracking</h3>
-                <p>Regular assessments and feedback to monitor your progress and identify areas for improvement.</p>
-              </BenefitCard>
-            </BenefitsGrid>
+            
+<BenefitsGrid>
+  <BenefitCard className="fade-in text-center p-4">
+    <Target className="benefit-icon mx-auto mb-3 text-primary" />
+    <h3 className="text-xl font-bold text-gray-800 mb-2">Focused Curriculum</h3>
+    <p className="text-gray-700 text-sm font-bold leading-relaxed">
+      Our courses are specifically designed to meet the requirements of each exam and degree program.
+    </p>
+  </BenefitCard>
+
+  <BenefitCard className="fade-in text-center p-4">
+    <GraduationCap className="benefit-icon mx-auto mb-3 text-primary" />
+    <h3 className="text-xl font-bold text-gray-800 mb-2">Expert Faculty</h3>
+    <p className="text-gray-700 text-sm font-bold leading-relaxed">
+      Learn from qualified legal professionals with extensive academic and practical experience.
+    </p>
+  </BenefitCard>
+
+  <BenefitCard className="fade-in text-center p-4">
+    <Smartphone className="benefit-icon mx-auto mb-3 text-primary" />
+    <h3 className="text-xl font-bold text-gray-800 mb-2">Flexible Learning</h3>
+    <p className="text-gray-700 text-sm font-bold leading-relaxed">
+      Choose between online and on-campus classes to fit your schedule and learning preferences.
+    </p>
+  </BenefitCard>
+
+  <BenefitCard className="fade-in text-center p-4">
+    <BarChart className="benefit-icon mx-auto mb-3 text-primary" />
+    <h3 className="text-xl font-bold text-gray-800 mb-2">Progress Tracking</h3>
+    <p className="text-gray-700 text-sm font-bold leading-relaxed">
+      Regular assessments and feedback to monitor your progress and identify areas for improvement.
+    </p>
+  </BenefitCard>
+</BenefitsGrid>
+
+
+
           </Container>
         </WhyChooseSection>
 

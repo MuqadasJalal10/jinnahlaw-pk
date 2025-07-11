@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import Hero from '../components/Hero';
 import { Section, SectionTitle, Container, Button, Card } from '../styles/GlobalStyles';
+import { Gavel, BookOpenText, GraduationCap, Landmark } from 'lucide-react';
+
 
 const FeaturesSection = styled(Section)`
   background: var(--gray-50);
@@ -11,7 +13,7 @@ const FeaturesSection = styled(Section)`
 
 const FeaturesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
 
   @media (max-width: 480px) {
@@ -20,36 +22,41 @@ const FeaturesGrid = styled.div`
   }
 `;
 
-const FeatureCard = styled(Card)`
+const FeatureCard = styled(Card)<{ bgColor?: string }>`
   padding: 1.5rem;
   text-align: center;
-  background: white;
-  border: 1px solid #e5e7eb;
+  background: ${({ bgColor }) => bgColor || '#f8fafc'};
+  border: 1px solid transparent;
   border-radius: 1rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
   animation: fadeSlideUp 0.6s ease forwards;
 
   .feature-icon {
     font-size: 2.25rem;
     margin-bottom: 0.75rem;
+    color: #3b82f6;
   }
 
   h3 {
     font-size: 1.1rem;
     margin-bottom: 0.75rem;
-    color: var(--gray-900);
+    color: #1e3a8a;
   }
 
   p {
     font-size: 0.95rem;
-    color: var(--gray-600);
+    color: #475569;
     line-height: 1.5;
+    font-weight: 500;
   }
 
   &:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.02);
     border-color: #1d4ed8;
-    box-shadow: 0 10px 24px rgba(29, 78, 216, 0.15);
+    box-shadow: 0 10px 20px rgba(29, 78, 216, 0.15);
+    background: ${({ bgColor }) => bgColor || 'rgba(248, 250, 252, 0.95)'};
+    backdrop-filter: blur(4px);
   }
 
   @keyframes fadeSlideUp {
@@ -298,32 +305,35 @@ const Home: React.FC = () => {
 
       <main>
         <FeaturesSection>
-          <Container>
-            <SectionTitle>Why Choose Jinnah Law Academy By Wasif Mateen?</SectionTitle>
-            <FeaturesGrid>
-              <FeatureCard className="fade-in">
-                <div className="feature-icon">🎓</div>
-                <h3>Only Law Academy in Nowshera Virkan</h3>
-                <p>The first and only specialized law academy in the region, providing focused legal education.</p>
-              </FeatureCard>
-              <FeatureCard className="fade-in">
-                <div className="feature-icon">📚</div>
-                <h3>Online + Physical Classes</h3>
-                <p>Flexible learning options with both online and on-campus classes to suit your schedule.</p>
-              </FeatureCard>
-              <FeatureCard className="fade-in">
-                <div className="feature-icon">👨‍🏫</div>
-                <h3>Qualified Legal Instructors</h3>
-                <p>Learn from experienced legal professionals and qualified instructors with proven expertise.</p>
-              </FeatureCard>
-              <FeatureCard className="fade-in">
-                <div className="feature-icon">🏛️</div>
-                <h3>University-Affiliated Exam Prep</h3>
-                <p>Comprehensive preparation for LAT, LL.B, and LAW-GAT exams with university-standard curriculum.</p>
-              </FeatureCard>
-            </FeaturesGrid>
-          </Container>
-        </FeaturesSection>
+  <Container>
+    <SectionTitle>Why Choose Jinnah Law Academy By Wasif Mateen?</SectionTitle>
+    <FeaturesGrid>
+      <FeatureCard className="fade-in" bgColor="#f0f9ff">
+        <div className="feature-icon"><Landmark size={36} /></div>
+        <h3>Only Law Academy in Nowshera Virkan</h3>
+        <p>The first and only specialized law academy in the region, providing focused legal education.</p>
+      </FeatureCard>
+
+      <FeatureCard className="fade-in" bgColor="#f0f9ff">
+        <div className="feature-icon"><BookOpenText size={36} /></div>
+        <h3>Online + Physical Classes</h3>
+        <p>Flexible learning options with both online and on-campus classes to suit your schedule.</p>
+      </FeatureCard>
+
+      <FeatureCard className="fade-in" bgColor="#f0f9ff">
+        <div className="feature-icon"><GraduationCap size={36} /></div>
+        <h3>Qualified Legal Instructors</h3>
+        <p>Learn from experienced legal professionals and qualified instructors with proven expertise.</p>
+      </FeatureCard>
+
+      <FeatureCard className="fade-in" bgColor="#f0f9ff">
+        <div className="feature-icon"><Gavel size={36} /></div>
+        <h3>University-Affiliated Exam Prep</h3>
+        <p>Comprehensive preparation for LAT, LL.B, and LAW-GAT exams with university-standard curriculum.</p>
+      </FeatureCard>
+    </FeaturesGrid>
+  </Container>
+</FeaturesSection>
 
         <CoursesPreviewSection>
           <Container>

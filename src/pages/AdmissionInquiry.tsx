@@ -366,6 +366,7 @@ const [subCourse, setSubCourse] = useState<string>("");
       <Hero 
         title="Admission Inquiry Form" 
         subtitle="Begin your journey in legal education with Jinnah Law Academy By Wasif Mateen. Fill out the form below to explore our programs."
+          backgroundImage="/Admission.jpg"
       />
       
       <main>

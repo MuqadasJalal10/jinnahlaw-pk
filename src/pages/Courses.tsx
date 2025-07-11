@@ -306,6 +306,7 @@ const Courses: React.FC = () => {
       <Hero 
         title="Our Courses" 
         subtitle="Explore our structured legal education offerings, tailored for different academic levels and career goals."
+         backgroundImage="/333.webp"
       />
       
       <main>
@@ -362,7 +363,7 @@ const Courses: React.FC = () => {
                 </CourseActions>
               </CourseInfo>
               <CourseImage className="fade-in">
-                <img src="https://images.pexels.com/photos/5212317/pexels-photo-5212317.jpeg?auto=compress&cs=tinysrgb&w=800" alt="LAT Preparation" />
+                <img src="/LAW_Book.jpg" alt="LAT Preparation" />
               </CourseImage>
             </CourseContent>
           </Container>
@@ -372,7 +373,7 @@ const Courses: React.FC = () => {
           <Container>
             <CourseContent>
               <CourseImage className="fade-in">
-                <img src="https://images.pexels.com/photos/5668772/pexels-photo-5668772.jpeg?auto=compress&cs=tinysrgb&w=800" alt="LL.B 4 Years Program" />
+                <img src="/law_s2.jpg" alt="LL.B 4 Years Program" />
               </CourseImage>
               <CourseInfo>
                 <CourseBadge>4-Year Degree</CourseBadge>
@@ -456,7 +457,7 @@ const Courses: React.FC = () => {
                 </CourseActions>
               </CourseInfo>
               <CourseImage className="fade-in">
-                <img src="https://images.pexels.com/photos/5669619/pexels-photo-5669619.jpeg?auto=compress&cs=tinysrgb&w=800" alt="LL.B 5 Years Program" />
+                <img src="law_s3.jpg" alt="LL.B 5 Years Program" />
               </CourseImage>
             </CourseContent>
           </Container>
@@ -466,7 +467,7 @@ const Courses: React.FC = () => {
           <Container>
             <CourseContent>
               <CourseImage className="fade-in">
-                <img src="https://images.pexels.com/photos/5668473/pexels-photo-5668473.jpeg?auto=compress&cs=tinysrgb&w=800" alt="LAW-GAT Preparation" />
+                <img src="/law_s4.jpg" alt="LAW-GAT Preparation" />
               </CourseImage>
               <CourseInfo>
                 <CourseBadge>Graduate Test</CourseBadge>

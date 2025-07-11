@@ -384,6 +384,7 @@ const About: React.FC = () => {
       <Hero
         title="Where Law Meets Purpose"
         subtitle="Discover our mission, values, and the visionary behind Jinnah Law Academy By Wasif Mateen."
+        backgroundImage="/222.jpg"
       />
       <main>
         <AboutSection style={{ background: "linear-gradient(135deg, #f8fafc, #e0f2fe)" }}>
@@ -428,7 +429,7 @@ const About: React.FC = () => {
 
       <AboutImage className="fade-in" style={{ boxShadow: "0 10px 25px rgba(30, 64, 175, 0.2)" }}>
         <img
-          src="https://images.pexels.com/photos/5669619/pexels-photo-5669619.jpeg?auto=compress&cs=tinysrgb&w=800"
+          src="/law_image.jpg"
           alt="Law books and gavel"
           style={{
            borderRadius: "0.25rem"

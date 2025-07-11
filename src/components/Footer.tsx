@@ -1,10 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons';
-
-
+import {
+  MapPin,
+  Phone,
+  MessageCircle,
+  Mail,
+  Facebook as LucideFacebook,
+} from 'lucide-react';
 
 const FooterContainer = styled.footer`
   background: var(--gray-900);
@@ -27,10 +30,6 @@ const FooterSection = styled.div`
     color: var(--white);
     margin-bottom: 1rem;
     font-size: 1.1rem;
-  }
-    
-  &:last-child h4 {
-    margin-left: -20px; /* adjust value as needed */
   }
 `;
 
@@ -111,12 +110,11 @@ const ContactInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-   margin-left: -35px;
 `;
 
 const ContactItem = styled.p`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.5rem;
   color: var(--gray-300);
   font-size: 0.9rem;
@@ -155,7 +153,6 @@ const Footer: React.FC = () => {
             <LogoIcon>
               <img src="/logo.jpeg" alt="Jinnah Law Academy Logo" />
             </LogoIcon>
-
             <LogoText>
               <AcademyName>Jinnah Law Academy</AcademyName>
               <ByText>By Wasif Mateen</ByText>
@@ -190,25 +187,23 @@ const Footer: React.FC = () => {
           <h4>Contact Info</h4>
           <ContactInfo>
             <ContactItem>
-              <span className="icon">📍</span>
+              <span className="icon"><MapPin size={16} /></span>
               Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Nowshera Virkan
             </ContactItem>
             <ContactItem>
-              <span className="icon">📞</span>
+              <span className="icon"><Phone size={16} /></span>
               <a href="tel:03001186473">0300-1186473</a>
             </ContactItem>
             <ContactItem>
-              <span className="icon">💬</span>
+              <span className="icon"><MessageCircle size={16} /></span>
               <a href="https://wa.me/923014686473">0301-4686473</a>
             </ContactItem>
             <ContactItem>
-              <span className="icon">✉️</span>
+              <span className="icon"><Mail size={16} /></span>
               <Link to="/contact">jinnahlawacademybywasifmateen@gmail.com</Link>
             </ContactItem>
             <ContactItem>
-              <span className="icon">
-                <FontAwesomeIcon icon={faFacebook} />
-              </span>
+              <span className="icon"><LucideFacebook size={16} /></span>
               <a
                 href="https://www.facebook.com/profile.php?id=61567960027157"
                 target="_blank"

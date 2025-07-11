@@ -43,23 +43,22 @@ const FooterLogo = styled.div`
 const LogoIcon = styled.div`
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-  color: var(--white);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 1.2rem;
-  font-family: 'Playfair Display', serif;
+  overflow: hidden;
   flex-shrink: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
   @media (max-width: 768px) {
     width: 50px;
     height: 50px;
-    font-size: 1.1rem;
   }
 `;
+
 
 const LogoText = styled.div``;
 
@@ -147,7 +146,10 @@ const Footer: React.FC = () => {
       <FooterContent>
         <FooterSection>
           <FooterLogo>
-            <LogoIcon>JLA</LogoIcon>
+           <LogoIcon>
+  <img src="/logo.jpeg" alt="Jinnah Law Academy Logo" />
+</LogoIcon>
+
             <LogoText>
               <AcademyName>Jinnah Law Academy</AcademyName>
               <ByText>By Wasif Mateen</ByText>

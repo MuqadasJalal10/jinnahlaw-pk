@@ -522,21 +522,21 @@ const [subCourse, setSubCourse] = useState<string>("");
   </FormGroup>
 )}
 
-                <FormGroup>
-                  <label htmlFor="mode">Mode *</label>
-                  <select 
-                    id="mode" 
-                    name="mode" 
-                    value={formData.mode}
-                    onChange={handleInputChange}
-                    required
-                  >
-                    
-                    <option value="physical">Physical Classes</option>
-                    <option value="online">Online Classes</option>
-                    
-                  </select>
-                </FormGroup>
+              <FormGroup>
+  <label htmlFor="mode">Mode *</label>
+  <select 
+    id="mode" 
+    name="mode" 
+    value={formData.mode}
+    onChange={handleInputChange}
+    required
+  >
+    <option value="">Select Mode</option> {/* Default empty option */}
+    <option value="physical">Physical Classes</option>
+    <option value="online">Online Classes</option>
+  </select>
+</FormGroup>
+
 
                 
 

@@ -47,9 +47,10 @@ const LogoText = styled.div`
   line-height: 1.2;
 
   @media (max-width: 768px) {
-    display: none;
+    display: flex;
   }
 `;
+
 
 const AcademyName = styled.span`
   font-family: 'Playfair Display', serif;

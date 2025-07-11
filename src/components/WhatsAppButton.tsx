@@ -52,7 +52,7 @@ const HoverText = styled.span`
 `;
 
 const WhatsAppButton: React.FC = () => {
-  const message = encodeURIComponent("How can I help you?");
+  const message = encodeURIComponent("How can I assist you?");
   const phone = "923014686473"; // Pakistan format without leading 0
 
   return (

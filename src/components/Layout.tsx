@@ -10,6 +10,7 @@ interface LayoutProps {
   title?: string;
   description?: string;
   keywords?: string;
+  backgroundImage?: string; // ✅ Add this line here
 }
 
 const Layout: React.FC<LayoutProps> = ({ 

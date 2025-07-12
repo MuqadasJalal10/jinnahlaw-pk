@@ -159,7 +159,7 @@ const Contact: React.FC = () => {
   return (
     <Layout title="Contact Us - Jinnah Law Academy By Wasif Mateen" description="Get in touch with Jinnah Law Academy.">
       <Hero title="Contact Us" subtitle="Get in touch with us for any inquiries about our programs, admissions, or general information."
-       backgroundImage="/444.jpg"
+       backgroundImage="/contactus.jpg"
       />
       
 

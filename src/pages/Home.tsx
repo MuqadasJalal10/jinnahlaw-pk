@@ -297,7 +297,7 @@ const Home: React.FC = () => {
     >
       <Hero
         title="Learn Law, Lead Justice"
-        subtitle="Welcome to Jinnah Law Academy by Wasif Mateen — the first and only law-focused institute in Nowshera Virkan. Get expert guidance in LAT, LL.B and LAW-GAT — available both online and on-campus."
+        subtitle="Welcome to Jinnah Law Academy by Wasif Mateen — Nowshera Virkan’s premier institute dedicated exclusively to legal education. Specializing in LAT, LL.B, and LAW-GAT preparation, we offer expert-led courses both online and on-campus to help you achieve your legal career goals."
         ctaText="Explore Courses"
         ctaLink="/courses"
         backgroundImage="/111.jpg"

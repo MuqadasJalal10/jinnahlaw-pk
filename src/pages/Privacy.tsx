@@ -47,10 +47,12 @@ const Privacy = () => {
     <Layout
       title="Privacy Policy - Jinnah Law Academy"
       description="Learn how we collect, use, and protect your data at Jinnah Law Academy by Wasif Mateen."
+      
     >
       <Hero
         title="Privacy Policy"
         subtitle="Your trust is our priority — here's how we safeguard your data."
+          backgroundImage="/privacy2.jpg"
       />
 
       <PageWrapper>

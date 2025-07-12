@@ -383,7 +383,7 @@ const About: React.FC = () => {
     >
       <Hero
         title="Where Law Meets Purpose"
-        subtitle="Discover our mission, values, and the visionary behind Jinnah Law Academy By Wasif Mateen."
+        subtitle="Learn how Jinnah Law Academy by Wasif Mateen is setting new benchmarks in legal education through unwavering values and future-focused leadership."
         backgroundImage="/222.jpg"
       />
       <main>

@@ -305,7 +305,7 @@ const Courses: React.FC = () => {
     >
       <Hero 
         title="Our Courses" 
-        subtitle="Explore our structured legal education offerings, tailored for different academic levels and career goals."
+        subtitle="Empowering tomorrow’s legal minds through structured, career-driven education in LAT, LL.B, and LAW-GAT."
          backgroundImage="/333.webp"
       />
       

@@ -8,6 +8,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   :root {
+ 
+   --background-color: #003366;
+  --primary-blue: #f8fafc;
+  --jinnah-blue: #0050c8;
+  --mateen-purple: #4f5cd1;
+  --hero-text-on-light: #1e293b;
+  --soft-white: #f8f9fa;
     --primary-blue: #1e40af;
     --secondary-blue: #3b82f6;
     --accent-blue: #60a5fa;

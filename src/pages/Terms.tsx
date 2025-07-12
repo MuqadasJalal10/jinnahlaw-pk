@@ -55,6 +55,7 @@ const Terms = () => {
       <Hero
         title="Terms & Conditions"
         subtitle="Understand our rules before accessing or using our platform."
+        backgroundImage='/.jpeg'
       />
 
       <PageWrapper>

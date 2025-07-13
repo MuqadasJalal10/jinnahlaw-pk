@@ -253,8 +253,7 @@ interface FormData {
   address: string;
   course: string;
   mode: string;
-  previousExperience: string;
-  additionalInfo: string;
+  
   terms: boolean;
 }
 
@@ -267,8 +266,7 @@ const AdmissionInquiry: React.FC = () => {
     address: '',
     course: '',
     mode: '',
-    previousExperience: '',
-    additionalInfo: '',
+    
     terms: false
   });
 const [subCourse, setSubCourse] = useState<string>("");
@@ -327,8 +325,8 @@ const [subCourse, setSubCourse] = useState<string>("");
         address: '',
         course: '',
         mode: '',
-        previousExperience: '',
-        additionalInfo: '',
+    
+       
         terms: false
       });
       

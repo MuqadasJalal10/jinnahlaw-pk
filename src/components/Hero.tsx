@@ -56,7 +56,7 @@ const CenteredContent = styled(motion.div)`
 
 const StyledCard = styled(motion.div)`
   position: absolute;
-  top: 18%;
+  top: 15%;
   left: 5%;
   transform: translateY(-50%);
   padding: 2.5rem;

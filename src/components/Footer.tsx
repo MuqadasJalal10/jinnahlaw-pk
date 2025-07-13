@@ -16,14 +16,32 @@ const FooterContainer = styled.footer`
 `;
 
 const FooterContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 0 1rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
 `;
+
+const LeftSection = styled.div`
+  flex: 1 1 250px;
+  min-width: 250px;
+`;
+
+const RightSection = styled.div`
+  flex: 3 1 600px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
 
 const FooterSection = styled.div`
   h4 {
@@ -31,6 +49,7 @@ const FooterSection = styled.div`
     margin-bottom: 1rem;
     font-size: 1.1rem;
   }
+    
 `;
 
 const FooterLogo = styled.div`
@@ -148,73 +167,73 @@ const Footer: React.FC = () => {
   return (
     <FooterContainer>
       <FooterContent>
-        <FooterSection>
-          <FooterLogo>
-            <LogoIcon>
-              <img src="/logo.jpeg" alt="Jinnah Law Academy Logo" />
-            </LogoIcon>
-            <LogoText>
-              <AcademyName>Jinnah Law Academy</AcademyName>
-              <ByText>By Wasif Mateen</ByText>
-              <Slogan>"Learn Law, Lead Justice"</Slogan>
-            </LogoText>
-          </FooterLogo>
-        </FooterSection>
+  <LeftSection>
+    <FooterLogo>
+      <LogoIcon>
+        <img src="/logo.jpeg" alt="Jinnah Law Academy Logo" />
+      </LogoIcon>
+      <LogoText>
+        <AcademyName>Jinnah Law Academy</AcademyName>
+        <ByText>By Wasif Mateen</ByText>
+        <Slogan>"Learn Law, Lead Justice"</Slogan>
+      </LogoText>
+    </FooterLogo>
+  </LeftSection>
 
-        <FooterSection>
-          <h4>Quick Links</h4>
-          <FooterLinks>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/courses">Courses</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-            <li><Link to="/terms">Terms & Conditions</Link></li>
-            <li><Link to="/privacy">Privacy Policy</Link></li>
-          </FooterLinks>
-        </FooterSection>
+  <RightSection>
+    <FooterSection>
+      <h4>Quick Links</h4>
+      <FooterLinks>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/about">About</Link></li>
+        <li><Link to="/courses">Courses</Link></li>
+        <li><Link to="/contact">Contact</Link></li>
+        <li><Link to="/admission-inquiry">Admission Inquiry</Link></li>
+      </FooterLinks>
+    </FooterSection>
 
-        <FooterSection>
-          <h4>Our Courses</h4>
-          <FooterLinks>
-            <li><Link to="/courses#lat">LAT</Link></li>
-            <li><Link to="/courses#llb-4">LL.B (4 Years)</Link></li>
-            <li><Link to="/courses#llb-5">LL.B (5 Years)</Link></li>
-            <li><Link to="/courses#law-gat">LAW-GAT</Link></li>
-          </FooterLinks>
-        </FooterSection>
+    <FooterSection>
+      <h4>Policies</h4>
+      <FooterLinks>
+        <li><Link to="/terms">Terms & Conditions</Link></li>
+        <li><Link to="/privacy">Privacy Policy</Link></li>
+      </FooterLinks>
+    </FooterSection>
 
-        <FooterSection>
-          <h4>Contact Info</h4>
-          <ContactInfo>
-            <ContactItem>
-              <span className="icon"><MapPin size={16} /></span>
-              Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Nowshera Virkan
-            </ContactItem>
-            <ContactItem>
-              <span className="icon"><Phone size={16} /></span>
-              <a href="tel:03001186473">0300-1186473</a>
-            </ContactItem>
-            <ContactItem>
-              <span className="icon"><MessageCircle size={16} /></span>
-              <a href="https://wa.me/923014686473">0301-4686473</a>
-            </ContactItem>
-            <ContactItem>
-              <span className="icon"><Mail size={16} /></span>
-              <Link to="/contact">jinnahlawacademybywasifmateen@gmail.com</Link>
-            </ContactItem>
-            <ContactItem>
-              <span className="icon"><LucideFacebook size={16} /></span>
-              <a
-                href="https://www.facebook.com/profile.php?id=61567960027157"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Facebook
-              </a>
-            </ContactItem>
-          </ContactInfo>
-        </FooterSection>
-      </FooterContent>
+    <FooterSection>
+      <h4>Contact Info</h4>
+      <ContactInfo>
+        <ContactItem>
+          <span className="icon"><MapPin size={16} /></span>
+          Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Nowshera Virkan
+        </ContactItem>
+        <ContactItem>
+          <span className="icon"><Phone size={16} /></span>
+          <a href="tel:03001186473">0300-1186473</a>
+        </ContactItem>
+        <ContactItem>
+          <span className="icon"><MessageCircle size={16} /></span>
+          <a href="https://wa.me/923014686473">0301-4686473</a>
+        </ContactItem>
+        <ContactItem>
+          <span className="icon"><Mail size={16} /></span>
+          <Link to="/contact">jinnahlawacademybywasifmateen@gmail.com</Link>
+        </ContactItem>
+        <ContactItem>
+          <span className="icon"><LucideFacebook size={16} /></span>
+          <a
+            href="https://www.facebook.com/profile.php?id=61567960027157"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Facebook
+          </a>
+        </ContactItem>
+      </ContactInfo>
+    </FooterSection>
+  </RightSection>
+</FooterContent>
+
 
       <FooterBottom>
         <p>&copy; {new Date().getFullYear()} Jinnah Law Academy by Wasif Mateen. All rights reserved.</p>

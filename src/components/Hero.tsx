@@ -10,53 +10,53 @@ interface HeroProps {
   ctaText?: string;
   ctaLink?: string;
   backgroundImage?: string;
+  isHomePage?: boolean;
 }
 
-const HeroSection = styled.section`
+const HeroSection = styled.section<{ isHomePage?: boolean }>`
   position: relative;
   display: flex;
-  height: 590px;
+  flex-direction: ${({ isHomePage }) => (isHomePage ? 'column' : 'row')};
+  justify-content: ${({ isHomePage }) => (isHomePage ? 'center' : 'flex-start')};
+  align-items: ${({ isHomePage }) => (isHomePage ? 'center' : 'stretch')};
+  height: ${({ isHomePage }) => (isHomePage ? '100vh' : '590px')};
+  width: 100%;
   overflow: hidden;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: auto;
-  }
 `;
 
 const ImageContainer = styled.div<{ backgroundImage?: string }>`
-  flex: 0.7;
+  flex: 1;
   background-image: ${({ backgroundImage }) =>
     backgroundImage ? `url(${backgroundImage})` : 'none'};
   background-size: cover;
   background-position: center;
   position: relative;
-
-  @media (max-width: 768px) {
-    height: 300px;
-    width: 100%;
-    flex: none;
-  }
+  width: 100%;
+  height: 100%;
 
   &::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.4); /* dark overlay */
+    background: rgba(0, 0, 0, 0.4);
   }
 `;
 
-const Spacer = styled.div`
-  flex: 0.3;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-const StyledCard = styled.div`
+const CenteredContent = styled(motion.div)`
   position: absolute;
-  top: 22%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+  padding: 1rem;
+  max-width: 90%;
+`;
+
+const StyledCard = styled(motion.div)`
+  position: absolute;
+  top: 18%;
   left: 5%;
   transform: translateY(-50%);
   padding: 2.5rem;
@@ -66,7 +66,6 @@ const StyledCard = styled.div`
   cursor: default;
   z-index: 10;
 
-  /* 🌈 Apply the gradient here */
   background: linear-gradient(90deg, #0d47a1, #1976d2);
   color: #fff;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
@@ -93,10 +92,6 @@ const StyledCard = styled.div`
     max-width: 90%;
   }
 `;
-
-
-// ✅ Motion-enabled Card
-const TextCard = motion(StyledCard);
 
 const HeroTitle = styled.h1`
   font-size: 2.5rem;
@@ -134,26 +129,42 @@ const Hero: React.FC<HeroProps> = ({
   ctaText,
   ctaLink,
   backgroundImage,
+  isHomePage = false,
 }) => {
   return (
-    <HeroSection>
-      <Spacer />
+    <HeroSection isHomePage={isHomePage}>
       <ImageContainer backgroundImage={backgroundImage} />
-      <TextCard
-        initial={{ opacity: 0, x: -80 }}
-        animate={{ opacity: 1, x: 0 }}
-
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-      >
-        <HeroTitle>{title}</HeroTitle>
-        <HeroSubtitle>{subtitle}</HeroSubtitle>
-        {ctaText && ctaLink && (
-          <CTAButton to={ctaLink}>
-            {ctaText}
-            <ArrowRight size={18} />
-          </CTAButton>
-        )}
-      </TextCard>
+      {isHomePage ? (
+        <CenteredContent
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <HeroTitle>{title}</HeroTitle>
+          <HeroSubtitle>{subtitle}</HeroSubtitle>
+          {ctaText && ctaLink && (
+            <CTAButton to={ctaLink}>
+              {ctaText}
+              <ArrowRight size={18} />
+            </CTAButton>
+          )}
+        </CenteredContent>
+      ) : (
+        <StyledCard
+          initial={{ opacity: 0, x: -80 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        >
+          <HeroTitle>{title}</HeroTitle>
+          <HeroSubtitle>{subtitle}</HeroSubtitle>
+          {ctaText && ctaLink && (
+            <CTAButton to={ctaLink}>
+              {ctaText}
+              <ArrowRight size={18} />
+            </CTAButton>
+          )}
+        </StyledCard>
+      )}
     </HeroSection>
   );
 };

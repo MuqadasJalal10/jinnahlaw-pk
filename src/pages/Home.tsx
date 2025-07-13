@@ -341,7 +341,7 @@ const Home: React.FC = () => {
             <CoursesGrid>
               <CourseCard className="fade-in">
                 <CourseHeader>
-                  <h3>LAT - Law Admission Test</h3>
+                  <h3>LAT</h3>
                   <CourseBadge>Entrance Exam</CourseBadge>
                 </CourseHeader>
                 <CourseContent>
@@ -360,7 +360,7 @@ const Home: React.FC = () => {
 
               <CourseCard className="fade-in">
                 <CourseHeader>
-                  <h3>LL.B - Bachelor of Laws</h3>
+                  <h3>LL.B</h3>
                   <CourseBadge>Degree Program</CourseBadge>
                 </CourseHeader>
                 <CourseContent>

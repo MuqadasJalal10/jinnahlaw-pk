@@ -17,14 +17,26 @@ const Navbar = styled.nav`
 `;
 
 const NavContent = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
 `;
+
+const Left = styled.div`
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+`;
+
+const Right = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-right: 1rem;
+`;
+
 
 const LogoLink = styled(Link)`
   display: flex;
@@ -195,37 +207,42 @@ const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <Navbar>
-        <NavContent>
-          <LogoLink to="/" aria-label="Jinnah Law Academy Home">
-            <LogoImage src="/logo.jpeg" alt="Logo" />
-            <LogoText>
-              <AcademyName>Jinnah Law Academy</AcademyName>
-              <ByText>By Wasif Mateen</ByText>
-            </LogoText>
-          </LogoLink>
+       <NavContent>
+  <Left>
+    <LogoLink to="/" aria-label="Jinnah Law Academy Home">
+      <LogoImage src="/logo.jpeg" alt="Logo" />
+      <LogoText>
+        <AcademyName>Jinnah Law Academy</AcademyName>
+        <ByText>By Wasif Mateen</ByText>
+      </LogoText>
+    </LogoLink>
+  </Left>
 
-          <NavMenu ref={menuRef} isOpen={isMenuOpen}>
-            {links.map(link => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                isActive={location.pathname === link.path}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </NavMenu>
+  <Right>
+    <NavMenu ref={menuRef} isOpen={isMenuOpen}>
+      {links.map(link => (
+        <NavLink
+          key={link.path}
+          to={link.path}
+          isActive={location.pathname === link.path}
+        >
+          {link.label}
+        </NavLink>
+      ))}
+    </NavMenu>
 
-          <MobileMenuToggle
-            onClick={() => setIsMenuOpen(prev => !prev)}
-            aria-label="Toggle navigation menu"
-            isOpen={isMenuOpen}
-          >
-            <span />
-            <span />
-            <span />
-          </MobileMenuToggle>
-        </NavContent>
+    <MobileMenuToggle
+      onClick={() => setIsMenuOpen(prev => !prev)}
+      aria-label="Toggle navigation menu"
+      isOpen={isMenuOpen}
+    >
+      <span />
+      <span />
+      <span />
+    </MobileMenuToggle>
+  </Right>
+</NavContent>
+
       </Navbar>
     </HeaderContainer>
   );

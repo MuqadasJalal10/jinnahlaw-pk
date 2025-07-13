@@ -290,50 +290,66 @@ const [subCourse, setSubCourse] = useState<string>("");
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Validate required fields
-    const requiredFields = ['fullName', 'education', 'phone', 'email', 'course', 'mode', 'terms'];
-    const missingFields = requiredFields.filter(field => {
-      if (field === 'terms') return !formData[field];
-      return !formData[field as keyof FormData];
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  const requiredFields = ['fullName', 'education', 'phone', 'email', 'course', 'mode', 'terms'];
+  const missingFields = requiredFields.filter(field => {
+    if (field === 'terms') return !formData[field];
+    return !formData[field as keyof FormData];
+  });
+
+  if (missingFields.length > 0) {
+    alert('Please fill in all required fields.');
+    return;
+  }
+
+  const submitButton = e.currentTarget.querySelector('button[type="submit"]') as HTMLButtonElement;
+const originalText = submitButton.textContent;
+
+submitButton.textContent = 'Submitting...';
+submitButton.disabled = true;
+
+try {
+  const response = await fetch('http://localhost:5000/api/admission', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      ...formData,
+      subCourse: subCourse || null,
+    }),
+  });
+
+  if (response.ok) {
+    setShowSuccess(true);
+    document.body.style.overflow = 'hidden';
+
+    // Reset form
+    setFormData({
+      fullName: '',
+      education: '',
+      phone: '',
+      email: '',
+      address: '',
+      course: '',
+      mode: '',
+      terms: false,
     });
-    
-    if (missingFields.length > 0) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-    
-    // Simulate form submission
-    const submitButton = e.currentTarget.querySelector('button[type="submit"]') as HTMLButtonElement;
-    const originalText = submitButton.textContent;
-    
-    submitButton.textContent = 'Submitting...';
-    submitButton.disabled = true;
-    
-    setTimeout(() => {
-      setShowSuccess(true);
-      document.body.style.overflow = 'hidden';
-      
-      // Reset form
-      setFormData({
-        fullName: '',
-        education: '',
-        phone: '',
-        email: '',
-        address: '',
-        course: '',
-        mode: '',
-    
-       
-        terms: false
-      });
-      
-      submitButton.textContent = originalText;
-      submitButton.disabled = false;
-    }, 1500);
-  };
+    setSubCourse('');
+  } else {
+    alert('Something went wrong. Please try again.');
+  }
+} catch (error) {
+  alert('Error submitting form: ' + error);
+} finally {
+  submitButton.textContent = originalText;
+  submitButton.disabled = false;
+}
+
+};
+
 
   const closeSuccessMessage = () => {
     setShowSuccess(false);

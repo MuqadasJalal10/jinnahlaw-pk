@@ -154,41 +154,42 @@ const Contact: React.FC = () => {
   };
 
     const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
+  e.preventDefault();
+  setLoading(true);
 
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/contact`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(formData),
+});
 
-      const data = await response.json();
+const data = await response.json(); // ✅ now it's defined
 
-      if (!response.ok) {
-        console.error('Server error:', data.error || 'Unknown error');
-        alert(`❌ Error: ${data.error || 'Something went wrong.'}`);
-        return;
-      }
 
-      alert('✅ Thank you! Your message has been sent successfully.');
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-      });
-    } catch (err: any) {
-      console.error('Network error:', err);
-      alert('❌ Failed to send. Please check your internet or try again later.');
-    } finally {
-      setLoading(false);
+    if (!response.ok) {
+      console.error('Server error:', data.error || 'Unknown error');
+      alert(`❌ Error: ${data.error || 'Something went wrong.'}`);
+      return;
     }
-  };
+
+    alert('✅ Thank you! Your message has been sent successfully.');
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      subject: '',
+      message: '',
+    });
+  } catch (err: any) {
+    console.error('Network error:', err);
+    alert('❌ Failed to send. Please check your internet or try again later.');
+  } finally {
+    setLoading(false);
+  }
+};
 
 
   return (

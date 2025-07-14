@@ -311,7 +311,8 @@ submitButton.textContent = 'Submitting...';
 submitButton.disabled = true;
 
 try {
-  const response = await fetch('http://localhost:5000/api/admission', {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admission`, {
+
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -139,29 +139,65 @@ const Contact: React.FC = () => {
     message: ''
   });
 
+  const [loading, setLoading] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleFaq = (index: number) => {
     setOpenIndex(prev => (prev === index ? null : index));
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        console.error('Server error:', data.error || 'Unknown error');
+        alert(`❌ Error: ${data.error || 'Something went wrong.'}`);
+        return;
+      }
+
+      alert('✅ Thank you! Your message has been sent successfully.');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: '',
+      });
+    } catch (err: any) {
+      console.error('Network error:', err);
+      alert('❌ Failed to send. Please check your internet or try again later.');
+    } finally {
+      setLoading(false);
+    }
   };
+
 
   return (
     <Layout title="Contact Us - Jinnah Law Academy By Wasif Mateen" description="Get in touch with Jinnah Law Academy.">
-      <Hero title="Contact Us" subtitle="Get in touch with us for any inquiries about our programs, admissions, or general information."
-       backgroundImage="/contactus.jpg"
+      <Hero
+        title="Contact Us"
+        subtitle="Get in touch with us for any inquiries about our programs, admissions, or general information."
+        backgroundImage="/contactus.jpg"
       />
-      
 
       <Container>
         <ContactWrapper>
@@ -217,7 +253,9 @@ const Contact: React.FC = () => {
               <textarea id="message" name="message" value={formData.message} onChange={handleInputChange} required></textarea>
             </FormGroup>
 
-            <Button type="submit" variant="primary">Send Message</Button>
+            <Button type="submit" variant="primary" disabled={loading}>
+              {loading ? 'Sending...' : 'Send Message'}
+            </Button>
           </ContactForm>
         </ContactWrapper>
       </Container>
@@ -225,32 +263,16 @@ const Contact: React.FC = () => {
       <FaqSection>
         <Container>
           <SectionTitle>Frequently Asked Questions</SectionTitle>
-
-          {[{
-            q: 'What are the admission requirements?',
-            a: 'For LAT preparation, students must have completed their intermediate (FA/FSc) or A-Levels. For LL.B programs, LAT qualification is mandatory in addition to prior academic credentials like intermediate or equivalent.'
-          }, {
-            q: 'Do you offer online classes?',
-            a: 'Yes, we offer both online and on-campus classes. Our online classes are conducted via Zoom or Google Meet and are equally interactive, allowing students from remote areas to benefit.'
-          }, {
-            q: 'What is the fee structure?',
-            a: 'The fee structure varies by program and duration. We offer monthly as well as lump-sum payment options. Discounts may be available for early registrations or group admissions.'
-          }, {
-            q: 'When do new batches start?',
-            a: 'We initiate new batches every two months. The exact dates are announced on our Facebook page and website. You can also call us for the latest schedule.'
-          }, {
-            q: 'Do you offer trial classes?',
-            a: 'Yes, prospective students can attend one or two trial classes free of cost to experience our teaching environment before committing.'
-          }, {
-            q: 'Can I get one-on-one support?',
-            a: 'Absolutely! We provide extra support and doubt-clearing sessions for students who need additional help, especially before exams or assessments.'
-          }, {
-            q: 'Are your instructors qualified?',
-            a: 'Our faculty includes experienced law professionals and LAT/LL.B subject experts with years of teaching experience. They are committed to delivering high-quality education.'
-          }, {
-            q: 'Is there any hostel or accommodation facility?',
-            a: 'Currently, we do not offer in-house hostel facilities. However, we can help students find nearby hostels or accommodations on request.'
-          }].map((item, idx) => (
+          {[
+            { q: 'What are the admission requirements?', a: 'For LAT preparation, students must have completed their intermediate (FA/FSc) or A-Levels. For LL.B programs, LAT qualification is mandatory in addition to prior academic credentials like intermediate or equivalent.' },
+            { q: 'Do you offer online classes?', a: 'Yes, we offer both online and on-campus classes. Our online classes are conducted via Zoom or Google Meet and are equally interactive, allowing students from remote areas to benefit.' },
+            { q: 'What is the fee structure?', a: 'The fee structure varies by program and duration. We offer monthly as well as lump-sum payment options. Discounts may be available for early registrations or group admissions.' },
+            { q: 'When do new batches start?', a: 'We initiate new batches every two months. The exact dates are announced on our Facebook page and website. You can also call us for the latest schedule.' },
+            { q: 'Do you offer trial classes?', a: 'Yes, prospective students can attend one or two trial classes free of cost to experience our teaching environment before committing.' },
+            { q: 'Can I get one-on-one support?', a: 'Absolutely! We provide extra support and doubt-clearing sessions for students who need additional help, especially before exams or assessments.' },
+            { q: 'Are your instructors qualified?', a: 'Our faculty includes experienced law professionals and LAT/LL.B subject experts with years of teaching experience. They are committed to delivering high-quality education.' },
+            { q: 'Is there any hostel or accommodation facility?', a: 'Currently, we do not offer in-house hostel facilities. However, we can help students find nearby hostels or accommodations on request.' },
+          ].map((item, idx) => (
             <FaqItem key={idx} className={openIndex === idx ? 'open' : ''}>
               <h3 onClick={() => toggleFaq(idx)}>{item.q}</h3>
               <div className="faq-answer">{item.a}</div>

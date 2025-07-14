@@ -34,7 +34,7 @@ router.post("/", async (req, res) => {
         <p>Thank you for contacting us regarding <strong>${subject}</strong>.</p>
         <p><em>Your message:</em><br/>${message}</p>
         <p>We will respond to you shortly.</p>
-        <p>Best regards,<br/>Jinnah Law Academy By Wasif Mateen</p>
+        <p>Best regards,<br/>Jinnah Law Academy By Wasif</p>
       `,
     });
 

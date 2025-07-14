@@ -24,8 +24,7 @@ router.post("/", async (req, res) => {
       course,
       subCourse,
       mode,
-      previousExperience,
-      additionalInfo,
+      
     } = req.body;
 
     if (!fullName || !education || !phone || !email || !course || !mode) {
@@ -60,16 +59,7 @@ router.post("/", async (req, res) => {
         ${subCourse ? `<p><strong>Year/Part:</strong> ${subCourse}</p>` : ""}
         <p><strong>Mode:</strong> ${mode}</p>
         ${address ? `<p><strong>Address:</strong> ${address}</p>` : ""}
-        ${
-          previousExperience
-            ? `<p><strong>Previous Experience:</strong><br/>${previousExperience}</p>`
-            : ""
-        }
-        ${
-          additionalInfo
-            ? `<p><strong>Additional Info:</strong><br/>${additionalInfo}</p>`
-            : ""
-        }
+        
       `,
     });
 

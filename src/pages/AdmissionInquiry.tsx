@@ -312,16 +312,16 @@ submitButton.disabled = true;
 
 try {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/admission`, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    ...formData,
+    subCourse: subCourse || null,
+  }),
+});
 
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      ...formData,
-      subCourse: subCourse || null,
-    }),
-  });
 
   if (response.ok) {
     setShowSuccess(true);

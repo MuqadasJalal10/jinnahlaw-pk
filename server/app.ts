@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 // Routes
-import contactRoutes from './routes/contact';
+
 import admissionRoutes from './routes/admission';
 
 // Config
@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 });
 
 // API Routes
-app.use('/api/contact', contactRoutes);
+
 app.use('/api/admission', admissionRoutes);
 
 // Start server

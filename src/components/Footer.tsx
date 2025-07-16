@@ -1,244 +1,165 @@
-import React from 'react';
+
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import {
-  MapPin,
-  Phone,
-  MessageCircle,
-  Mail,
-  Facebook as LucideFacebook,
-} from 'lucide-react';
+import { Facebook, Phone, Mail, MapPin, Clock } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
 
-const FooterContainer = styled.footer`
-  background: var(--gray-900);
-  color: var(--white);
-  padding: 3rem 0 1rem;
-`;
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
 
-const FooterContent = styled.div`
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 0 1rem;
-  gap: 2rem;
-  margin-bottom: 2rem;
-`;
-
-const LeftSection = styled.div`
-  flex: 1 1 250px;
-  min-width: 250px;
-`;
-
-const RightSection = styled.div`
-  flex: 3 1 600px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-
-const FooterSection = styled.div`
-  h4 {
-    color: var(--white);
-    margin-bottom: 1rem;
-    font-size: 1.1rem;
-  }
-    
-`;
-
-const FooterLogo = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-`;
-
-const LogoIcon = styled.div`
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  overflow: hidden;
-  flex-shrink: 0;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  @media (max-width: 768px) {
-    width: 50px;
-    height: 50px;
-  }
-`;
-
-const LogoText = styled.div``;
-
-const AcademyName = styled.h3`
-  font-family: 'Playfair Display', serif;
-  font-size: 1.3rem;
-  color: var(--white);
-  margin-bottom: 0.25rem;
-
-  @media (max-width: 768px) {
-    font-size: 1.2rem;
-  }
-`;
-
-const ByText = styled.p`
-  color: var(--gray-300);
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-`;
-
-const Slogan = styled.p`
-  color: var(--accent-blue);
-  font-style: italic;
-  font-size: 0.9rem;
-`;
-
-const FooterLinks = styled.ul`
-  list-style: none;
-
-  li {
-    margin-bottom: 0.5rem;
-  }
-
-  a {
-    color: var(--gray-300);
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: var(--accent-blue);
-    }
-  }
-`;
-
-const ContactInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-`;
-
-const ContactItem = styled.p`
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--gray-300);
-  font-size: 0.9rem;
-
-  .icon {
-    flex-shrink: 0;
-  }
-
-  a {
-    color: var(--gray-300);
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: var(--accent-blue);
-    }
-  }
-`;
-
-const FooterBottom = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  text-align: center;
-  padding-top: 2rem;
-  border-top: 1px solid var(--gray-700);
-  color: var(--gray-400);
-  font-size: 0.9rem;
-`;
-
-const Footer: React.FC = () => {
   return (
-    <FooterContainer>
-      <FooterContent>
-  <LeftSection>
-    <FooterLogo>
-      <LogoIcon>
-        <img src="/logo.jpeg" alt="Jinnah Law Academy Logo" />
-      </LogoIcon>
-      <LogoText>
-        <AcademyName>Jinnah Law Academy</AcademyName>
-        <ByText>By Wasif Mateen</ByText>
-        <Slogan>"Learn Law, Lead Justice"</Slogan>
-      </LogoText>
-    </FooterLogo>
-  </LeftSection>
+    <footer className="bg-slate-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Academy Info */}
+          <div className="lg:col-span-2">
+            <div className="flex items-center space-x-3 mb-4">
+  <img
+    src="/logo.jpeg"
+    alt="Jinnah Law Academy Logo"
+    className="w-16 h-16 object-contain rounded-full"
+  />
+  <div>
+    <h3 className="text-xl font-bold font-serif">Jinnah Law Academy By Wasif Mateen</h3>
+    <p className="text-slate-300">Learn Law, Lead Justice</p>
+  </div>
+</div>
 
-  <RightSection>
-    <FooterSection>
-      <h4>Quick Links</h4>
-      <FooterLinks>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/courses">Courses</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
-        <li><Link to="/admission-inquiry">Admission Inquiry</Link></li>
-      </FooterLinks>
-    </FooterSection>
+            <p className="text-slate-300 mb-4 max-w-md">
+              Empowering the next generation of legal minds through comprehensive education and practical training in law. 
+              Founded by Mian Wasif Mateen, Advocate High Court.
+            </p>
+            <div className="flex space-x-4">
+              <a
+                href="https://www.facebook.com/profile.php?id=61567960027157"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors duration-200"
+              >
+                <Facebook size={20} />
+              </a>
+              <a
+                href="https://wa.me/923014686473"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors duration-200"
+              >
+                <FaWhatsapp size={20} />
+              </a>
+            </div>
+          </div>
 
-    <FooterSection>
-      <h4>Policies</h4>
-      <FooterLinks>
-        <li><Link to="/terms">Terms & Conditions</Link></li>
-        <li><Link to="/privacy">Privacy Policy</Link></li>
-      </FooterLinks>
-    </FooterSection>
+          {/* Quick Links */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              {[
+                { name: 'Home', path: '/' },
+                { name: 'About', path: '/about' },
+                { name: 'Courses', path: '/courses' },
+                { name: 'Admission', path: '/admission' },
+                { name: 'Contact', path: '/contact' },
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.path}
+                    className="text-slate-300 hover:text-amber-400 transition-colors duration-200"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-    <FooterSection>
-      <h4>Contact Info</h4>
-      <ContactInfo>
-        <ContactItem>
-          <span className="icon"><MapPin size={16} /></span>
-          Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Nowshera Virkan
-        </ContactItem>
-        <ContactItem>
-          <span className="icon"><Phone size={16} /></span>
-          <a href="tel:03001186473">0300-1186473</a>
-        </ContactItem>
-        <ContactItem>
-          <span className="icon"><MessageCircle size={16} /></span>
-          <a href="https://wa.me/923014686473">0301-4686473</a>
-        </ContactItem>
-        <ContactItem>
-          <span className="icon"><Mail size={16} /></span>
-          <Link to="/contact">jinnahlawacademybywasifmateen@gmail.com</Link>
-        </ContactItem>
-        <ContactItem>
-          <span className="icon"><LucideFacebook size={16} /></span>
-          <a
-            href="https://www.facebook.com/profile.php?id=61567960027157"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Facebook
-          </a>
-        </ContactItem>
-      </ContactInfo>
-    </FooterSection>
-  </RightSection>
-</FooterContent>
+          {/* Contact Info */}
 
+<div>
+  <h4 className="text-lg font-semibold mb-4">Contact Info</h4>
+  <ul className="space-y-3">
 
-      <FooterBottom>
-        <p>&copy; {new Date().getFullYear()} Jinnah Law Academy by Wasif Mateen. All rights reserved.</p>
-      </FooterBottom>
-    </FooterContainer>
+    {/* Phone Number */}
+    <li className="flex items-start space-x-3">
+      <Phone className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+      <div>
+        <a
+          href="tel:03001186473"
+          className="text-slate-300 hover:text-amber-300 transition-colors duration-200"
+        >
+          0300-1186473
+        </a>
+      </div>
+    </li>
+
+    {/* WhatsApp */}
+    <li className="flex items-start space-x-3">
+      <FaWhatsapp className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+      <div>
+        <a
+          href="https://wa.me/923014686473"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-slate-300 hover:text-green-300 transition-colors duration-200"
+        >
+          03014686473
+        </a>
+      </div>
+    </li>
+
+    {/* Email */}
+    <li className="flex items-start space-x-3">
+      <Mail className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+      <div>
+        <p className="text-slate-300 text-sm">
+          jinnahlawacademybywasifmateen@gmail.com
+        </p>
+      </div>
+    </li>
+
+    {/* Address */}
+    <li className="flex items-start space-x-3">
+      <MapPin className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+      <div>
+        <p className="text-slate-300 text-sm">
+          Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Tehsil Nowshera Virkan District Gujranwala
+        </p>
+      </div>
+    </li>
+
+    {/* Office Timing */}
+    <li className="flex items-start space-x-3">
+      <Clock className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+      <div>
+        <p className="text-slate-300 text-sm">
+          Mon-Fri (9-6), Sat (9-2), Sun (Closed)
+        </p>
+      </div>
+    </li>
+    
+  </ul>
+</div>
+</div>
+
+        <div className="border-t border-slate-700 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-slate-400 text-sm">
+            © {currentYear} Jinnah Law Academy By Wasif Mateen. All rights reserved.
+          </p>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <Link
+              to="/privacy-policy"
+              className="text-slate-400 hover:text-amber-400 text-sm transition-colors duration-200"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              to="/terms-conditions"
+              className="text-slate-400 hover:text-amber-400 text-sm transition-colors duration-200"
+            >
+              Terms & Conditions
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 

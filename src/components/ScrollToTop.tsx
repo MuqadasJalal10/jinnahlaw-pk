@@ -1,15 +1,14 @@
-// ScrollToTop.tsx
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-function ScrollToTop() {
+const ScrollToTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0); // 👈 Scroll to top when pathname changes
   }, [pathname]);
 
   return null;
-}
+};
 
 export default ScrollToTop;

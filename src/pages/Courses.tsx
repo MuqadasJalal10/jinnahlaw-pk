@@ -1,572 +1,400 @@
-import React, { useEffect } from 'react';
+
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Layout from '../components/Layout';
-import Hero from '../components/Hero';
-import { Section, SectionTitle, Container, Button, Card } from '../styles/GlobalStyles';
-import { Target, GraduationCap, Smartphone, BarChart } from 'lucide-react';
-
-
-
-const CoursesOverviewSection = styled(Section)`
-  background: var(--white);
-  padding: 2rem 0;
-`;
-
-const OverviewText = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
+import { 
+  BookOpen, 
+  Clock, 
+  Users, 
+  Award, 
+  CheckCircle, 
+  Star,
+  Globe,
+  MapPin,
+  Calendar,
+  ArrowRight,
+  Target,
+  FileText,
+  Video,
   
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--gray-900);
-    
-    @media (max-width: 768px) {
-      font-size: 2rem;
+} from 'lucide-react';
+
+const Courses = () => {
+  const courses = [
+    {
+      id: 'lat',
+      title: 'LAT – Law Admission Test',
+      subtitle: 'Your Gateway to Legal Education',
+      description: 'Comprehensive preparation for the Law Admission Test with expert guidance and proven strategies.',
+      image: 'LAW_Book.jpg',
+      eligibility: 'Intermediate / A-Level',
+      duration: 'Short-Term (3-6 Months)',
+      mode: 'Online + Physical',
+      features: [
+        'Free Preparatory Material',
+        'Comprehensive Study Material',
+        'Regular Mock Tests',
+        'Expert Tips & Strategies',
+        'Performance Analysis',
+        'Doubt Clearing Sessions',
+        'Current Affairs Updates',
+        'Time Management Training'
+      ],
+      highlights: [
+        { icon: Target, text: 'Mock Test Series' },
+        { icon: Users, text: 'Expert Guidance' },
+        { icon: Star, text: '95% Success Rate' },
+        { icon: BookOpen, text: 'Complete Coverage' }
+      ],
+      color: 'bg-slate-600'
+    },
+    {
+      id: 'llb-4',
+      title: 'LL.B – 4-Year Program',
+      subtitle: 'Postgraduate Legal Education',
+      description: 'Intensive 4-year LL.B program for graduates seeking to build a career in law.',
+      image: 'Admission.jpg',
+      eligibility: 'Bachelor\'s Degree + LAT',
+      duration: '4 Years',
+      mode: 'On-Campus + Online Support',
+      features: [
+        'HEC Recognized Program',
+        'Court Visits & Practical Training',
+        'Legal Internship Opportunities',
+        'Moot Court Competitions',
+        'Research Projects',
+        'Industry Expert Sessions',
+        'Career Guidance',
+        'Professional Development'
+      ],
+      highlights: [
+        { icon: Award, text: 'HEC Recognized' },
+        { icon: FileText, text: 'Court Visits' },
+        { icon: Users, text: 'Legal Training' },
+        { icon: Target, text: 'Internships' }
+      ],
+      color: 'bg-slate-700'
+    },
+    {
+      id: 'llb-5',
+      title: 'LL.B – 5-Year Program',
+      subtitle: 'Complete Legal Foundation',
+      description: 'Comprehensive 5-year LL.B program for intermediate students with complete legal foundation.',
+      image: 'law_s2.jpg',
+      eligibility: 'Intermediate + LAT',
+      duration: '5 Years',
+      mode: 'On-Campus + Online Support',
+      features: [
+        'Complete Legal Foundation',
+        'Moot Court Training',
+        'Research & Thesis Projects',
+        'Practical Legal Training',
+        'Court Observation Programs',
+        'Legal Writing Workshops',
+        'Professional Ethics Training',
+        'Career Placement Support'
+      ],
+      highlights: [
+        { icon: BookOpen, text: 'Full Foundation' },
+        { icon: Award, text: 'Moot Court' },
+        { icon: FileText, text: 'Research Projects' },
+        { icon: Users, text: 'Practical Training' }
+      ],
+      color: 'bg-slate-800'
+    },
+    {
+      id: 'law-gat',
+      title: 'LAW-GAT Preparation',
+      subtitle: 'Graduate Assessment Excellence',
+      description: 'Specialized preparation for Law Graduate Assessment Test covering all major legal subjects.',
+      image: 'law_justice.jpeg',
+      eligibility: 'LL.B Graduates',
+      duration: '6-12 Months',
+      mode: 'Online + Physical',
+      features: [
+        'Civil Law Coverage',
+        'Criminal Law Preparation',
+        'Constitutional Law',
+        'Jurisprudence & Legal Theory',
+        'Regular Mock Examinations',
+        'Complete Syllabus Coverage',
+        'Performance Feedback',
+        'Result Analysis & Improvement'
+      ],
+      highlights: [
+        { icon: BookOpen, text: 'Complete Coverage' },
+        { icon: Target, text: 'Mock Exams' },
+        { icon: Users, text: 'Expert Faculty' },
+        { icon: Star, text: 'Result Tracking' }
+      ],
+      color: 'bg-slate-800'
     }
-  }
-  
-  p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--gray-600);
-  }
-`;
-
-const CourseDetailSection = styled(Section)<{ alt?: boolean }>`
-  background: ${props => props.alt ? 'var(--gray-50)' : 'var(--white)'};
-  padding: 4rem 0;
-  border-bottom: 1px solid var(--gray-200);
-`;
-
-const CourseContent = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-`;
-
-const CourseInfo = styled.div``;
-
-const CourseBadge = styled.div`
-  display: inline-block;
-  background: var(--primary-blue);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border-radius: 2rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-`;
-
-const CourseTitle = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: var(--gray-900);
-  
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-`;
-
-const CourseDescription = styled.p`
-  font-size: 1.1rem;
-  line-height: 1.8;
-  color: var(--gray-600);
-  margin-bottom: 2rem;
-`;
-
-const CourseDetails = styled.div<{ alt?: boolean }>`
-  background: ${props => props.alt ? 'var(--gray-50)' : 'var(--white)'};
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  box-shadow: var(--shadow-sm);
-  margin-bottom: 2rem;
-  border-left: 4px solid var(--primary-blue);
-`;
-
-const DetailItem = styled.div`
-  display: flex;
-  margin-bottom: 0.75rem;
-  
-  &:last-child {
-    margin-bottom: 0;
-  }
-  
-  strong {
-    min-width: 120px;
-    color: var(--gray-900);
-  }
-  
-  span {
-    color: var(--gray-600);
-  }
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 0.25rem;
-    
-    strong {
-      min-width: auto;
-    }
-  }
-`;
-
-const CourseFeatures = styled.div`
-  margin-bottom: 2rem;
-  
-  h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: var(--gray-900);
-  }
-  
-  ul {
-    list-style: none;
-    padding: 0;
-    
-    li {
-      padding: 0.5rem 0;
-      color: var(--gray-700);
-      font-size: 0.95rem;
-    }
-  }
-`;
-
-const CourseActions = styled.div`
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-const CourseImage = styled.div`
-  overflow: hidden;
-  border-radius: 1rem;
-
-  img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-md);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-  }
-
-  &:hover img {
-    transform: scale(1.05);
-    box-shadow: var(--shadow-lg);
-  }
-`;
-
-
-const WhyChooseSection = styled(Section)`
-  background: var(--gray-50);
-`;
-
-const BenefitsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-`;
-
-const BenefitCard = styled(Card)`
-  padding: 2rem;
-  text-align: center;
-  background: #f0f9ff;
-  border: 1px solid #e5e7eb; /* light gray border */
-  border-radius: 1rem;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-  animation: fadeSlideUp 0.6s ease forwards;
-
-  .benefit-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #2563eb; /* Tailwind blue-600 */
-  }
-
-  h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    color: var(--gray-900);
-  }
-
-  p {
-    color: var(--gray-600);
-    line-height: 1.6;
-     
-  }
-
-  &:hover {
-    transform: translateY(-8px) scale(1.02);
-    border-color: #1d4ed8; /* Tailwind blue-700 */
-    box-shadow: 0 8px 16px rgba(29, 78, 216, 0.2);
-  }
-
-  @keyframes fadeSlideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-`;
-
-const CtaSection = styled(Section)`
-  background: var(--primary-blue);
-  color: var(--white);
-  text-align: center;
-`;
-
-const CtaContent = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
-`;
-
-const CtaTitle = styled.h2`
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--white);
-  
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-`;
-
-const CtaSubtitle = styled.p`
-  font-size: 1.1rem;
-  margin-bottom: 2rem;
-  color: var(--light-blue);
-`;
-
-const CtaButtons = styled.div`
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-`;
-
-const CtaPrimaryButton = styled(Button)`
-  background: var(--white);
-  color: var(--primary-blue);
-  
-  &:hover {
-    background: var(--gray-100);
-    color: var(--primary-blue);
-  }
-`;
-
-const CtaSecondaryButton = styled(Button)`
-  background: transparent;
-  color: var(--white);
-  border: 2px solid var(--white);
-  
-  &:hover {
-    background: var(--white);
-    color: var(--primary-blue);
-  }
-`;
-
-const Courses: React.FC = () => {
-  useEffect(() => {
-    const fadeElements = document.querySelectorAll('.fade-in');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    });
-
-    fadeElements.forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  ];
 
   return (
-    <Layout 
-      title="Our Courses - Jinnah Law Academy By Wasif Mateen" 
-      description="Explore our comprehensive legal education programs including LAT, LL.B (4 & 5 Years), and LAW-GAT preparation courses."
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="pt-20"
     >
-      <Hero 
-        title="Our Courses" 
-        subtitle="Empowering tomorrow’s legal minds through structured, career-driven education in LAT, LL.B, and LAW-GAT."
-         backgroundImage="/333.webp"
-      />
-      
-      <main>
-        <CoursesOverviewSection>
-          <Container>
-            <OverviewText>
-              <h2 className="fade-in">Comprehensive Legal Education</h2>
-              <p className="fade-in">Our carefully designed curriculum covers all aspects of legal education, from entrance test preparation to advanced law degrees. Whether you're just starting your legal journey or advancing your career, we have the right program for you.</p>
-            </OverviewText>
-          </Container>
-        </CoursesOverviewSection>
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-r from-slate-800 to-slate-900">
+        <div className="absolute inset-0">
+          <img
+            src='law_s4.jpg'
+            alt="Courses"
+            className="w-full h-full object-cover opacity-20"
+          />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 font-serif">
+              Our Programs
+            </h1>
+            <p className="text-xl text-slate-200 max-w-3xl mx-auto mb-8">
+              Empowering tomorrow's legal minds through structured, career-driven education 
+              in LAT, LL.B, and LAW-GAT preparation.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex items-center text-white">
+                <Globe className="w-5 h-5 mr-2" />
+                <span>Online + On-Campus</span>
+              </div>
+              <div className="flex items-center text-white">
+                <Award className="w-5 h-5 mr-2" />
+                <span>HEC Recognized</span>
+              </div>
+              <div className="flex items-center text-white">
+                <Users className="w-5 h-5 mr-2" />
+                <span>Expert Faculty</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-        <CourseDetailSection id="lat">
-          <Container>
-            <CourseContent>
-              <CourseInfo>
-                <CourseBadge>Entrance Exam</CourseBadge>
-                <CourseTitle className="fade-in">LAT - Law Admission Test</CourseTitle>
-                <CourseDescription className="fade-in">Comprehensive preparation for the Law Admission Test, covering all essential topics including Essay Writing, Legal Reasoning, and General Knowledge.</CourseDescription>
-                
-                <CourseDetails className="fade-in">
-                  <DetailItem>
-                    <strong>Description:</strong>
-                    <span>Essay, Legal Reasoning, General Knowledge</span>
-                  </DetailItem>
-                  <DetailItem>
-                    <strong>Eligibility:</strong>
-                    <span>Intermediate / A-Level Students</span>
-                  </DetailItem>
-                  <DetailItem>
-                    <strong>Mode:</strong>
-                    <span>Online & On-Campus</span>
-                  </DetailItem>
-                  <DetailItem>
-                    <strong>Duration:</strong>
-                    <span>Short-Term Intensive</span>
-                  </DetailItem>
-                </CourseDetails>
+      {/* Courses Grid */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="space-y-20">
+            {courses.map((course, index) => (
+              <motion.div
+                key={course.id}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className={`grid lg:grid-cols-2 gap-12 items-center ${
+                  index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
+                }`}
+              >
+                {/* Image */}
+                <div className={`${index % 2 === 1 ? 'lg:col-start-2' : ''} relative`}>
+                  <img
+                    src={course.image}
+                    alt={course.title}
+                    className="rounded-lg shadow-2xl w-full h-64 md:h-80 object-cover"
+                  />
+                  <div className={`absolute top-6 left-6 px-4 py-2 ${course.color} text-white rounded-full font-semibold`}>
+                    {course.title.split(' – ')[0]}
+                  </div>
+                </div>
 
-                <CourseFeatures className="fade-in">
-                  <h3>Course Features</h3>
-                  <ul>
-                    <li>✅ Free LAT Test Preparation</li>
-                    <li>✅ Comprehensive Study Material</li>
-                    <li>✅ Mock Tests & Practice Sessions</li>
-                    <li>✅ Expert Guidance & Tips</li>
-                    <li>✅ Flexible Online & Physical Classes</li>
-                  </ul>
-                </CourseFeatures>
+                {/* Content */}
+                <div className={`${index % 2 === 1 ? 'lg:col-start-1' : ''}`}>
+                  <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 font-serif">
+                    {course.title}
+                  </h2>
+                  <p className="text-lg text-amber-600 font-semibold mb-4">
+                    {course.subtitle}
+                  </p>
+                  <p className="text-slate-600 mb-6 leading-relaxed">
+                    {course.description}
+                  </p>
 
-                <CourseActions className="fade-in">
-                  <Button as={Link} to="/admission-inquiry" variant="primary">Enroll Now</Button>
-                  <Button as={Link} to="/contact" variant="secondary">Get Info</Button>
-                </CourseActions>
-              </CourseInfo>
-              <CourseImage className="fade-in">
-                <img src="/LAW_Book.jpg" alt="LAT Preparation" />
-              </CourseImage>
-            </CourseContent>
-          </Container>
-        </CourseDetailSection>
+                  {/* Course Details */}
+                  <div className="grid md:grid-cols-3 gap-4 mb-6">
+                    <div className="bg-slate-50 p-4 rounded-lg">
+                      <div className="flex items-center mb-2">
+                        <Users className="w-5 h-5 text-slate-600 mr-2" />
+                        <span className="font-semibold text-slate-800">Eligibility</span>
+                      </div>
+                      <p className="text-slate-600 text-sm">{course.eligibility}</p>
+                    </div>
+                    <div className="bg-slate-50 p-4 rounded-lg">
+                      <div className="flex items-center mb-2">
+                        <Clock className="w-5 h-5 text-slate-600 mr-2" />
+                        <span className="font-semibold text-slate-800">Duration</span>
+                      </div>
+                      <p className="text-slate-600 text-sm">{course.duration}</p>
+                    </div>
+                    <div className="bg-slate-50 p-4 rounded-lg">
+                      <div className="flex items-center mb-2">
+                        <MapPin className="w-5 h-5 text-slate-600 mr-2" />
+                        <span className="font-semibold text-slate-800">Mode</span>
+                      </div>
+                      <p className="text-slate-600 text-sm">{course.mode}</p>
+                    </div>
+                  </div>
 
-        <CourseDetailSection alt id="llb-4">
-          <Container>
-            <CourseContent>
-              <CourseImage className="fade-in">
-                <img src="/law_s2.jpg" alt="LL.B 4 Years Program" />
-              </CourseImage>
-              <CourseInfo>
-                <CourseBadge>4-Year Degree</CourseBadge>
-                <CourseTitle className="fade-in">LL.B - 4 Years Program</CourseTitle>
-                <CourseDescription className="fade-in">Complete Bachelor of Laws degree program designed for students who have already completed their bachelor's degree and want to pursue law as their career.</CourseDescription>
-                
-                <CourseDetails alt className="fade-in">
-                  <DetailItem>
-                    <strong>Eligibility:</strong>
-                    <span>LAT Qualified + Bachelor Degree</span>
-                  </DetailItem>
-                  <DetailItem>
-                    <strong>Duration:</strong>
-                    <span>4 Years (Parts 1-4)</span>
-                  </DetailItem>
-                  <DetailItem>
-                    <strong>Recognition:</strong>
-                    <span>HEC Recognized</span>
-                  </DetailItem>
-                </CourseDetails>
+                  {/* Highlights */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    {course.highlights.map((highlight, highlightIndex) => (
+                      <div key={highlightIndex} className="flex items-center">
+                        <div className={`w-8 h-8 ${course.color} rounded-full flex items-center justify-center mr-3`}>
+                          <highlight.icon className="w-4 h-4 text-white" />
+                        </div>
+                        <span className="text-slate-700 text-sm font-medium">{highlight.text}</span>
+                      </div>
+                    ))}
+                  </div>
 
-                <CourseFeatures className="fade-in">
-                  <h3>Program Features</h3>
-                  <ul>
-                    <li>✅ University-Standard Syllabus</li>
-                    <li>✅ Expert Faculty with Legal Experience</li>
-                    <li>✅ Practical Legal Training</li>
-                    <li>✅ Court Visit Opportunities</li>
-                    <li>✅ Internship Guidance</li>
-                    <li>✅ Career Counseling</li>
-                  </ul>
-                </CourseFeatures>
+                  {/* Features */}
+                  <div className="mb-8">
+                    <h3 className="text-xl font-semibold text-slate-800 mb-4">Key Features</h3>
+                    <div className="grid md:grid-cols-2 gap-2">
+                      {course.features.map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-center">
+                          <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                          <span className="text-slate-600 text-sm">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
 
-                <CourseActions className="fade-in">
-                  <Button as={Link} to="/admission-inquiry" variant="primary">Enroll Now</Button>
-                  <Button as={Link} to="/contact" variant="secondary">Learn More</Button>
-                </CourseActions>
-              </CourseInfo>
-            </CourseContent>
-          </Container>
-        </CourseDetailSection>
+                  {/* CTA */}
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <Link
+                      to="/admission"
+                      className={`inline-flex items-center justify-center px-6 py-3 ${course.color} hover:opacity-90 text-white font-semibold rounded-lg transition-all duration-300`}
+                    >
+                      Apply Now
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Link>
+                    <Link
+                      to="/contact"
+                      className="inline-flex items-center justify-center px-6 py-3 border-2 border-slate-300 text-slate-700 hover:border-slate-400 font-semibold rounded-lg transition-all duration-300"
+                    >
+                      Get Info
+                      <ArrowRight className="ml-2 w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        <CourseDetailSection id="llb-5">
-          <Container>
-            <CourseContent>
-              <CourseInfo>
-                <CourseBadge>5-Year Degree</CourseBadge>
-                <CourseTitle className="fade-in">LL.B - 5 Years Program</CourseTitle>
-                <CourseDescription className="fade-in">Comprehensive law degree program for intermediate students, providing thorough legal education from foundational to advanced levels.</CourseDescription>
-                
-                <CourseDetails className="fade-in">
-                  <DetailItem>
-                    <strong>Eligibility:</strong>
-                    <span>LAT Qualified + Intermediate</span>
-                  </DetailItem>
-                  <DetailItem>
-                    <strong>Duration:</strong>
-                    <span>5 Years (10 Semesters)</span>
-                  </DetailItem>
-                  <DetailItem>
-                    <strong>Recognition:</strong>
-                    <span>HEC Recognized</span>
-                  </DetailItem>
-                </CourseDetails>
+      {/* Additional Benefits */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 font-serif">
+              Why Choose Our Programs?
+            </h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Comprehensive benefits that make our programs stand out in legal education.
+            </p>
+          </motion.div>
 
-                <CourseFeatures className="fade-in">
-                  <h3>Program Features</h3>
-                  <ul>
-                    <li>✅ Comprehensive Legal Education</li>
-                    <li>✅ Internship & Court Visit Opportunities</li>
-                    <li>✅ Recognized by HEC</li>
-                    <li>✅ Professional Development</li>
-                    <li>✅ Moot Court Training</li>
-                    <li>✅ Research Methodology</li>
-                  </ul>
-                </CourseFeatures>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Video,
+                title: 'Online Learning Platform',
+                description: 'Access lectures, materials, and tests from anywhere with our advanced LMS.',
+              },
+              {
+                icon: Users,
+                title: 'Small Class Sizes',
+                description: 'Personalized attention with limited students per batch for better learning.',
+              },
+              {
+                icon: Calendar,
+                title: 'Flexible Scheduling',
+                description: 'Multiple batch timings to accommodate working professionals and students.',
+              },
+              {
+                icon: Award,
+                title: 'Certification',
+                description: 'Recognized certificates and completion credentials for all programs.',
+              },
+              {
+                icon: Target,
+                title: 'Career Guidance',
+                description: 'Professional counseling and career placement assistance.',
+              },
+              {
+                icon: BookOpen,
+                title: 'Updated Curriculum',
+                description: 'Latest syllabus aligned with current legal education requirements.',
+              },
+            ].map((benefit, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+                  <benefit.icon className="w-6 h-6 text-amber-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-2">{benefit.title}</h3>
+                <p className="text-slate-600">{benefit.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-                <CourseActions className="fade-in">
-                  <Button as={Link} to="/admission-inquiry" variant="primary">Enroll Now</Button>
-                  <Button as={Link} to="/contact" variant="secondary">Get Details</Button>
-                </CourseActions>
-              </CourseInfo>
-              <CourseImage className="fade-in">
-                <img src="law_s3.jpg" alt="LL.B 5 Years Program" />
-              </CourseImage>
-            </CourseContent>
-          </Container>
-        </CourseDetailSection>
-
-        <CourseDetailSection alt id="law-gat">
-          <Container>
-            <CourseContent>
-              <CourseImage className="fade-in">
-                <img src="/law_s4.jpg" alt="LAW-GAT Preparation" />
-              </CourseImage>
-              <CourseInfo>
-                <CourseBadge>Graduate Test</CourseBadge>
-                <CourseTitle className="fade-in">LAW-GAT</CourseTitle>
-                <CourseDescription className="fade-in">Advanced preparation for the Law Graduate Assessment Test, designed for law graduates seeking to pursue higher studies or advance their legal careers.</CourseDescription>
-                
-                <CourseDetails alt className="fade-in">
-                  <DetailItem>
-                    <strong>Eligibility:</strong>
-                    <span>LL.B Graduates</span>
-                  </DetailItem>
-                  <DetailItem>
-                    <strong>Coverage:</strong>
-                    <span>Jurisprudence, Constitutional, Civil, Criminal Law</span>
-                  </DetailItem>
-                  <DetailItem>
-                    <strong>Duration:</strong>
-                    <span>Intensive Course</span>
-                  </DetailItem>
-                </CourseDetails>
-
-                <CourseFeatures className="fade-in">
-                  <h3>Course Features</h3>
-                  <ul>
-                    <li>✅ Comprehensive Practice Tests</li>
-                    <li>✅ Expert Guidance & Mentorship</li>
-                    <li>✅ Updated Syllabus Coverage</li>
-                    <li>✅ Mock Examinations</li>
-                    <li>✅ Individual Performance Analysis</li>
-                    <li>✅ Career Guidance</li>
-                  </ul>
-                </CourseFeatures>
-
-                <CourseActions className="fade-in">
-                  <Button as={Link} to="/admission-inquiry" variant="primary">Enroll Now</Button>
-                  <Button as={Link} to="/contact" variant="secondary">Contact Us</Button>
-                </CourseActions>
-              </CourseInfo>
-            </CourseContent>
-          </Container>
-        </CourseDetailSection>
-
-        <WhyChooseSection>
-          <Container>
-            <SectionTitle>Why Choose Our Courses?</SectionTitle>
-            
-<BenefitsGrid>
-  <BenefitCard className="fade-in text-center p-4">
-    <Target className="benefit-icon mx-auto mb-3 text-primary" />
-    <h3 className="text-xl font-bold text-gray-800 mb-2">Focused Curriculum</h3>
-    <p className="text-gray-700 text-sm font-bold leading-relaxed">
-      Our courses are specifically designed to meet the requirements of each exam and degree program.
-    </p>
-  </BenefitCard>
-
-  <BenefitCard className="fade-in text-center p-4">
-    <GraduationCap className="benefit-icon mx-auto mb-3 text-primary" />
-    <h3 className="text-xl font-bold text-gray-800 mb-2">Expert Faculty</h3>
-    <p className="text-gray-700 text-sm font-bold leading-relaxed">
-      Learn from qualified legal professionals with extensive academic and practical experience.
-    </p>
-  </BenefitCard>
-
-  <BenefitCard className="fade-in text-center p-4">
-    <Smartphone className="benefit-icon mx-auto mb-3 text-primary" />
-    <h3 className="text-xl font-bold text-gray-800 mb-2">Flexible Learning</h3>
-    <p className="text-gray-700 text-sm font-bold leading-relaxed">
-      Choose between online and on-campus classes to fit your schedule and learning preferences.
-    </p>
-  </BenefitCard>
-
-  <BenefitCard className="fade-in text-center p-4">
-    <BarChart className="benefit-icon mx-auto mb-3 text-primary" />
-    <h3 className="text-xl font-bold text-gray-800 mb-2">Progress Tracking</h3>
-    <p className="text-gray-700 text-sm font-bold leading-relaxed">
-      Regular assessments and feedback to monitor your progress and identify areas for improvement.
-    </p>
-  </BenefitCard>
-</BenefitsGrid>
-
-
-
-          </Container>
-        </WhyChooseSection>
-
-        <CtaSection>
-          <Container>
-            <CtaContent>
-              <CtaTitle>Ready to Begin Your Legal Education?</CtaTitle>
-              <CtaSubtitle>Join our comprehensive programs and take the first step towards a successful legal career.</CtaSubtitle>
-              <CtaButtons>
-                <CtaPrimaryButton as={Link} to="/admission-inquiry">Start Application</CtaPrimaryButton>
-                <CtaSecondaryButton as={Link} to="/contact">Get More Info</CtaSecondaryButton>
-              </CtaButtons>
-            </CtaContent>
-          </Container>
-        </CtaSection>
-      </main>
-    </Layout>
+      {/* CTA Section */}
+      <section className="py-20 bg-gradient-to-r from-slate-800 to-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">
+              Ready to Start Your Legal Education?
+            </h2>
+            <p className="text-xl text-slate-200 mb-8 max-w-3xl mx-auto">
+              Choose from our comprehensive programs and take the first step towards a successful legal career.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/admission"
+                className="inline-flex items-center px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-colors duration-300"
+              >
+                Apply for Admission
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-slate-900 font-semibold rounded-lg transition-colors duration-300"
+              >
+                Contact for Details
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </motion.div>
   );
 };
 

@@ -1,610 +1,385 @@
-import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import Layout from '../components/Layout';
-import Hero from '../components/Hero';
-import { Section, SectionTitle, Container, Card } from '../styles/GlobalStyles';
 
-import {
-  CalendarDays,
-  GraduationCap,
-  UserCheck,
-  Award,
-  Target,
-  Rocket,
-  Gavel,
-  Lightbulb,
-  Handshake
-} from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Scale, Award, Users, Target, Shield, Lightbulb, BookOpen, Building2 } from 'lucide-react';
 
-const AboutSection = styled(Section)`
-  background: var(--white);
-`;
+const About = () => {
+  const values = [
+    {
+      icon: Scale,
+      title: 'Justice',
+      description: 'Upholding fairness and equality in all our educational endeavors.',
+      color: 'bg-blue-500',
+    },
+    {
+      icon: Target,
+      title: 'Excellence',
+      description: 'Striving for the highest standards in legal education and training.',
+      color: 'bg-amber-500',
+    },
+    {
+      icon: Shield,
+      title: 'Integrity',
+      description: 'Maintaining ethical principles and moral character in all aspects.',
+      color: 'bg-green-500',
+    },
+    {
+      icon: Lightbulb,
+      title: 'Innovation',
+      description: 'Embracing modern teaching methods and educational technology.',
+      color: 'bg-purple-500',
+    },
+  ];
 
-const AboutContent = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-`;
+  const achievements = [
+    {
+      icon: Award,
+      title: 'HEC Recognition',
+      description: 'All our programs are recognized by Higher Education Commission of Pakistan.',
+    },
+    {
+      icon: Users,
+      title: 'Expert Faculty',
+      description: 'Qualified advocates and legal professionals with extensive courtroom experience.',
+    },
+    {
+      icon: BookOpen,
+      title: 'Comprehensive Curriculum',
+      description: 'Complete coverage of LAT, LL.B, and LAW-GAT with modern teaching methods.',
+    },
+    {
+      icon: Building2,
+      title: 'Modern Facilities',
+      description: 'State-of-the-art classrooms and library with latest legal resources.',
+    },
+  ];
 
-const AboutText = styled.div`
-  h2: {
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--gray-900);
-    @media (max-width: 768px) {
-      font-size: 2rem;
-    }
-  }
-  p: {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--gray-600);
-    margin-bottom: 1.5rem;
-  }
-`;
-
-const AboutImage = styled.div`
-  overflow: hidden;
-  border-radius: 1rem;
-  img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-lg);
-    transition: transform 0.4s ease, border 0.3s ease;
-    border: 2px solid transparent;
-  }
-  &:hover img {
-    transform: scale(1.03);
-  }
-  @media (max-width: 768px) {
-    img {
-      height: 250px;
-    }
-  }
-  @media (max-width: 480px) {
-    img {
-      height: 180px;
-    }
-  }
-`;
-
-const QuickFactsSection = styled(Section)`
-  background: var(--gray-50);
-`;
-
-const FactsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-`;
-
-const FactCard = styled(Card)<{ bgColor?: string }>`
-  padding: 2rem;
-  text-align: center;
-  background: ${({ bgColor }) => bgColor || '#f8fafc'};
-  border-radius: 1rem;
-  border: 1px solid transparent;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  animation: fadeSlideUp 0.6s ease forwards;
-
-  &:hover {
-    transform: translateY(-6px) scale(1.02);
-    border-color: #3b82f6;
-    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15);
-    background: ${({ bgColor }) => bgColor || "rgba(248, 250, 252, 0.95)"};
-    backdrop-filter: blur(4px);
-  }
-
-  .fact-icon {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 1rem;
-    color: #3b82f6;
-  }
-
-  h3 {
-    font-size: 1.25rem;
-    color: #1e3a8a;
-    margin-bottom: 0.5rem;
-  }
-
-  p {
-    color: #475569;
-    font-weight: 500;
-  }
-
-  @keyframes fadeSlideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-`;
-
-
-const VisionMissionSection = styled(Section)`
-  background: var(--white);
-`;
-
-const VmGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-  gap: 2rem;
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const VmCard = styled.div`
-  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
-  color: var(--white);
-  padding: 2.5rem;
-  border-radius: 1rem;
-  text-align: center;
-  box-shadow: var(--shadow-lg);
-  .vm-icon {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 1rem;
-    color: #fff;
-    
-  }
-  h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--white);
-  }
-  p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: var(--light-blue);
-  }
-`;
-
-const FounderMessageSection = styled(Section)`
-  background: var(--gray-50);
-`;
-
-const FounderContent = styled.div`
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const FounderText = styled.div`
-  h2 {
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-    color: var(--gray-900);
-    @media (max-width: 768px) {
-      font-size: 2rem;
-    }
-  }
-  blockquote {
-    font-size: 1.3rem;
-    line-height: 1.6;
-    color: var(--gray-700);
-    font-style: italic;
-    margin-bottom: 2rem;
-    padding-left: 2rem;
-    border-left: 4px solid var(--primary-blue);
-    @media (max-width: 768px) {
-      font-size: 1.1rem;
-    }
-  }
-`;
-
-const FounderSignature = styled.div`
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: var(--shadow-md);
-  .signature-text {
-    font-style: italic;
-    color: var(--gray-600);
-    margin-bottom: 0.5rem;
-  }
-  .founder-name {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: 0.25rem;
-  }
-  .founder-title {
-    color: var(--primary-blue);
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-  .founder-role {
-    color: var(--gray-600);
-    font-size: 0.9rem;
-  }
-`;
-
-const FounderImage = styled.div`
-  margin-top: -100px;
-  overflow: hidden;
-  border-radius: 1rem;
-  img {
-    width: 100%;
-    height: 400px;
-    object-fit: cover;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-lg);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-    }
-  }
-`;
-
-const ValuesSection = styled(Section)`
-  background: var(--white);
-`;
-
-const ValuesGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-`;
-
-interface ValueCardProps {
-  bgColor?: string;
-}
-
-const ValueCard = styled.div<ValueCardProps>`
-  background: ${({ bgColor }) => bgColor || "#f8fafc"};
-  padding: 2rem;
-  border-radius: 1rem;
-  text-align: center;
-  border: 1px solid transparent;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease;
-  animation: fadeSlideUp 0.6s ease forwards;
-
-  &:hover {
-    transform: translateY(-6px) scale(1.02);
-    border-color: #3b82f6;
-    box-shadow: 0 10px 20px rgba(59, 130, 246, 0.15);
-    background: ${({ bgColor }) => bgColor || "rgba(248, 250, 252, 0.95)"};
-    backdrop-filter: blur(4px);
-  }
-
-  .value-icon {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 1rem;
-    color: #3b82f6;
-  }
-
-  h3 {
-    font-size: 1.25rem;
-    color: #1e3a8a;
-    margin-bottom: 0.5rem;
-  }
-
-  p {
-    color: #475569;
-    font-weight: 500;
-  }
-
-  @keyframes fadeSlideUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-`;
-
-
-
-
-const AchievementsSection = styled(Section)`
-  background: var(--gray-50);
-`;
-
-const AchievementsContent = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const AchievementImage = styled.div`
-  overflow: hidden;
-  border-radius: 1rem;
-  img {
-    width: 80%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-lg);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
-    }
-  }
-`;
-
-const AchievementText = styled.div`
-  h2 {
-    font-size: 2.2rem;
-    color: var(--gray-900);
-    margin-bottom: 1rem;
-  }
-  p {
-    font-size: 1.1rem;
-    color: var(--gray-600);
-    line-height: 1.7;
-  }
-`;
-
-const About: React.FC = () => {
-  useEffect(() => {
-    const fadeElements = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    });
-    fadeElements.forEach(el => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
+  const timeline = [
+    {
+      year: '2024',
+      title: 'Foundation',
+      description: 'Jinnah Law Academy established by Mian Wasif Mateen, Advocate High Court.',
+    },
+    {
+      year: '2024',
+      title: 'First Batch',
+      description: 'Enrolled our first batch of students for LAT and LL.B preparation.',
+    },
+    {
+      year: '2024',
+      title: 'Online Platform',
+      description: 'Launched comprehensive online learning platform for remote students.',
+    },
+    {
+      year: '2024',
+      title: 'Recognition',
+      description: 'Received HEC recognition for our LL.B programs.',
+    },
+  ];
 
   return (
-    <Layout
-      title="About Us - Jinnah Law Academy By Wasif Mateen"
-      description="Learn about our mission, vision, and the founder of Jinnah Law Academy - the first law‑focused institute in Nowshera Virkan."
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="pt-20"
     >
-      <Hero
-        title="Where Law Meets Purpose"
-        subtitle="Learn how Jinnah Law Academy by Wasif Mateen is setting new benchmarks in legal education through unwavering values and future-focused leadership."
-        backgroundImage="/222.jpg"
-      />
-      <main>
-        <AboutSection style={{ background: "linear-gradient(135deg, #f8fafc, #e0f2fe)" }}>
-  <Container>
-    <AboutContent>
-      <AboutText>
-        <h2 className="fade-in" style={{ fontSize: "2.8rem", color: "#1e40af", position: "relative", marginBottom: "1rem" }}>
-          Who We Are
-          <span style={{
-            display: "block",
-            width: "60px",
-            height: "4px",
-            backgroundColor: "#1e40af",
-            marginTop: "8px",
-            borderRadius: "2px"
-           
-          }} />
-        </h2>
-        <p className="fade-in" style={{ fontSize: "1.15rem", lineHeight: "1.9", color: "#334155", marginBottom: "1.25rem" }}>
-          At <strong>Jinnah Law Academy By Wasif Mateen</strong>, we are redefining legal education for the modern age.
-          Established in 2024, we are the first dedicated law academy in Nowshera Virkan — created with a vision to uplift and empower the next generation of legal professionals.
-        </p>
-
-        <div style={{
-          background: "#e0f2fe",
-          padding: "1rem 1.5rem",
-          borderLeft: "5px solid #1e3a8a",
-          borderRadius: "0.5rem",
-          fontStyle: "italic",
-          color: "#1e293b",
-          marginBottom: "1.5rem",
-          fontSize: "1.1rem"
-        }}>
-          "Where knowledge meets justice — and ambition meets opportunity."
+      {/* Hero Section */}
+      <section className="relative py-20 bg-gradient-to-r from-slate-800 to-slate-900">
+        <div className="absolute inset-0">
+          <img
+            src='law_s4.jpg'
+            alt="About Us"
+            className="w-full h-full object-cover opacity-20"
+          />
         </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 font-serif">
+              Who We Are
+            </h1>
+            <p className="text-xl text-slate-200 max-w-3xl mx-auto">
+              Empowering the next generation of legal minds through comprehensive education, 
+              practical training, and unwavering commitment to justice.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-        <p className="fade-in" style={{ fontSize: "1.15rem", lineHeight: "1.9", color: "#334155" }}>
-          Through innovative teaching methods, flexible learning options, and a commitment to integrity and excellence,
-          we provide students with the tools, mindset, and mentorship to pursue careers as lawyers, judges, civil servants, and change-makers.
-        </p>
-      </AboutText>
+      {/* Mission & Vision */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16">
+            <motion.div
+              initial={{ x: -30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="bg-gradient-to-br from-amber-50 to-white p-10 rounded-2xl shadow-2xl border border-amber-100 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-amber-100 rounded-full -translate-y-16 translate-x-16 opacity-30"></div>
+                <div className="relative">
+                  <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-amber-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg">
+                    <Target className="w-8 h-8 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-slate-800 mb-6 font-serif">Our Mission</h2>
+                  <p className="text-slate-600 leading-relaxed text-lg">
+                    To provide exceptional legal education that combines theoretical knowledge with practical skills, 
+                    preparing students to become competent, ethical, and socially responsible legal professionals 
+                    who contribute positively to society and the justice system.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
 
-      <AboutImage className="fade-in" style={{ boxShadow: "0 10px 25px rgba(30, 64, 175, 0.2)" }}>
-        <img
-          src="/law_image.jpg"
-          alt="Law books and gavel"
-          style={{
-           borderRadius: "0.25rem"
-          }}
-        />
-      </AboutImage>
-    </AboutContent>
-  </Container>
-</AboutSection>
+            <motion.div
+              initial={{ x: 30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative"
+            >
+              <div className="bg-gradient-to-br from-blue-50 to-white p-10 rounded-2xl shadow-2xl border border-blue-100 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-32 h-32 bg-blue-100 rounded-full -translate-y-16 -translate-x-16 opacity-30"></div>
+                <div className="relative">
+                  <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-8 shadow-lg">
+                    <Lightbulb className="w-8 h-8 text-white" />
+                  </div>
+                  <h2 className="text-3xl font-bold text-slate-800 mb-6 font-serif">Our Vision</h2>
+                  <p className="text-slate-600 leading-relaxed text-lg">
+                    To be Pakistan's leading law academy, recognized for excellence in legal education, 
+                    innovation in teaching methodologies, and producing graduates who uphold the highest 
+                    standards of professional integrity and contribute to the advancement of justice.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-
-        <QuickFactsSection>
-          <Container>
-            <SectionTitle>Quick Facts</SectionTitle>
-            <FactsGrid>
-  <FactCard className="fade-in" bgColor="#f0f9ff">
-  <CalendarDays className="fact-icon" />
-  <h3>Founded</h3>
-  <p>2024</p>
-</FactCard>
-
-<FactCard className="fade-in" bgColor="#f0f9ff">
-  <GraduationCap className="fact-icon" />
-  <h3>Students Enrolled</h3>
-  <p>50+</p>
-</FactCard>
-
-<FactCard className="fade-in" bgColor="#f0f9ff">
-  <UserCheck className="fact-icon" />
-  <h3>Expert Faculty</h3>
-  <p>Qualified Legal Instructors</p>
-</FactCard>
-
-<FactCard className="fade-in" bgColor="#f0f9ff">
-  <Award className="fact-icon" />
-  <h3>Specialty</h3>
-  <p>First Law Academy in Nowshera Virkan</p>
-</FactCard>
-
-
-</FactsGrid>
-
-          </Container>
-        </QuickFactsSection>
-
-        <VisionMissionSection>
-          <Container>
-            <VmGrid>
-              <VmCard className="fade-in">
-                <Target className="vm-icon" />
-                <h3>Our Vision</h3>
-                <p>To empower the youth of Pakistan to become competent legal professionals—lawyers, judges, and civil servants—committed to justice and integrity.</p>
-              </VmCard>
-              <VmCard className="fade-in">
-                <Rocket className="vm-icon" />
-                <h3>Our Mission</h3>
-                <p>To deliver high-quality legal education that fosters critical thinking, leadership, and ethical excellence in law.</p>
-              </VmCard>
-            </VmGrid>
-          </Container>
-        </VisionMissionSection>
-
-       <FounderMessageSection style={{  padding: "3rem 0", marginBottom: "3rem" }}>
-
-  <Container>
-    <FounderContent>
-      <FounderText>
-        <h2 className="fade-in" style={{ fontSize: "2.8rem", color: "#1e40af", marginBottom: "1rem" }}>
-          Founder's Message
-          <span style={{
-            display: "block",
-            width: "60px",
-            height: "4px",
-            backgroundColor: "#1e40af",
-            marginTop: "8px",
-            borderRadius: "2px"
-          }} />
-        </h2>
-        <blockquote className="fade-in" style={{ fontSize: "1.15rem", lineHeight: "1.9", color: "#334155" }}>
-          <p><strong>Law is more than a profession</strong> — it's the foundation of justice, dignity, and social change. It empowers individuals, protects freedoms, and reflects a nation's moral compass.</p>
-          <p>With this vision, I founded <strong>Jinnah Law Academy By Wasif Mateen</strong> — a space where aspiring legal minds grow with discipline, confidence, and purpose.</p>
-          <p>We go beyond textbooks to shape <em>critical thinkers</em> and <em>ethical leaders</em> — prepared not just to study law, but to <strong>live it</strong> and <strong>lead through it</strong>.</p>
-          <p>Legal education is a powerful journey requiring clarity, courage, and integrity. At our academy, we instill these values to develop true agents of change.</p>
-          <p>I invite you to join this mission — to rise above mediocrity, lead with purpose, and create lasting impact.</p>
-        </blockquote>
-        <FounderSignature className="fade-in" style={{ marginTop: "2rem", color: "#1e293b" }}>
-          <p className="signature-text">Warmly,</p>
-          <p className="founder-name">Mian Wasif Mateen</p>
-          <p className="founder-title">Advocate High Court</p>
-          <p className="founder-role">Founder – Jinnah Law Academy By Wasif Mateen</p>
-        </FounderSignature>
-      </FounderText>
-      <FounderImage className="fade-in">
-        <img src="./founder.jpeg" alt="Founder of Jinnah Law Academy" style={{ borderRadius: "0.75rem", boxShadow: "0 8px 24px rgba(0,0,0,0.1)" }} />
-      </FounderImage>
-    </FounderContent>
-  </Container>
-</FounderMessageSection>
-
-
-        <AchievementsSection style={{ padding: "3rem 0", marginTop: "3rem" }}>
-
-  <Container>
-    <AchievementsContent>
-
-      <AchievementImage className="fade-in" style={{ marginRight: "2rem" }}>
-        <img 
-          src="./result1.jpeg" 
-          alt="Jinnah Law Academy student achievement" 
-          style={{ 
-            maxWidth: "100%", 
-            borderRadius: "0.75rem", 
-            boxShadow: "0 10px 25px rgba(0, 0, 0, 0.1)" 
-          }} 
-        />
-      </AchievementImage>
-
-      <AchievementText className="fade-in">
-        <h2 style={{ fontSize: "2.8rem", color: "#1e40af", marginBottom: "1rem" }}>
-          Our Achievements
-          <span style={{
-            display: "block",
-            width: "60px",
-            height: "4px",
-            backgroundColor: "#1e40af",
-            marginTop: "8px",
-            borderRadius: "2px"
-          }} />
-        </h2>
-
-        <p style={{ fontSize: "1.15rem", lineHeight: "1.9", color: "#334155" }}>
-          At <strong>Jinnah Law Academy</strong>, our impact speaks through our students' success. From producing top scorers to expanding our digital footprint and publishing insightful legal materials — our achievements reflect our unwavering commitment to excellence.
-        </p>
-
-        <p style={{ fontSize: "1.15rem", lineHeight: "1.9", color: "#334155", marginTop: "1rem" }}>
-          Our journey has only just begun, and it’s powered by the hard work of our faculty, the trust of our community, and the ambition of every student who walks through our doors.
-        </p>
-      </AchievementText>
-
-    </AchievementsContent>
-  </Container>
-</AchievementsSection>
+      {/* Founder's Message */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ x: -30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <img
+                src='founder.jpeg'
+                alt="Mian Wasif Mateen"
+                className="rounded-lg shadow-2xl w-full max-w-md mx-auto"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ x: 30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-6 font-serif">
+                Founder's Message
+              </h2>
+              <blockquote className="text-lg text-slate-600 italic mb-6 leading-relaxed">
+                "Law is more than a profession — it's the foundation of justice, dignity, and social change. 
+                With this vision, I founded Jinnah Law Academy By Wasif Mateen — a place where aspiring legal minds grow 
+                with discipline and purpose.
+              </blockquote>
+              <blockquote className="text-lg text-slate-600 italic mb-6 leading-relaxed">
+                Our commitment extends beyond textbooks and examinations. We strive to instill in our 
+                students a deep understanding of legal principles, ethical responsibility, and the courage 
+                to stand for what is right. Every student who walks through our doors is not just pursuing 
+                a career — they are preparing to become guardians of justice."
+              </blockquote>
+              <div className="border-t border-slate-200 pt-6">
+                <h3 className="text-xl font-semibold text-slate-800">Mian Wasif Mateen</h3> 
+<p className="text-slate-500 text-sm mt-1">LL.B (Hons), LL.M</p> 
+<p className="text-slate-600">Advocate High Court</p> 
+<p className="founder-role mt-1">Founder – Jinnah Law Academy By Wasif Mateen</p> 
 
 
+                
 
-        <ValuesSection>
-  <Container>
-    <SectionTitle>Our Values</SectionTitle>
-    <ValuesGrid>
-      <ValueCard className="fade-in" bgColor="#f0f9ff">
-        <Gavel className="value-icon" />
-        <h3>Justice</h3>
-        <p>We believe in fairness, equality, and the rule of law as fundamental principles of society.</p>
-      </ValueCard>
-      <ValueCard className="fade-in" bgColor="#f0f9ff">
-        <Target className="value-icon" />
-        <h3>Excellence</h3>
-        <p>We strive for the highest standards in legal education and professional development.</p>
-      </ValueCard>
-      <ValueCard className="fade-in" bgColor="#f0f9ff">
-        <Handshake className="value-icon" />
-        <h3>Integrity</h3>
-        <p>We uphold honesty, transparency, and ethical conduct in all our academic and professional activities.</p>
-      </ValueCard>
-      <ValueCard className="fade-in" bgColor="#f0f9ff">
-        <Lightbulb className="value-icon" />
-        <h3>Innovation</h3>
-        <p>We embrace modern teaching methods and technology to enhance learning experiences.</p>
-      </ValueCard>
-    </ValuesGrid>
-  </Container>
-</ValuesSection>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-      </main>
-    </Layout>
+      {/* Core Values */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 font-serif">
+              Our Core Values
+            </h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              The fundamental principles that guide our approach to legal education and shape our academy's culture.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center group"
+              >
+                <div className={`w-16 h-16 ${value.color} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                  <value.icon className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-2">{value.title}</h3>
+                <p className="text-slate-600">{value.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Achievements */}
+      <section className="py-20 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 font-serif">
+              Our Achievements
+            </h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Milestones that reflect our commitment to excellence in legal education.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {achievements.map((achievement, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
+                  <achievement.icon className="w-6 h-6 text-amber-600" />
+                </div>
+                <h3 className="text-xl font-semibold text-slate-800 mb-2">{achievement.title}</h3>
+                <p className="text-slate-600">{achievement.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 font-serif">
+              Our Journey
+            </h2>
+            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
+              Key milestones in our academy's growth and development.
+            </p>
+          </motion.div>
+
+          <div className="relative">
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-amber-200"></div>
+            <div className="space-y-12">
+              {timeline.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ y: 20, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
+                >
+                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8'}`}>
+                    <div className="bg-white p-6 rounded-lg shadow-lg">
+                      <div className="text-2xl font-bold text-amber-600 mb-2">{item.year}</div>
+                      <h3 className="text-xl font-semibold text-slate-800 mb-2">{item.title}</h3>
+                      <p className="text-slate-600">{item.description}</p>
+                    </div>
+                  </div>
+                  <div className="relative">
+                    <div className="w-4 h-4 bg-amber-500 rounded-full border-4 border-white shadow-lg"></div>
+                  </div>
+                  <div className="w-1/2"></div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Academy Stats */}
+      <section className="py-20 bg-gradient-to-r from-slate-800 to-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 font-serif">
+              Academy by Numbers
+            </h2>
+            <p className="text-lg text-slate-200 max-w-3xl mx-auto">
+              Our impact in numbers reflects our commitment to excellence.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { number: '50+', label: 'Students Enrolled' },
+              { number: '95%', label: 'Success Rate' },
+              { number: '15+', label: 'Expert Faculty Members' },
+              { number: '24/7', label: 'Student Support' },
+            ].map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="text-center"
+              >
+                <div className="text-3xl md:text-4xl font-bold text-amber-400 mb-2 font-serif">
+                  {stat.number}
+                </div>
+                <div className="text-slate-200">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </motion.div>
   );
 };
 

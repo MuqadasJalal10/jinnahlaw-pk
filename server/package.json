@@ -1,24 +1,29 @@
 {
-  "name": "server",
+  "name": "jinnah-law-academy-backend",
   "version": "1.0.0",
-  "main": "app.ts",
-  "description": "Backend server for handling contact and admission form emails using Resend",
+  "description": "Backend API for Jinnah Law Academy website",
+  "main": "server.js",
+  "type": "module",
   "scripts": {
-    "dev": "ts-node-dev app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^17.1.0",
-    "express": "^5.1.0",
-    "resend": "^4.6.0"
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.1.5",
+    "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.7",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
-    "@types/node": "^24.0.12",
+    "@types/node": "^24.0.14",
+    "nodemon": "^3.1.10",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   }

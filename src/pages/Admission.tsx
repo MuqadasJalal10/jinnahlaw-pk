@@ -38,7 +38,7 @@
   console.log('Submitting data:', cleanedData); // Optional: Debug log
 
   try {
-    const response = await fetch('http://localhost:5000/api/admission', {
+    const response = await fetch('/api/admission', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

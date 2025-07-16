@@ -56,7 +56,12 @@ app.use(helmet());
 
 // CORS configuration
 app.use(cors({
-  origin: 'http://jinnahlaw.pk',
+  origin:  [
+    'http://localhost:3000',
+    'http://jinnahlaw.pk',
+    'https://jinnahlaw.pk',
+    'https://www.jinnahlaw.pk'
+  ],
   credentials: true
 }));
 
@@ -144,7 +149,12 @@ app.get('/', (req, res) => {
 
 
 app.use(cors({
-  origin: 'http://jinnahlaw.pk',
+  origin:  [
+    'http://localhost:3000',
+    'http://jinnahlaw.pk',
+    'https://jinnahlaw.pk',
+    'https://www.jinnahlaw.pk'
+  ],
   methods: ['POST', 'GET', 'PUT'],
   allowedHeaders: ['Content-Type']
 }));

@@ -7,41 +7,39 @@ import nodemailer from 'nodemailer';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
-
-// Import routes
+// Routes
 import contactRoutes from './routes/contact.js';
 import admissionRoutes from './routes/admission.js';
 import adminRoutes from './routes/admin.js';
 
-// Import database initialization
+// DB
 import { initializeDatabase } from './config/database.js';
 
 dotenv.config();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Email transporter configuration
+// ✅ Email
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: parseInt(process.env.EMAIL_PORT),
-  secure: false, // false for TLS/STARTTLS (port 587)
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
 });
 
-// ✅ Test email route
+// ✅ Test Email Route
 app.get('/api/test-email', async (req, res) => {
   try {
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
-      to: 'muqadasjalal4@gmail.com', // <-- change if needed
-      subject: '📧 Test Email from Jinnah Law Academy By Wasif Mateen',
+      to: 'muqadasjalal4@gmail.com',
+      subject: '📧 Test Email from Jinnah Law Academy',
       text: 'This is a test email sent from the backend.'
     });
     res.send('✅ Email sent successfully!');
@@ -51,50 +49,43 @@ app.get('/api/test-email', async (req, res) => {
   }
 });
 
-// Security middleware
-app.use(helmet());
-
-// CORS configuration
+// ✅ CORS (ONE TIME ONLY)
 app.use(cors({
-  origin:  [
+  origin: [
     'http://localhost:3000',
     'http://jinnahlaw.pk',
     'https://jinnahlaw.pk',
     'https://www.jinnahlaw.pk'
   ],
+  methods: ['POST', 'GET', 'PUT'],
   credentials: true
 }));
 
+// ✅ Security
+app.use(helmet());
 
-// Rate limiting
+// ✅ Rate Limiters
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100,
-  message: {
-    error: 'Too many requests from this IP, please try again later.'
-  }
+  max: 100
 });
-
 const formLimiter = rateLimit({
   windowMs: 60 * 1000,
-  max: 5,
-  message: {
-    error: 'Too many form submissions, please try again later.'
-  }
+  max: 5
 });
 
 app.use(limiter);
 app.use('/api/contact', formLimiter);
 app.use('/api/admission', formLimiter);
 
-// Body parsing middleware
+// ✅ Body Parser
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// Initialize database
+// ✅ Initialize DB
 initializeDatabase();
 
-// Health check endpoint
+// ✅ Health Check
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'OK',
@@ -103,59 +94,33 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// API routes
+// ✅ Mount API Routes
 app.use('/api/contact', contactRoutes);
 app.use('/api/admission', admissionRoutes);
 app.use('/api/admin', adminRoutes);
 
-// Error handling middleware
+// ✅ 404 & Error Handling
 app.use((err, req, res, next) => {
   console.error('Error:', err);
-
   if (err.type === 'entity.parse.failed') {
-    return res.status(400).json({
-      success: false,
-      error: 'Invalid JSON format'
-    });
+    return res.status(400).json({ success: false, error: 'Invalid JSON format' });
   }
-
   res.status(500).json({
     success: false,
-    error: process.env.NODE_ENV === 'production'
-      ? 'Internal server error'
-      : err.message
+    error: process.env.NODE_ENV === 'production' ? 'Internal server error' : err.message
   });
 });
 
-// 404 handler
 app.use('*', (req, res) => {
-  res.status(404).json({
-    success: false,
-    error: 'Endpoint not found'
-  });
+  res.status(404).json({ success: false, error: 'Endpoint not found' });
 });
 
-// Server listen
-app.listen(PORT, () => {
-  console.log(`🚀 Jinnah Law Academy API running on port ${PORT}`);
-  console.log(`📧 Email service configured for: ${process.env.EMAIL_FROM}`);
-  console.log(`🏫 Academy: ${process.env.ACADEMY_NAME}`);
-});
-
+// ✅ Default Home
 app.get('/', (req, res) => {
   res.send('🚀 Jinnah Law Academy API is running');
 });
 
-
-
-app.use(cors({
-  origin:  [
-    'http://localhost:3000',
-    'http://jinnahlaw.pk',
-    'https://jinnahlaw.pk',
-    'https://www.jinnahlaw.pk'
-  ],
-  methods: ['POST', 'GET', 'PUT'],
-  allowedHeaders: ['Content-Type']
-}));
-
+// ✅ Start Server
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});

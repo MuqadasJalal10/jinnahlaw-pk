@@ -38,7 +38,7 @@
   console.log('Submitting data:', cleanedData); // Optional: Debug log
 
   try {
-    const response = await fetch('https://api.jinnahlaw.pk/api/admission', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admission`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

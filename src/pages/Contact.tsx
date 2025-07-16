@@ -40,6 +40,8 @@ const Contact = () => {
   const onSubmit = async (data: any) => {
   setIsSubmitting(true);
 
+    
+
   try {
    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/contact`, {
       method: 'POST',

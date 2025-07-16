@@ -1,30 +1,12 @@
-import nodemailer from 'nodemailer';
+// email.js
+
+import { Resend } from 'resend';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Create transporter
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: parseInt(process.env.EMAIL_PORT),
-  secure: false, // true for port 465, false for 587 or others
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
-
-// Verify configuration
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('❌ Email configuration error:', error);
-  } else {
-    console.log('✅ Email service ready');
-  }
-});
+// Initialize Resend
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Email templates
 export const emailTemplates = {
@@ -58,7 +40,7 @@ export const emailTemplates = {
               Best regards,<br>
               <strong>Jinnah Law Academy Team</strong><br>
               Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Nowshera Virkan<br>
-              Phone: 0300-1186473 | Email: jinnahlawacademybywasifmateen@gmail.com
+              Phone: 0300-1186473 | Email: info@jinnahlaw.pk
             </p>
           </div>
         </div>
@@ -140,30 +122,23 @@ export const emailTemplates = {
   })
 };
 
-// Send email utility
+// Send email using Resend
 export const sendEmail = async (to, template) => {
   try {
-    const mailOptions = {
-      from: `"Jinnah Law Academy" <${process.env.EMAIL_FROM}>`,
+    const result = await resend.emails.send({
+      from: process.env.EMAIL_FROM, // e.g., info@jinnahlaw.pk
       to,
       subject: template.subject,
       html: template.html,
-      replyTo: process.env.EMAIL_FROM, // Optional: reply-to same address
-      // attachments: [  // Optional: Add attachments here
-      //   {
-      //     filename: 'brochure.pdf',
-      //     path: './public/brochure.pdf'
-      //   }
-      // ]
-    };
+      reply_to: process.env.EMAIL_FROM
+    });
 
-    const result = await transporter.sendMail(mailOptions);
-    console.log('✅ Email sent successfully:', result.messageId);
-    return { success: true, messageId: result.messageId };
+    console.log('✅ Email sent via Resend:', result.id);
+    return { success: true, messageId: result.id };
   } catch (error) {
-    console.error('❌ Email sending failed:', error);
+    console.error('❌ Resend Email Failed:', error);
     return { success: false, error: error.message };
   }
 };
 
-export default transporter;
+export default resend;

@@ -80,7 +80,7 @@ const Contact = () => {
     icon: Mail,
     title: 'Email',
     details: [
-      { text: 'jinnahlawacademybywasifmateen@gmail.com', action: 'mailto:jinnahlawacademybywasifmateen@gmail.com' }
+      { text: 'info@jinnahlaw.pk', action: 'mailto:info@jinnahlaw.pk' }
     ]
   },
   {

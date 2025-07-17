@@ -110,7 +110,7 @@ const Footer = () => {
       <Mail className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
       <div>
         <p className="text-slate-300 text-sm">
-          jinnahlawacademybywasifmateen@gmail.com
+          info@jinnahlaw.pk
         </p>
       </div>
     </li>

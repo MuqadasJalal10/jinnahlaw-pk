@@ -17,10 +17,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
-       <div>
-      {/* Aapka website content */}
-      <WhatsAppButton /> {/* Button yahan render hoga */}
-    </div>
+     
       <div className="min-h-screen bg-white">
         <Navbar />
         <AnimatePresence mode="wait">

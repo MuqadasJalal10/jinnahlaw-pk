@@ -20,7 +20,7 @@ const HeroSlideshow = () => {
         'Empowering the next generation of legal minds through comprehensive education and practical training.',
     },
     {
-      image: 'law_book123.webp',
+      image: 'slide4.webp',
       title: 'Excellence in Legal Education',
       subtitle:
         "Join Pakistan's premier law academy and build your career in justice and advocacy.",

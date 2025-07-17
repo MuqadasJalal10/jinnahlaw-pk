@@ -5,14 +5,13 @@ const WhatsApp: React.FC = () => {
   const phone = "923014686473";
 
   return (
-    <div className="fixed bottom-5 right-5 flex items-center gap-2 z-50">
-      {/* WhatsApp Icon Button with Official Icon */}
+    <div className="fixed bottom-5 right-5 z-50 group flex items-center">
       <a
         href={`https://wa.me/${phone}?text=${message}`}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="bg-[#25d366] hover:bg-[#128c7e] w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300"
+        className="bg-[#25d366] hover:bg-[#128c7e] w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform duration-300"
       >
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
@@ -21,8 +20,8 @@ const WhatsApp: React.FC = () => {
         />
       </a>
 
-      {/* Separate Text */}
-      <span className="text-sm font-medium text-gray-800 bg-white px-3 py-2 rounded shadow hidden sm:inline">
+      {/* Hover Text */}
+      <span className="ml-2 bg-white text-gray-800 text-sm font-medium px-3 py-2 rounded shadow opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
         How can I assist you?
       </span>
     </div>

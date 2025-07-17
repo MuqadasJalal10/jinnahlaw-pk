@@ -11,7 +11,7 @@ import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
 import ScrollToTop from './components/ScrollToTop';
-import WhatsAppButton from './components/WhatsappButton';
+import WhatsAppButton1  from './components/WhatsAppButton1';
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
           </Routes>
         </AnimatePresence>
         <Footer />
-               <WhatsAppButton />
+               <WhatsAppButton1 />
       </div>
     </Router>
   );

@@ -1,10 +1,9 @@
-// src/components/WhatsAppButton.tsx
 import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 
 const WhatsAppButton: React.FC = () => {
   const message = encodeURIComponent("How can I help you?");
-  const phone = "923014686473"; // Pakistan format (without 0)
+  const phone = "923014686473";
 
   return (
     <a

@@ -37,7 +37,7 @@
   console.log('Submitting data:', cleanedData); // Optional: Debug log
 
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/admission`, {
+    const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/admission`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

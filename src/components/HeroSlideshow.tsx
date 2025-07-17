@@ -9,7 +9,7 @@ const HeroSlideshow = () => {
   const slides = [
     {
       image: 'slide1.webp',
-      title: 'Learn Law, Lead Justice',
+      title: 'Empowering Future Lawyers — Jinnah Law Academy by Wasif Mateen',
       subtitle:
         'Comprehensive LAT, LL.B, and LAW-GAT preparation with expert guidance and modern facilities.',
     },

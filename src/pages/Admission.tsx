@@ -25,10 +25,9 @@
     const selectedCourse = watch('course') as keyof typeof subCourses | '';
 
 
-    const onSubmit = async (data: any) => {
+  const onSubmit = async (data: any) => {
   setIsSubmitting(true);
 
-  // Clean optional fields to avoid sending undefined or empty strings
   const cleanedData = {
     ...data,
     subcourse: data.subcourse?.trim() || null,

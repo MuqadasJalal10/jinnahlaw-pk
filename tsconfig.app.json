@@ -18,7 +18,16 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    // ✅ Add these two:
+    "baseUrl": "src",
+    "paths": {
+  "@components/*": ["components/*"],
+  "@pages/*": ["pages/*"],
+  "@root/*": ["*"] // 👈 root alias for App.tsx
+}
+
   },
   "include": ["src"]
 }

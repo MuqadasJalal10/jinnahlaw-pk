@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaWhatsapp } from 'react-icons/fa';
 
-const WhatsAppButton1: React.FC = () => {
+const WhatsApp: React.FC = () => {
   const message = encodeURIComponent("How can I assist you?");
   const phone = "923014686473"; // Pakistan number without leading 0
 
@@ -19,4 +19,4 @@ const WhatsAppButton1: React.FC = () => {
   );
 };
 
-export default WhatsAppButton1;
+export default WhatsApp;

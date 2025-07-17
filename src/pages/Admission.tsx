@@ -463,7 +463,7 @@ const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/admission
                   </div>
                   <div className="flex items-center">
                     <Mail className="w-4 h-4 mr-2" />
-                    admission@jinnahlawacademy.edu.pk
+                    info@jinnahlaw.pk
                   </div>
                   <div className="flex items-center">
                     <Clock className="w-4 h-4 mr-2" />

@@ -202,7 +202,7 @@ const About = () => {
               </blockquote>
               <div className="border-t border-slate-200 pt-6">
                 <h3 className="text-xl font-semibold text-slate-800">Mian Wasif Mateen</h3> 
-<p className="text-slate-500 text-sm mt-1">LL.B (Hons), LL.M</p> 
+<p className="text-slate-500 text-sm mt-1">LL.B , MCS</p> 
 <p className="text-slate-600">Advocate High Court</p> 
 <p className="founder-role mt-1">Founder – Jinnah Law Academy By Wasif Mateen</p> 
 

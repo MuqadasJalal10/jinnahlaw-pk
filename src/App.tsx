@@ -11,11 +11,13 @@ import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
 import ScrollToTop from './components/ScrollToTop';
+import WhatsAppButton from './components/WhatsappButton';
 
 function App() {
   return (
     <Router>
       <ScrollToTop />
+      <WhatsAppButton />
       <div className="min-h-screen bg-white">
         <Navbar />
         <AnimatePresence mode="wait">

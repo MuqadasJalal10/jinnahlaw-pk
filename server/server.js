@@ -1,19 +1,22 @@
+// Register module alias before anything else
+import 'module-alias/register';
+
 import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 import rateLimit from 'express-rate-limit';
-import nodemailer from 'nodemailer';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import { Resend } from 'resend';
 
-// Routes
-import contactRoutes from './routes/contact.js';
-import admissionRoutes from './routes/admission.js';
-import adminRoutes from './routes/admin.js';
+// @ Aliased Routes
+import contactRoutes from '@/routes/contact.js';
+import admissionRoutes from '@/routes/admission.js';
+import adminRoutes from '@/routes/admin.js';
 
 // DB
-import { initializeDatabase } from './config/database.js';
+import { initializeDatabase } from '@/config/database.js';
 
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -22,34 +25,26 @@ const __dirname = dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Email
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: parseInt(process.env.EMAIL_PORT),
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+// ✅ Resend Email Setup
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 // ✅ Test Email Route
 app.get('/api/test-email', async (req, res) => {
   try {
-    await transporter.sendMail({
+    await resend.emails.send({
       from: process.env.EMAIL_FROM,
-      to: 'muqadasjalal4@gmail.com',
-      subject: '📧 Test Email from Jinnah Law Academy',
-      text: 'This is a test email sent from the backend.'
+      to: process.env.ADMIN_EMAIL,
+      subject: '📧 Test Email from Jinnah Law Academy (Resend)',
+      html: '<p>This is a test email sent via Resend.com API.</p>'
     });
-    res.send('✅ Email sent successfully!');
+    res.send('✅ Test email sent using Resend!');
   } catch (error) {
-    console.error('❌ Email send failed:', error);
-    res.status(500).send('❌ Failed to send email.');
+    console.error('❌ Resend email failed:', error);
+    res.status(500).send('❌ Failed to send test email.');
   }
 });
 
-// ✅ CORS (ONE TIME ONLY)
+// ✅ CORS
 app.use(cors({
   origin: [
     'http://localhost:3000',
@@ -78,7 +73,7 @@ app.use(limiter);
 app.use('/api/contact', formLimiter);
 app.use('/api/admission', formLimiter);
 
-// ✅ Body Parser
+// ✅ Body Parsers
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
@@ -94,12 +89,12 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// ✅ Mount API Routes
+// ✅ Routes
 app.use('/api/contact', contactRoutes);
 app.use('/api/admission', admissionRoutes);
 app.use('/api/admin', adminRoutes);
 
-// ✅ 404 & Error Handling
+// ✅ Error Handling
 app.use((err, req, res, next) => {
   console.error('Error:', err);
   if (err.type === 'entity.parse.failed') {
@@ -111,11 +106,12 @@ app.use((err, req, res, next) => {
   });
 });
 
+// ✅ 404
 app.use('*', (req, res) => {
   res.status(404).json({ success: false, error: 'Endpoint not found' });
 });
 
-// ✅ Default Home
+// ✅ Home
 app.get('/', (req, res) => {
   res.send('🚀 Jinnah Law Academy API is running');
 });

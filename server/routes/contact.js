@@ -1,7 +1,7 @@
 import express from 'express';
 import { body, validationResult } from 'express-validator';
-import db from '../config/database.js';
-import { sendEmail, emailTemplates } from '../config/email.js';
+import db from '@config/database.js';
+import { sendEmail, emailTemplates } from '@config/email.js';
 
 const router = express.Router();
 
@@ -11,22 +11,22 @@ const contactValidation = [
     .trim()
     .isLength({ min: 2, max: 100 })
     .withMessage('Name must be between 2 and 100 characters'),
-  
+
   body('email')
     .isEmail()
     .normalizeEmail()
     .withMessage('Please provide a valid email address'),
-  
+
   body('phone')
     .optional()
     .isMobilePhone('any')
     .withMessage('Please provide a valid phone number'),
-  
+
   body('subject')
     .trim()
     .isLength({ min: 5, max: 200 })
     .withMessage('Subject must be between 5 and 200 characters'),
-  
+
   body('message')
     .trim()
     .isLength({ min: 10, max: 2000 })
@@ -36,7 +36,6 @@ const contactValidation = [
 // POST /api/contact - Submit contact form
 router.post('/', contactValidation, async (req, res) => {
   try {
-    // Check validation errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({
@@ -50,13 +49,12 @@ router.post('/', contactValidation, async (req, res) => {
     const ipAddress = req.ip || req.connection.remoteAddress;
     const userAgent = req.get('User-Agent');
 
-    // Save to database
     const stmt = db.prepare(`
       INSERT INTO contact_submissions (name, email, phone, subject, message, ip_address, user_agent)
       VALUES (?, ?, ?, ?, ?, ?, ?)
     `);
 
-    stmt.run([name, email, phone || null, subject, message, ipAddress, userAgent], function(err) {
+    stmt.run([name, email, phone || null, subject, message, ipAddress, userAgent], function (err) {
       if (err) {
         console.error('Database error:', err);
         return res.status(500).json({
@@ -64,22 +62,20 @@ router.post('/', contactValidation, async (req, res) => {
           error: 'Failed to save contact submission'
         });
       }
-
       console.log(`📧 New contact submission from ${name} (${email})`);
     });
 
     stmt.finalize();
 
-    // Send confirmation email to user
+    // Email to user
     const userTemplate = emailTemplates.contactConfirmation({
       name,
       subject,
       message
     });
-
     await sendEmail(email, userTemplate);
 
-    // Send notification to admin
+    // Email to admin
     const adminTemplate = emailTemplates.adminNotification('Contact Form Submission', {
       name,
       email,
@@ -88,7 +84,6 @@ router.post('/', contactValidation, async (req, res) => {
       message,
       ip_address: ipAddress
     });
-
     await sendEmail(process.env.ADMIN_EMAIL, adminTemplate);
 
     res.json({
@@ -105,7 +100,7 @@ router.post('/', contactValidation, async (req, res) => {
   }
 });
 
-// GET /api/contact - Get all contact submissions (admin only)
+// GET /api/contact - Admin: Get recent contacts
 router.get('/', async (req, res) => {
   try {
     db.all(

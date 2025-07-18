@@ -1,7 +1,7 @@
 import express from 'express';
 import { body, validationResult } from 'express-validator';
-import db from '../config/database.js';
-import { sendEmail, emailTemplates } from '../config/email.js';
+import db from '@config/database.js';
+import { sendEmail, emailTemplates } from '@config/email.js';
 
 const router = express.Router();
 

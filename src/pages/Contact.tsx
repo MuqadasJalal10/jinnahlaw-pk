@@ -43,8 +43,8 @@ const Contact = () => {
     
 
   try {
-      console.log("API BASE URL:", import.meta.env.VITE_API_BASE_URL);
-   const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/contact`, {
+      
+   const response = await fetch('/api/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

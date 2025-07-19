@@ -1,9 +1,9 @@
-// /api/admission.ts
+// api/admission.ts
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(req, res) {
+export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
     return res.status(405).json({ success: false, error: 'Method Not Allowed' });
   }
@@ -26,10 +26,10 @@ export default async function handler(req, res) {
   try {
     const emailData = await resend.emails.send({
       from: 'Jinnah Law <no-reply@jinnahlaw.pk>',
-      to: ['info@jinnahlaw.pk'],
-      subject: `New Admission Request: ${course} (${subcourse || ''})`,
+      to: ['info@jinnahlaw.pk', email],
+      subject: `New Admission Form: ${name}`,
       html: `
-        <h2>New Admission Form Submission</h2>
+        <h2>Admission Application</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Phone:</strong> ${phone}</p>
@@ -44,6 +44,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ success: true, data: emailData });
   } catch (error) {
     console.error('Resend error:', error);
-    return res.status(500).json({ success: false, error: 'Failed to send email' });
+    return res.status(500).json({ success: false, error: 'Email sending failed' });
   }
 }

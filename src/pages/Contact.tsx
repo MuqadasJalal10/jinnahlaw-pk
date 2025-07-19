@@ -251,154 +251,136 @@ const Contact = () => {
               </h3>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="flex items-center text-sm font-medium text-slate-700 mb-2">
-                      <User className="w-4 h-4 mr-2" />
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      {...register('name', { required: 'Name is required' })}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
-                      placeholder="Enter your full name"
-                    />
-                    {errors.name && (
-                      <p className="mt-1 text-sm text-red-600 flex items-center">
-                        <AlertCircle className="w-4 h-4 mr-1" />
-                        {errors.subject?.message && (
-                         <p className="...">
-                           <AlertCircle className="..." />
-                          {String(errors.subject.message)}
-                             </p>
-                            )}
+  <div className="grid md:grid-cols-2 gap-6">
+    {/* Full Name */}
+    <div>
+      <label className="flex items-center text-sm font-medium text-slate-700 mb-2">
+        <User className="w-4 h-4 mr-2" />
+        Full Name *
+      </label>
+      <input
+        type="text"
+        {...register('name', { required: 'Name is required' })}
+        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
+        placeholder="Enter your full name"
+      />
+      {errors.name && (
+        <p className="mt-1 text-sm text-red-600 flex items-center">
+          <AlertCircle className="w-4 h-4 mr-1" />
+          {String(errors.name.message)}
+        </p>
+      )}
+    </div>
 
-                      </p>
-                    )}
-                  </div>
+    {/* Email Address */}
+    <div>
+      <label className="flex items-center text-sm font-medium text-slate-700 mb-2">
+        <Mail className="w-4 h-4 mr-2" />
+        Email Address *
+      </label>
+      <input
+        type="email"
+        {...register('email', {
+          required: 'Email is required',
+          pattern: {
+            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+            message: 'Invalid email address'
+          }
+        })}
+        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
+        placeholder="Enter your email"
+      />
+      {errors.email && (
+        <p className="mt-1 text-sm text-red-600 flex items-center">
+          <AlertCircle className="w-4 h-4 mr-1" />
+          {String(errors.email.message)}
+        </p>
+      )}
+    </div>
+  </div>
 
-                  <div>
-                    <label className="flex items-center text-sm font-medium text-slate-700 mb-2">
-                      <Mail className="w-4 h-4 mr-2" />
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      {...register('email', { 
-                        required: 'Email is required',
-                        pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: 'Invalid email address'
-                        }
-                      })}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
-                      placeholder="Enter your email"
-                    />
-                    {errors.email && (
-                      <p className="mt-1 text-sm text-red-600 flex items-center">
-                        <AlertCircle className="w-4 h-4 mr-1" />
-                        {errors.subject?.message && (
-  <p className="...">
-    <AlertCircle className="..." />
-    {String(errors.subject.message)}
-  </p>
-)}
+  <div className="grid md:grid-cols-2 gap-6">
+    {/* Phone Number */}
+    <div>
+      <label className="flex items-center text-sm font-medium text-slate-700 mb-2">
+        <Phone className="w-4 h-4 mr-2" />
+        Phone Number
+      </label>
+      <input
+        type="tel"
+        {...register('phone')}
+        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
+        placeholder="03XX-XXXXXXX"
+      />
+    </div>
 
-                      </p>
-                    )}
-                  </div>
-                </div>
+    {/* Subject */}
+    <div>
+      <label className="flex items-center text-sm font-medium text-slate-700 mb-2">
+        <MessageSquare className="w-4 h-4 mr-2" />
+        Subject *
+      </label>
+      <select
+        {...register('subject', { required: 'Subject is required' })}
+        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
+      >
+        <option value="">Select a subject</option>
+        <option value="admission">Admission Inquiry</option>
+        <option value="courses">Course Information</option>
+        <option value="fees">Fee Structure</option>
+        <option value="schedules">Class Schedules</option>
+        <option value="general">General Inquiry</option>
+        <option value="support">Student Support</option>
+      </select>
+      {errors.subject && (
+        <p className="mt-1 text-sm text-red-600 flex items-center">
+          <AlertCircle className="w-4 h-4 mr-1" />
+          {String(errors.subject.message)}
+        </p>
+      )}
+    </div>
+  </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="flex items-center text-sm font-medium text-slate-700 mb-2">
-                      <Phone className="w-4 h-4 mr-2" />
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      {...register('phone')}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
-                      placeholder="03XX-XXXXXXX"
-                    />
-                  </div>
+  {/* Message */}
+  <div>
+    <label className="flex items-center text-sm font-medium text-slate-700 mb-2">
+      <MessageSquare className="w-4 h-4 mr-2" />
+      Message *
+    </label>
+    <textarea
+      {...register('message', { required: 'Message is required' })}
+      rows={5}
+      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors resize-none"
+      placeholder="Write your message here..."
+    />
+    {errors.message && (
+      <p className="mt-1 text-sm text-red-600 flex items-center">
+        <AlertCircle className="w-4 h-4 mr-1" />
+        {String(errors.message.message)}
+      </p>
+    )}
+  </div>
 
-                  <div>
-                    <label className="flex items-center text-sm font-medium text-slate-700 mb-2">
-                      <MessageSquare className="w-4 h-4 mr-2" />
-                      Subject *
-                    </label>
-                    <select
-                      {...register('subject', { required: 'Subject is required' })}
-                      className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors"
-                    >
-                      <option value="">Select a subject</option>
-                      <option value="admission">Admission Inquiry</option>
-                      <option value="courses">Course Information</option>
-                      <option value="fees">Fee Structure</option>
-                      <option value="schedules">Class Schedules</option>
-                      <option value="general">General Inquiry</option>
-                      <option value="support">Student Support</option>
-                    </select>
-                    {errors.subject && (
-                      <p className="mt-1 text-sm text-red-600 flex items-center">
-                        <AlertCircle className="w-4 h-4 mr-1" />
-                        {errors.subject?.message && (
-  <p className="...">
-    <AlertCircle className="..." />
-    {String(errors.subject.message)}
-  </p>
-)}
+  {/* Submit Button */}
+  <button
+    type="submit"
+    disabled={isSubmitting}
+    className="w-full px-6 py-4 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 text-white font-semibold rounded-lg transition-colors duration-300 flex items-center justify-center"
+  >
+    {isSubmitting ? (
+      <>
+        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+        Sending...
+      </>
+    ) : (
+      <>
+        <Send className="w-5 h-5 mr-2" />
+        Send Message
+      </>
+    )}
+  </button>
+</form>
 
-
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="flex items-center text-sm font-medium text-slate-700 mb-2">
-                    <MessageSquare className="w-4 h-4 mr-2" />
-                    Message *
-                  </label>
-                  <textarea
-                    {...register('message', { required: 'Message is required' })}
-                    rows={5}
-                    className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors resize-none"
-                    placeholder="Write your message here..."
-                  />
-                  {errors.message && (
-                    <p className="mt-1 text-sm text-red-600 flex items-center">
-                      <AlertCircle className="w-4 h-4 mr-1" />
-                      {errors.subject?.message && (
-  <p className="...">
-    <AlertCircle className="..." />
-    {String(errors.subject.message)}
-  </p>
-)}
-
-                    </p>
-                  )}
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-4 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-300 text-white font-semibold rounded-lg transition-colors duration-300 flex items-center justify-center"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5 mr-2" />
-                      Send Message
-                    </>
-                  )}
-                </button>
-              </form>
             </motion.div>
 
             {/* Map */}

@@ -4,11 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
-  },
+  "dev": "vite",
+  "dev:server": "node server/server.js",
+  "dev:server:watch": "nodemon server/server.js",
+  "dev:full": "concurrently \"vite\" \"nodemon server/server.js\"",
+  "build": "vite build",
+  "lint": "eslint .",
+  "preview": "vite preview"
+},
+"_moduleAliases": {
+  "@": "server"
+},
   "proxy": "http://localhost:5000",
   "dependencies": {
     "@hookform/resolvers": "^5.1.1",

@@ -38,7 +38,7 @@
 
   try {
     console.log("API BASE URL:", import.meta.env.VITE_API_BASE_URL);
-const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/admission`, {
+const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/admission`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -79,7 +79,7 @@ const Courses = () => {
       title: 'LL.B – 5-Year Program',
       subtitle: 'Complete Legal Foundation',
       description: 'Comprehensive 5-year LL.B program for intermediate students with complete legal foundation.',
-      image: 'law_s2.jpg',
+      image: 'book3.jpg',
       eligibility: 'Intermediate + LAT',
       duration: '5 Years',
       mode: 'On-Campus + Online Support',

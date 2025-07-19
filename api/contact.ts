@@ -20,7 +20,7 @@ export default async function handler(req: any, res: any) {
 
   try {
     const emailData = await resend.emails.send({
-      from: 'Jinnah Law <no-reply@jinnahlaw.pk>',
+      from: 'Jinnah Law <info@jinnahlaw.pk>',
       to: ['info@jinnahlaw.pk', email],
       subject: `New Contact Form: ${name}`,
       html: `
@@ -33,8 +33,14 @@ export default async function handler(req: any, res: any) {
     });
 
     return res.status(200).json({ success: true, data: emailData });
-  } catch (error) {
-    console.error('Resend error:', error);
-    return res.status(500).json({ success: false, error: 'Failed to send message' });
-  }
+  } catch (error: any) {
+  console.error('Resend error:', error);
+
+  // Ensure JSON response — log real message
+  return res.status(500).json({ 
+    success: false, 
+    error: error?.message || 'Failed to send message' 
+  });
+}
+
 }

@@ -13,6 +13,7 @@ import Admission from '@pages/Admission';
 import Contact from '@pages/Contact';
 import PrivacyPolicy from '@pages/PrivacyPolicy';
 import TermsConditions from '@pages/TermsConditions';
+import Testimonials from '@pages/Testimonials';
 
 
 
@@ -32,6 +33,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-conditions" element={<TermsConditions />} />
+             <Route path="/testimonials" element={<Testimonials />} />
           </Routes>
         </AnimatePresence>
         <Footer />

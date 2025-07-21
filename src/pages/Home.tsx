@@ -62,27 +62,6 @@ const Home = () => {
     },
   ];
 
-  const testimonials = [
-    {
-      name: 'Ahmed Hassan',
-      program: 'LL.B Graduate',
-      text: 'Jinnah Law Academy By Wasif Mateen provided me with excellent foundation in law. The faculty is outstanding.',
-      image: 'https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
-    },
-    {
-      name: 'Fatima Khan',
-      program: 'LAT Preparation',
-      text: 'The LAT preparation course helped me secure admission in top law universities.',
-      image: 'https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
-    },
-    {
-      name: 'Muhammad Ali',
-      program: 'LAW-GAT Student',
-      text: 'Best academy for law entrance preparation. Highly recommend to all law aspirants.',
-      image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop',
-    },
-  ];
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -353,52 +332,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-    <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-4 font-serif">
-              Student Success Stories
-            </h2>
-            <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-              Outstanding results from our dedicated students who achieved excellence in their legal education journey.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {testimonials.map((student, index) => (
-              <motion.div
-                key={index}
-                initial={{ y: 20, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 border border-slate-100"
-              >
-                <div className="flex items-center mb-4">
-                  <img
-                    src={student.image}
-                    alt={student.name}
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div className="ml-4">
-                    <h4 className="font-semibold text-slate-800">{student.name}</h4>
-                    <p className="text-sm text-slate-600">{student.program}</p>
-                  </div>
-                </div>
-                <div className="text-slate-600 text-sm leading-relaxed italic">
-                  “{student.text}”
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-r from-slate-800 to-slate-900">

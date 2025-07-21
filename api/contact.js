@@ -25,7 +25,7 @@ export default async function handler(req, res) {
 
     // Email to Admin
     await resend.emails.send({
-      from: 'Jinnah Law Academy <noreply@jinnahlaw.pk>',
+      from: 'Jinnah Law Academy By Wasif Mateen <noreply@jinnahlaw.pk>',
       to: 'info@jinnahlaw.pk',
       subject: `📬 New Contact Message - ${subject}`,
       html: htmlBody,
@@ -33,12 +33,12 @@ export default async function handler(req, res) {
 
     // Confirmation Email to User
     await resend.emails.send({
-      from: 'Jinnah Law Academy <info@jinnahlaw.pk>',
+      from: 'Jinnah Law Academy By Wasif Mateen<info@jinnahlaw.pk>',
       to: email,
       subject: '✅ We Received Your Message',
       html: `
         <p>Dear ${name},</p>
-        <p>Thank you for contacting Jinnah Law Academy. We have received your message with the subject "<strong>${subject}</strong>" and will get back to you shortly.</p>
+        <p>Thank you for contacting Jinnah Law Academy By Wasif Mateen. We have received your message with the subject "<strong>${subject}</strong>" and will get back to you shortly.</p>
         <p><strong>Your Message:</strong></p>
         <blockquote style="border-left: 4px solid #ccc; padding-left: 1em; color: #555;">${message.replace(/\n/g, '<br/>')}</blockquote>
         <br/>

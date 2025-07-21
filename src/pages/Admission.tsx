@@ -38,7 +38,7 @@
 
   try {
     
-const response = await fetch('https://www.jinnahlaw.pk/api/admission', {
+const response = await fetch('api/admission', {
 
       method: 'POST',
       headers: {

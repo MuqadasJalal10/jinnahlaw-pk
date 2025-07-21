@@ -41,7 +41,7 @@ export default async function handler(req, res) {
     // Email to admin
     await resend.emails.send({
       from: 'Jinnah Law Academy <noreply@jinnahlaw.pk>',
-      to: 'admin@jinnahlaw.pk', // change this to your admin email
+      to: 'info@jinnahlaw.pk', // change this to your admin email
       subject: '🎓 New Admission Form Submission',
       html: htmlBody,
     });
@@ -50,13 +50,13 @@ export default async function handler(req, res) {
     await resend.emails.send({
       from: 'Jinnah Law Academy <info@jinnahlaw.pk>',
       to: email,
-      subject: '✅ Admission Form Received - Jinnah Law Academy',
+      subject: '✅ Admission Form Received - Jinnah Law Academy By Wasif Mateen',
       html: `
         <p>Dear ${name},</p>
         <p>Thank you for applying for the <strong>${course}</strong> program at Jinnah Law Academy By Wasif Mateen.</p>
         <p>We’ve received your application and will reach out to you soon.</p>
         <br/>
-        <p>Regards,<br/>Jinnah Law Academy</p>
+        <p>Regards,<br/>Jinnah Law Academy By Wasif Mateen</p>
       `,
     });
 

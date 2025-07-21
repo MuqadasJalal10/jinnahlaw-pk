@@ -292,7 +292,7 @@ const TermsConditions = () => {
               If you have any questions about these terms and conditions, please contact us:
             </p>
             <div className="space-y-2 text-blue-100">
-              <p><strong>Email:</strong> legal@jinnahlawacademy.edu.pk</p>
+              <p><strong>Email:</strong>info@jinnahlaw.pk</p>
               <p><strong>Phone:</strong> 0300-1186473</p>
               <p><strong>Address:</strong> Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Nowshera Virkan</p>
             </div>

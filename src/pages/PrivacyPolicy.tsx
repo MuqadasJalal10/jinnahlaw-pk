@@ -236,7 +236,7 @@ const PrivacyPolicy = () => {
               If you have any questions about this privacy policy or our data practices, please contact us:
             </p>
             <div className="space-y-2 text-amber-100">
-              <p><strong>Email:</strong> privacy@jinnahlawacademy.edu.pk</p>
+              <p><strong>Email:</strong>info@jinnahlawa.pk</p>
               <p><strong>Phone:</strong> 0300-1186473</p>
               <p><strong>Address:</strong> Near Bank Islami, Opp. Sports Hall, Mattu Bhaike Rd, Nowshera Virkan</p>
             </div>

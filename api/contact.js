@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     // Email to Admin
     await resend.emails.send({
       from: 'Jinnah Law Academy <noreply@jinnahlaw.pk>',
-      to: 'admin@jinnahlaw.pk',
+      to: 'info@jinnahlaw.pk',
       subject: `📬 New Contact Message - ${subject}`,
       html: htmlBody,
     });

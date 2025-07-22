@@ -9,7 +9,7 @@ const HeroSlideshow = () => {
   const slides = [
     {
       image: 'slide1.webp',
-      title: 'Empowering Future Lawyers — Jinnah Law Academy by Wasif Mateen',
+      title: 'Start Your Journey Toward Legal Excellence',
       subtitle:
         'Comprehensive LAT, LL.B, and LAW-GAT preparation with expert guidance and modern facilities.',
     },
@@ -44,7 +44,7 @@ const HeroSlideshow = () => {
 
   return (
     <div className="relative h-screen overflow-hidden pt-20">
-      {/* Background Image - Static switch, no transition */}
+      {/* Background Image */}
       <div className="absolute inset-0">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-none"
@@ -53,54 +53,52 @@ const HeroSlideshow = () => {
         <div className="absolute inset-0 bg-black/60" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 h-full flex items-center">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-          <div className="max-w-4xl">
-            <motion.h1
-              key={`title-${currentSlide}`}
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-serif leading-tight"
+      {/* Centered Content */}
+      <div className="relative z-10 h-full flex items-center justify-center text-center">
+        <div className="max-w-4xl px-4 sm:px-6 lg:px-8">
+          <motion.h1
+            key={`title-${currentSlide}`}
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 font-serif leading-tight"
+          >
+            {slides[currentSlide].title}
+          </motion.h1>
+          <motion.p
+            key={`subtitle-${currentSlide}`}
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="text-xl md:text-2xl text-slate-200 mb-8 leading-relaxed max-w-3xl mx-auto"
+          >
+            {slides[currentSlide].subtitle}
+          </motion.p>
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Link
+              to="/courses"
+              className="group inline-flex items-center justify-center px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
             >
-              {slides[currentSlide].title}
-            </motion.h1>
-            <motion.p
-              key={`subtitle-${currentSlide}`}
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl md:text-2xl text-slate-200 mb-8 leading-relaxed max-w-3xl"
+              Explore Courses
+              <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+            </Link>
+            <Link
+              to="/admission"
+              className="group inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-slate-900 font-semibold rounded-lg transition-all duration-300"
             >
-              {slides[currentSlide].subtitle}
-            </motion.p>
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <Link
-                to="/courses"
-                className="group inline-flex items-center justify-center px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
-              >
-                Explore Courses
-                <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
-              <Link
-                to="/admission"
-                className="group inline-flex items-center justify-center px-8 py-4 border-2 border-white text-white hover:bg-white hover:text-slate-900 font-semibold rounded-lg transition-all duration-300"
-              >
-                Apply Now
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
-              </Link>
-            </motion.div>
-          </div>
+              Apply Now
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+            </Link>
+          </motion.div>
         </div>
       </div>
 
-      {/* Slide indicators */}
+      {/* Slide Indicators */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
         {slides.map((_, index) => (
           <button

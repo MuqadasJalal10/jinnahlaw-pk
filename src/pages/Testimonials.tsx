@@ -18,28 +18,28 @@ const students = [
     program: '66/100',
     text: 'Proud to have achieved 66 marks with the help of mock tests and materials.',
     image:
-      'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><circle cx="24" cy="24" r="24" fill="%23f1f5f9" /></svg>',
+      '/female.jpeg',
   },
   {
     name: 'Hajra Asif',
     program: '65/100',
     text: 'With discipline and academy support, I successfully scored 65.',
     image:
-      'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><circle cx="24" cy="24" r="24" fill="%23f1f5f9" /></svg>',
+      '/female.jpeg',
   },
   {
     name: 'Huma Kanwal',
     program: '64/100',
     text: 'Scored 64 marks through focused study and valuable academy support.',
     image:
-      'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><circle cx="24" cy="24" r="24" fill="%23f1f5f9" /></svg>',
+      '/female.jpeg',
   },
   {
     name: 'Ayesha Yaqoob',
     program: '56/100',
     text: 'Happy to be part of the academy – scored 56 successfully.',
     image:
-      'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"><circle cx="24" cy="24" r="24" fill="%23f1f5f9" /></svg>',
+      '/female.jpeg',
   },
 ];
 

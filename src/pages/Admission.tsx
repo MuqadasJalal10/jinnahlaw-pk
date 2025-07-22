@@ -548,7 +548,7 @@ const response = await fetch('api/admission', {
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
               <h3 className="text-2xl font-bold text-slate-800 mb-2">Application Submitted!</h3>
               <p className="text-slate-600 mb-6">
-                Thank you for your interest in Jinnah Law Academy. We'll contact you within 24 hours.
+                Thank you for your interest in Jinnah Law Academy By Wasif Mateen. We'll contact you within 24 hours.
               </p>
               <button
                 onClick={() => setShowSuccess(false)}

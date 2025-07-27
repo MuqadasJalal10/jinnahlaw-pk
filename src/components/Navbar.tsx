@@ -45,18 +45,19 @@ const Navbar = () => {
     alt="Jinnah Law Academy Logo"
     className="w-12 h-12 object-contain rounded-full"
   />
-  <div className="hidden sm:block">
-    <h1 className={`text-xl font-bold font-serif ${
-      isScrolled ? 'text-slate-800' : 'text-white'
-    }`}>
-      Jinnah Law Academy By Wasif Mateen
-    </h1>
-    <p className={`text-sm ${
-      isScrolled ? 'text-slate-600' : 'text-slate-200'
-    }`}>
-      Learn Law, Lead Justice
-    </p>
-  </div>
+  <div className="block">
+  <h1 className={`text-xl font-bold font-serif ${
+    isScrolled ? 'text-slate-800' : 'text-white'
+  }`}>
+    Jinnah Law Academy By Wasif Mateen
+  </h1>
+  <p className={`text-sm ${
+    isScrolled ? 'text-slate-600' : 'text-slate-200'
+  }`}>
+    Learn Law, Lead Justice
+  </p>
+</div>
+
 </Link>
 
           {/* Desktop Navigation */}
